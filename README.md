@@ -46,6 +46,13 @@
 - [精通 Spring 4.x](https://book.douban.com/subject/26952826/)
 - [Spring 揭秘](https://book.douban.com/subject/3897837/)
 
+# Scala
+
+- [Scala编程](https://book.douban.com/subject/27591387/)
+- [深入理解Scala](https://book.douban.com/subject/26302645/)
+- [Scala并发编程](https://book.douban.com/subject/26642326/)
+- [Scala函数式编程](https://book.douban.com/subject/26772149/)
+
 # C++
 
 - [C++ Primer](https://book.douban.com/subject/25708312/)
