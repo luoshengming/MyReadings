@@ -46,6 +46,10 @@
 - [精通 Spring 4.x](https://book.douban.com/subject/26952826/)
 - [Spring 揭秘](https://book.douban.com/subject/3897837/)
 
+# JavaScript
+
+- [Java 编程思想](https://book.douban.com/subject/2130190/)
+
 # Scala
 
 - [Scala编程](https://book.douban.com/subject/27591387/)
@@ -53,13 +57,21 @@
 - [Scala并发编程](https://book.douban.com/subject/26642326/)
 - [Scala函数式编程](https://book.douban.com/subject/26772149/)
 
-# C++
+# Python
 
-- [C++ Primer](https://book.douban.com/subject/25708312/)
-- [Effective C++](https://book.douban.com/subject/1842426/)
-- [C++ 编程规范](https://book.douban.com/subject/1480481/)
-- [STL 源码剖析](https://book.douban.com/subject/1110934/)
-- [深度探索 C++ 对象模型](https://book.douban.com/subject/1091086/)
+- [Python基础教程](https://book.douban.com/subject/27667375/)
+- [Python编程快速上手](https://book.douban.com/subject/26836700/)
+
+# Spring
+
+- [Spring实战](https://book.douban.com/subject/26767354/)
+- [Spring Boot实战](https://book.douban.com/subject/26857423/)
+- [Spring MVC学习指南](https://book.douban.com/subject/26411275/)
+- [Servlet JSP和Spring MVC初学指南](https://book.douban.com/subject/26956492/)
+- [Spring学习指南](https://book.douban.com/subject/30273739/)
+- [Spring微服务实战](https://book.douban.com/subject/30233791/)
+- [Spring Cloud微服务实战](https://book.douban.com/subject/27025912/)
+- [Spring Cloud与Docker微服务架构实战](https://book.douban.com/subject/27028228/)
 
 # 系统设计
 
