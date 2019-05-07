@@ -40,11 +40,17 @@
 # Java
 
 - [Java 编程思想](https://book.douban.com/subject/2130190/)
-- [Effective java 中文版](https://book.douban.com/subject/3360807/)
-- [深入理解 Java 虚拟机](https://book.douban.com/subject/24722612/)
-- [Java 并发编程实战](https://book.douban.com/subject/10484692/)
-- [精通 Spring 4.x](https://book.douban.com/subject/26952826/)
-- [Spring 揭秘](https://book.douban.com/subject/3897837/)
+- [Java 8编程参考官方教程](https://book.douban.com/subject/26556574/)
+- [Java核心技术·卷 I](https://book.douban.com/subject/26880667/)
+- [Java核心技术·卷 II](https://book.douban.com/subject/27165931/)
+- [Java函数式编程](https://book.douban.com/subject/27594722/)
+- [Java并发编程实战](https://book.douban.com/subject/10484692/)
+- [Java高并发编程详解](https://book.douban.com/subject/30255689/)
+- [Java 8实战](https://book.douban.com/subject/26772632/)
+- [Java 9模块化开发](https://book.douban.com/subject/30297395/)
+- [Java与XML](https://book.douban.com/subject/6078806/)
+- [Java网络编程](https://book.douban.com/subject/26259017/)
+- [java语言袖珍指南](https://book.douban.com/subject/26608074/)
 
 # JavaScript
 
