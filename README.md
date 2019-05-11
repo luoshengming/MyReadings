@@ -54,7 +54,12 @@
 
 # JavaScript
 
-- [Java 编程思想](https://book.douban.com/subject/2130190/)
+- [JavaScript权威指南(第6版)](https://book.douban.com/subject/10549733/)
+- [JavaScript高级程序设计（第3版）](https://book.douban.com/subject/10546125/)
+- [深入理解JavaScript](https://book.douban.com/subject/26697422/)
+- [JavaScript语言精粹](https://book.douban.com/subject/11874748/)
+- [JavaScript忍者秘籍](https://book.douban.com/subject/26638316/)
+- [JavaScript专家编程](https://book.douban.com/subject/26583722/)
 
 # Scala
 
@@ -62,11 +67,15 @@
 - [深入理解Scala](https://book.douban.com/subject/26302645/)
 - [Scala并发编程](https://book.douban.com/subject/26642326/)
 - [Scala函数式编程](https://book.douban.com/subject/26772149/)
+- [Scala学习手册](https://book.douban.com/subject/26786632/)
+- [高性能Scala](https://book.douban.com/subject/27038405/)
 
 # Python
 
+- [Python编程](https://book.douban.com/subject/26829016/)
 - [Python基础教程](https://book.douban.com/subject/27667375/)
 - [Python编程快速上手](https://book.douban.com/subject/26836700/)
+- [精通Python爬虫框架Scrapy](https://book.douban.com/subject/30150912/)
 
 # Spring
 
