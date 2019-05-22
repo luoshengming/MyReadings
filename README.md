@@ -5,6 +5,9 @@
 - [编程珠玑](https://book.douban.com/subject/3227098/)
 - [剑指 Offer](https://book.douban.com/subject/25910559/)
 
+# 计算机组成原理
+
+
 # 操作系统
 
 - [现代操作系统](https://book.douban.com/subject/3852290/)
@@ -23,12 +26,6 @@
 - [UNIX 网络编程](https://book.douban.com/subject/1500149/)
 - [Linux 多线程服务端编程](https://book.douban.com/subject/20471211/)
 
-# 面向对象
-
-- [Head First 设计模式](https://book.douban.com/subject/2243615/)
-- [设计模式 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)
-- [敏捷软件开发 原则、模式与实践](https://book.douban.com/subject/1140457/)
-
 # 数据库
 
 - [数据库系统概念](https://book.douban.com/subject/10548379/)
@@ -45,6 +42,7 @@
 - [Java核心技术·卷 II](https://book.douban.com/subject/27165931/)
 - [Java函数式编程](https://book.douban.com/subject/27594722/)
 - [Java并发编程实战](https://book.douban.com/subject/10484692/)
+- [Java并发编程的艺术](https://book.douban.com/subject/26591326/)
 - [Java高并发编程详解](https://book.douban.com/subject/30255689/)
 - [Java 8实战](https://book.douban.com/subject/26772632/)
 - [Java 9模块化开发](https://book.douban.com/subject/30297395/)
@@ -88,13 +86,14 @@
 - [Spring Cloud微服务实战](https://book.douban.com/subject/27025912/)
 - [Spring Cloud与Docker微服务架构实战](https://book.douban.com/subject/27028228/)
 
-# 系统设计
+# 设计模式
 
-- [大规模分布式存储系统](https://book.douban.com/subject/25723658/)
-- [从 Paxos 到 Zookeeper](https://book.douban.com/subject/26292004/)
-- [大型网站系统与 Java 中间件开发实践](https://book.douban.com/subject/25867042/)
-- [淘宝技术这十年](https://book.douban.com/subject/24335672/)
-- [深入理解 Nginx](https://book.douban.com/subject/22793675/)
+- [Head First 设计模式](https://book.douban.com/subject/2243615/)
+- [设计模式 可复用面向对象软件的基础](https://book.douban.com/subject/1052241/)
+
+# 软件设计
+
+- [架构修炼之道——亿级网关、平台开放、分布式、微服务、容错等核心技术修炼实践](https://book.douban.com/subject/33389549/)
 
 # 开发工具
 
@@ -111,6 +110,4 @@
 
 # 其它
 
-- [JavaScript 语言精粹](https://book.douban.com/subject/3590768/)
-- [利用 Python 进行数据分析](https://book.douban.com/subject/25779298/)
 - [概率论与数理统计](https://book.douban.com/subject/2201479/)
