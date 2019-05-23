@@ -2,7 +2,8 @@
 
 - [算法](https://book.douban.com/subject/19952400/)
 - [数据结构与算法分析](https://book.douban.com/subject/3351237/)
-- [编程珠玑](https://book.douban.com/subject/3227098/)
+- [编程珠玑(第2版•修订版)](https://book.douban.com/subject/26302533/)
+- [编程之美：微软技术面试心得](https://book.douban.com/subject/30351275/)
 - [剑指 Offer](https://book.douban.com/subject/25910559/)
 
 # 计算机组成原理
@@ -10,21 +11,13 @@
 
 # 操作系统
 
-- [现代操作系统](https://book.douban.com/subject/3852290/)
 - [深入理解计算机系统](https://book.douban.com/subject/26912767/)
 - [鸟哥的 Linux 私房菜](https://book.douban.com/subject/4889838/)
-- [Unix 环境高级编程](https://book.douban.com/subject/25900403/)
-- [Unix/Linux 编程实践教程](https://book.douban.com/subject/1219329/)
-- [Operating Systems: Three Easy Pieces (OSTEP)](http://pages.cs.wisc.edu/~remzi/OSTEP/)
 
 # 计算机网络
 
 - [计算机网络](https://book.douban.com/subject/2970300/)
-- [计算机网络 自顶向下方法](https://book.douban.com/subject/1391207/)
-- [图解 HTTP](https://book.douban.com/subject/25863515/)
 - [TCP/IP 详解 卷 1：协议](https://book.douban.com/subject/1088054/)
-- [UNIX 网络编程](https://book.douban.com/subject/1500149/)
-- [Linux 多线程服务端编程](https://book.douban.com/subject/20471211/)
 
 # 数据库
 
@@ -68,6 +61,10 @@
 - [Scala学习手册](https://book.douban.com/subject/26786632/)
 - [高性能Scala](https://book.douban.com/subject/27038405/)
 
+# Go
+
+- [Go语言实战](https://book.douban.com/subject/27015617/)
+
 # Python
 
 - [Python编程](https://book.douban.com/subject/26829016/)
@@ -93,6 +90,7 @@
 
 # 软件设计
 
+- [未来架构：从服务化到云原生](https://book.douban.com/subject/30477839/)
 - [架构修炼之道——亿级网关、平台开放、分布式、微服务、容错等核心技术修炼实践](https://book.douban.com/subject/33389549/)
 
 # 开发工具
