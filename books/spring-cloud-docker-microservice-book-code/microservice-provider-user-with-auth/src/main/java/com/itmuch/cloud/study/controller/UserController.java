@@ -34,7 +34,7 @@ public class UserController {
     } else {
       // do other things
     }
-    User findOne = this.userRepository.findOne(id);
+    User findOne = this.userRepository.getOne(id);
     return findOne;
   }
 }
