@@ -1,6 +1,6 @@
 package com.didispace.web;
 
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name="HELLO-SERVICE", fallback = HelloServiceFallback.class)

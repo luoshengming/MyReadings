@@ -3,59 +3,112 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.didispace</groupId>
+    <parent>
+        <groupId>com.luoshengming</groupId>
+        <artifactId>books</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>spring-cloud-in-action</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.1.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <modules>
+        <module>api-gateway</module>
+        <module>api-gateway-dynamic-filter</module>
+        <module>api-gateway-dynamic-route</module>
+        <module>api-gateway-exception</module>
+
+        <module>config-client</module>
+        <module>config-client-eureka</module>
+        <module>config-client-eureka-kafka</module>
+        <module>config-client-eureka-rabbit</module>
+
+        <module>config-server</module>
+        <module>config-server-eureka</module>
+        <module>config-server-eureka-kafka</module>
+        <module>config-server-eureka-rabbit</module>
+
         <module>spring-boot-hello</module>
         <module>eureka-server</module>
         <module>eureka-server-ha</module>
+
         <module>hello-service</module>
+        <module>hello-service-api</module>
 
         <module>ribbon-consumer</module>
         <module>feign-consumer</module>
 
-        <module>hello-service-api</module>
-
-        <module>api-gateway</module>
-        <module>api-gateway-exception</module>
-        <module>api-gateway-dynamic-route</module>
-        <module>api-gateway-dynamic-filter</module>
-
-        <module>config-server</module>
-        <module>config-client</module>
-
-        <module>config-server-eureka</module>
-        <module>config-client-eureka</module>
-
-        <module>config-server-eureka-rabbit</module>
-        <module>config-client-eureka-rabbit</module>
-
-        <module>config-server-eureka-kafka</module>
-        <module>config-client-eureka-kafka</module>
-
         <module>rabbitmq-hello</module>
 
         <module>hystrix-dashboard</module>
-        <module>turbine</module>
-        <module>turbine-amqp</module>
 
         <module>stream-consumer</module>
         <module>stream-producer</module>
 
         <module>trace-1</module>
         <module>trace-2</module>
-        <module>zipkin-server</module>
 
         <module>trace-stream-1</module>
         <module>trace-stream-2</module>
+
+        <module>turbine</module>
+        <module>turbine-amqp</module>
+
+        <module>zipkin-server</module>
         <module>zipkin-server-stream</module>
         <module>zipkin-server-stream-mysql</module>
-
-        <module>consul-client-1</module>
-        <module>api-gateway-consul</module>
     </modules>
 
 </project>

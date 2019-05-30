@@ -1,7 +1,8 @@
 package com.didispace.web;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Service
 public class HelloService {
 
-    private final Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     RestTemplate restTemplate;

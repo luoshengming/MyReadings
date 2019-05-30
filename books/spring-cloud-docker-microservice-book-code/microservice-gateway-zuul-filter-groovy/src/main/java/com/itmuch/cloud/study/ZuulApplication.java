@@ -1,16 +1,15 @@
 package com.itmuch.cloud.study;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.stereotype.Component;
-
 import com.netflix.zuul.FilterFileManager;
 import com.netflix.zuul.FilterLoader;
 import com.netflix.zuul.groovy.GroovyCompiler;
 import com.netflix.zuul.groovy.GroovyFileFilter;
 import com.netflix.zuul.monitoring.MonitoringHelper;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @EnableZuulProxy

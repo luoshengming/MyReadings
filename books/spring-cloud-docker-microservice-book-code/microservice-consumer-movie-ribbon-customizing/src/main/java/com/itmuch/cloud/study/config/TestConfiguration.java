@@ -1,9 +1,8 @@
 package com.itmuch.cloud.study.config;
 
+import com.itmuch.cloud.config.RibbonConfiguration;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Configuration;
-
-import com.itmuch.cloud.config.RibbonConfiguration;
 
 /**
  * 使用RibbonClient，为特定name的Ribbon Client自定义配置.

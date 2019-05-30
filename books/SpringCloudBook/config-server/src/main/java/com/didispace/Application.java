@@ -10,7 +10,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class Application {
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(Application.class).web(WebApplicationType.NONE).run(args);
+        new SpringApplicationBuilder(Application.class).web(WebApplicationType.SERVLET).run(args);
 	}
 
 }

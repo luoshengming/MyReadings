@@ -1,6 +1,5 @@
 package com.itmuch.cloud.study;
 
-import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class AggregationController {
             this.aggregationService.getUserById(id),
             this.aggregationService.getMovieUserByUserId(id),
             (user, movieUser) -> {
-              HashMap<String, User> map = Maps.newHashMap();
+                HashMap<String, User> map = new HashMap<>(2);
               map.put("user", user);
               map.put("movieUser", movieUser);
               return map;

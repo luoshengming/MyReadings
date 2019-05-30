@@ -4,6 +4,7 @@ import com.netflix.zuul.FilterFileManager;
 import com.netflix.zuul.FilterLoader;
 import com.netflix.zuul.groovy.GroovyCompiler;
 import com.netflix.zuul.groovy.GroovyFileFilter;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.SpringCloudApplication;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 public class Application {
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(Application.class).web(true).run(args);
+        new SpringApplicationBuilder(Application.class).web(WebApplicationType.SERVLET).run(args);
 	}
 
 	@Bean

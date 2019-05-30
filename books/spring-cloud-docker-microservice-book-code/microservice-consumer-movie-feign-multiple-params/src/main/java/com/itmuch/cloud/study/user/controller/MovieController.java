@@ -1,15 +1,14 @@
 package com.itmuch.cloud.study.user.controller;
 
-import java.util.Map;
-
+import com.itmuch.cloud.study.user.entity.User;
+import com.itmuch.cloud.study.user.feign.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.Maps;
-import com.itmuch.cloud.study.user.entity.User;
-import com.itmuch.cloud.study.user.feign.UserFeignClient;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class MovieController {
@@ -49,7 +48,7 @@ public class MovieController {
    */
   @GetMapping("/user/get2")
   public User get2(User user) {
-    Map<String, Object> map = Maps.newHashMap();
+    Map<String, Object> map = new HashMap<>(2);
     map.put("id", user.getId());
     map.put("username", user.getUsername());
     return this.userFeignClient.get2(map);

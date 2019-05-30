@@ -1,9 +1,8 @@
 package com.itmuch.cloud.config;
 
+import feign.Contract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import feign.Contract;
 
 /**
  * 该类为Feign的配置类
