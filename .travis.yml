@@ -1,0 +1,14 @@
+language: java
+
+jdk:
+  - oraclejdk11
+
+# default install command is just "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -e
+
+notifications:
+  email:
+    recipients:
+      - luoshengming@hotmail.com
+    on_failure: always
