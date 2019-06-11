@@ -6,6 +6,15 @@ jdk:
 # default install command is just "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -e
+  
+addons:
+  sonarcloud:
+    organization: "luoshengming-github"
+    token:
+      secure: "5c6c00b9a0d168f800d9ef8d57f84efddb87842d"
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar 
 
 notifications:
   email:
