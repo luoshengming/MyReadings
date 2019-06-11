@@ -11,7 +11,7 @@ addons:
   sonarcloud:
     organization: "luoshengming-github"
     token:
-      secure: "5c6c00b9a0d168f800d9ef8d57f84efddb87842d"
+      secure: sonarcloud.io_MyReadings_token
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar 
