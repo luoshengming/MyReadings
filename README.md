@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE.md) [![Build Status](https://travis-ci.org/luoshengming/MyReadings.svg?branch=master)](https://travis-ci.org/luoshengming/MyReadings) ![Language](https://img.shields.io/badge/language-Java%20%2F%20MySQL%20%2F%20Bash-blue.svg) 
+
 ## 数据结构与算法
 
 |  #  |      Title            
