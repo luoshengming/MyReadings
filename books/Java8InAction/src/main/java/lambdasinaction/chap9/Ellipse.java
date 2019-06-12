@@ -4,6 +4,7 @@ package lambdasinaction.chap9;
  * Created by raoul-gabrielurma on 15/01/2014.
  */
 public class Ellipse implements Resizable {
+
     @Override
     public int getWidth() {
         return 0;

@@ -18,11 +18,11 @@
         <module>effective-java-3e-source-code</module>
         <module>Java8InAction</module>
         <!--        <module>java_cookbook_3e</module>-->
-        <!--        <module>fpinjava</module>-->
+        <module>fpinjava</module>
 <!--        <module>Java-Data-Science-Cookbook</module>-->
 <!--        <module>java_cookbook_3e</module>-->
         <!--        <module>learning-akka</module>-->
-<!--        <module>netty-in-action-2.0</module>-->
+        <module>netty-in-action-2.0</module>
         <!--        <module>spmia_overview</module>-->
         <module>spring-cloud-docker-microservice-book-code</module>
         <module>SpringCloudBook</module>

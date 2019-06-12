@@ -19,24 +19,20 @@ import java.net.InetSocketAddress;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class ChatServer {
-    private final ChannelGroup channelGroup =
-        new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE);
+    private final ChannelGroup channelGroup = new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE);
     private final EventLoopGroup group = new NioEventLoopGroup();
     private Channel channel;
 
     public ChannelFuture start(InetSocketAddress address) {
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(group)
-             .channel(NioServerSocketChannel.class)
-             .childHandler(createInitializer(channelGroup));
+        bootstrap.group(group).channel(NioServerSocketChannel.class).childHandler(createInitializer(channelGroup));
         ChannelFuture future = bootstrap.bind(address);
         future.syncUninterruptibly();
         channel = future.channel();
         return future;
     }
 
-    protected ChannelInitializer<Channel> createInitializer(
-        ChannelGroup group) {
+    protected ChannelInitializer<Channel> createInitializer(ChannelGroup group) {
         return new ChatServerInitializer(group);
     }
 
@@ -55,8 +51,7 @@ public class ChatServer {
         }
         int port = Integer.parseInt(args[0]);
         final ChatServer endpoint = new ChatServer();
-        ChannelFuture future = endpoint.start(
-                new InetSocketAddress(port));
+        ChannelFuture future = endpoint.start(new InetSocketAddress(port));
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {

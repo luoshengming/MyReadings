@@ -24,29 +24,25 @@ public class WriteHandlers {
 
     /**
      * Listing 6.6 Accessing the Channel from a ChannelHandlerContext
-     * */
+     */
     public static void writeViaChannel() {
         ChannelHandlerContext ctx = CHANNEL_HANDLER_CONTEXT_FROM_SOMEWHERE; //get reference form somewhere
         Channel channel = ctx.channel();
-        channel.write(Unpooled.copiedBuffer("Netty in Action",
-                CharsetUtil.UTF_8));
-
+        channel.write(Unpooled.copiedBuffer("Netty in Action", CharsetUtil.UTF_8));
     }
 
     /**
      * Listing 6.7 Accessing the ChannelPipeline from a ChannelHandlerContext
-     * */
+     */
     public static void writeViaChannelPipeline() {
         ChannelHandlerContext ctx = CHANNEL_HANDLER_CONTEXT_FROM_SOMEWHERE; //get reference form somewhere
         ChannelPipeline pipeline = ctx.pipeline(); //get reference form somewhere
-        pipeline.write(Unpooled.copiedBuffer("Netty in Action",
-                CharsetUtil.UTF_8));
-
+        pipeline.write(Unpooled.copiedBuffer("Netty in Action", CharsetUtil.UTF_8));
     }
 
     /**
      * Listing 6.8 Calling ChannelHandlerContext write()
-     * */
+     */
     public static void writeViaChannelHandlerContext() {
         ChannelHandlerContext ctx = CHANNEL_HANDLER_CONTEXT_FROM_SOMEWHERE; //get reference form somewhere;
         ctx.write(Unpooled.copiedBuffer("Netty in Action", CharsetUtil.UTF_8));

@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Bean;
 @SpringCloudApplication
 public class Application {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class).web(WebApplicationType.SERVLET).run(args);
-	}
+    }
 
-	@Bean
-	public AccessFilter accessFilter() {
-		return new AccessFilter();
-	}
+    @Bean
+    public AccessFilter accessFilter() {
+        return new AccessFilter();
+    }
 
-	@Bean
-	public PatternServiceRouteMapper serviceRouteMapper() {
-		return new PatternServiceRouteMapper(
-				"(?<name>^.+)-(?<version>v.+$)",
-				"${version}/${name}");
-	}
+    @Bean
+    public PatternServiceRouteMapper serviceRouteMapper() {
+        return new PatternServiceRouteMapper(
+                "(?<name>^.+)-(?<version>v.+$)",
+                "${version}/${name}");
+    }
 
 }

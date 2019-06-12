@@ -40,8 +40,6 @@ ivy-report.css
 */build/
 build/
 *DS_Store
-pom.xml
-*/pom.xml
 out/
 */out/
 LOG_FILE_IS_UNDEFINED

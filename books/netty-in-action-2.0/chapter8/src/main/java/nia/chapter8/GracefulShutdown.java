@@ -16,6 +16,7 @@ import java.net.InetSocketAddress;
  * @author <a href="mailto:mawolfthal@gmail.com">Marvin Wolfthal</a>
  */
 public class GracefulShutdown {
+
     public static void main(String args[]) {
         GracefulShutdown client = new GracefulShutdown();
         client.bootstrap();

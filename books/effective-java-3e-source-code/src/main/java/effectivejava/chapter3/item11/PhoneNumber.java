@@ -1,4 +1,5 @@
 package effectivejava.chapter3.item11;
+
 import java.util.*;
 
 // Shows the need for overriding hashcode when you override equals (Pages 50-53 )
@@ -7,8 +8,8 @@ public final class PhoneNumber {
 
     public PhoneNumber(int areaCode, int prefix, int lineNum) {
         this.areaCode = rangeCheck(areaCode, 999, "area code");
-        this.prefix   = rangeCheck(prefix,   999, "prefix");
-        this.lineNum  = rangeCheck(lineNum, 9999, "line num");
+        this.prefix = rangeCheck(prefix, 999, "prefix");
+        this.lineNum = rangeCheck(lineNum, 9999, "line num");
     }
 
     private static short rangeCheck(int val, int max, String arg) {
@@ -17,12 +18,13 @@ public final class PhoneNumber {
         return (short) val;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (o == this)
             return true;
         if (!(o instanceof PhoneNumber))
             return false;
-        PhoneNumber pn = (PhoneNumber)o;
+        PhoneNumber pn = (PhoneNumber) o;
         return pn.lineNum == lineNum && pn.prefix == prefix
                 && pn.areaCode == areaCode;
     }

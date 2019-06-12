@@ -36,8 +36,7 @@ public class ConnectExample {
                 if (future.isSuccess()) {
                     ByteBuf buffer = Unpooled.copiedBuffer(
                             "Hello", Charset.defaultCharset());
-                    ChannelFuture wf = future.channel()
-                            .writeAndFlush(buffer);
+                    ChannelFuture wf = future.channel().writeAndFlush(buffer);
                     // ...
                 } else {
                     Throwable cause = future.cause();

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.luoshengming</groupId>
+        <artifactId>fpinjava</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>fpinjava-parent</artifactId>
+    <name>fpinjava-parent</name>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.luoshengming</groupId>
+                <artifactId>fpinjava-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>fpinjava-actors</module>
+        <module>fpinjava-advancedlisthandling-exercises</module>
+        <module>fpinjava-advancedlisthandling-solutions</module>
+        <module>fpinjava-advancedtrees-exercises</module>
+        <module>fpinjava-advancedtrees-solutions</module>
+        <module>fpinjava-applications</module>
+        <module>fpinjava-common</module>
+        <module>fpinjava-handlingerrors-exercises</module>
+        <module>fpinjava-handlingerrors-solutions</module>
+        <module>fpinjava-introduction</module>
+        <module>fpinjava-io-exercises</module>
+        <module>fpinjava-io-solutions</module>
+        <module>fpinjava-laziness-exercises</module>
+        <module>fpinjava-laziness-solutions</module>
+        <module>fpinjava-lists-exercises</module>
+        <module>fpinjava-lists-solutions</module>
+        <module>fpinjava-makingjavafunctional-exercises</module>
+        <module>fpinjava-makingjavafunctional-solutions</module>
+        <module>fpinjava-optionaldata-exercises</module>
+        <module>fpinjava-optionaldata-solutions</module>
+        <module>fpinjava-recursion-exercises</module>
+        <module>fpinjava-recursion-solutions</module>
+        <module>fpinjava-state-exercises</module>
+        <module>fpinjava-state-solutions</module>
+        <module>fpinjava-trees-exercises</module>
+        <module>fpinjava-trees-solutions</module>
+        <module>fpinjava-usingfunctions-exercises</module>
+        <module>fpinjava-usingfunctions-solutions</module>
+    </modules>
+</project>

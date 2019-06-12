@@ -8,9 +8,9 @@ import io.netty.channel.*;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class OutboundExceptionHandler extends ChannelOutboundHandlerAdapter {
+
     @Override
-    public void write(ChannelHandlerContext ctx, Object msg,
-        ChannelPromise promise) {
+    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
         promise.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture f) {

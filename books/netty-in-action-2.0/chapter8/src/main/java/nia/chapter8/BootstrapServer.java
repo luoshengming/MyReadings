@@ -25,12 +25,10 @@ public class BootstrapServer {
     public void bootstrap() {
         NioEventLoopGroup group = new NioEventLoopGroup();
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(group)
-            .channel(NioServerSocketChannel.class)
-            .childHandler(new SimpleChannelInboundHandler<ByteBuf>() {
-                @Override
-                protected void channelRead0(ChannelHandlerContext channelHandlerContext,
-                    ByteBuf byteBuf) throws Exception {
+        bootstrap.group(group).channel(NioServerSocketChannel.class).childHandler(new SimpleChannelInboundHandler<ByteBuf>() {
+
+            @Override
+                protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
                     System.out.println("Received data");
                 }
             });

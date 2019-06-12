@@ -3,7 +3,6 @@ package lambdasinaction.chap8;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-
 public class ChainOfResponsibilityMain {
 
     public static void main(String[] args) {
@@ -41,15 +40,13 @@ public class ChainOfResponsibilityMain {
         abstract protected T handleWork(T input);
     }
 
-    static private class HeaderTextProcessing
-            extends ProcessingObject<String> {
+    static private class HeaderTextProcessing extends ProcessingObject<String> {
         public String handleWork(String text) {
             return "From Raoul, Mario and Alan: " + text;
         }
     }
 
-    static private class SpellCheckerProcessing
-            extends ProcessingObject<String> {
+    static private class SpellCheckerProcessing extends ProcessingObject<String> {
         public String handleWork(String text) {
             return text.replaceAll("labda", "lambda");
         }

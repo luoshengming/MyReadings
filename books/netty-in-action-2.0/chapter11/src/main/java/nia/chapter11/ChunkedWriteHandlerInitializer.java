@@ -14,10 +14,10 @@ import java.io.FileInputStream;
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
-public class ChunkedWriteHandlerInitializer
-    extends ChannelInitializer<Channel> {
+public class ChunkedWriteHandlerInitializer extends ChannelInitializer<Channel> {
     private final File file;
     private final SslContext sslCtx;
+
     public ChunkedWriteHandlerInitializer(File file, SslContext sslCtx) {
         this.file = file;
         this.sslCtx = sslCtx;
@@ -31,15 +31,12 @@ public class ChunkedWriteHandlerInitializer
         pipeline.addLast(new WriteStreamHandler());
     }
 
-    public final class WriteStreamHandler
-        extends ChannelInboundHandlerAdapter {
+    public final class WriteStreamHandler extends ChannelInboundHandlerAdapter {
 
         @Override
-        public void channelActive(ChannelHandlerContext ctx)
-            throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) throws Exception {
             super.channelActive(ctx);
-            ctx.writeAndFlush(
-            new ChunkedStream(new FileInputStream(file)));
+            ctx.writeAndFlush(new ChunkedStream(new FileInputStream(file)));
         }
     }
 }

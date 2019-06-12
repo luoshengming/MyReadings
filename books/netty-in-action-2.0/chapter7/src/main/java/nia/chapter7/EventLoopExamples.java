@@ -11,20 +11,20 @@ import java.util.List;
 public class EventLoopExamples {
     /**
      * Listing 7.1 Executing tasks in an event loop
-     * */
+     */
     public static void executeTaskInEventLoop() {
         boolean terminated = true;
         //...
         while (!terminated) {
             List<Runnable> readyEvents = blockUntilEventsReady();
-            for (Runnable ev: readyEvents) {
+            for (Runnable ev : readyEvents) {
                 ev.run();
             }
         }
     }
 
-    private static final List<Runnable> blockUntilEventsReady() {
-        return Collections.<Runnable>singletonList(new Runnable() {
+    private static List<Runnable> blockUntilEventsReady() {
+        return Collections.singletonList(new Runnable() {
             @Override
             public void run() {
                 try {

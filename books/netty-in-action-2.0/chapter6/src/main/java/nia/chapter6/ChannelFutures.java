@@ -3,10 +3,8 @@ package nia.chapter6;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.socket.nio.NioSocketChannel;
-
 
 /**
  * Created by kerr.
@@ -19,8 +17,8 @@ public class ChannelFutures {
 
     /**
      * Listing 6.13 Adding a ChannelFutureListener to a ChannelFuture
-     * */
-    public static void addingChannelFutureListener(){
+     */
+    public static void addingChannelFutureListener() {
         Channel channel = CHANNEL_FROM_SOMEWHERE; // get reference to pipeline;
         ByteBuf someMessage = SOME_MSG_FROM_SOMEWHERE; // get reference to pipeline;
         //...

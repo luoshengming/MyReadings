@@ -32,8 +32,7 @@ public class BogusTrustManagerFactory
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] chain, String authType)
-            throws CertificateException {
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
             // Always trust - it is an example.
             // You should do something in the real world.
             System.err.println("UNKNOWN SERVER CERTIFICATE: " + chain[0].getSubjectDN());
@@ -46,14 +45,12 @@ public class BogusTrustManagerFactory
     }
 
     @Override
-    protected void engineInit(KeyStore keystore)
-        throws KeyStoreException {
+    protected void engineInit(KeyStore keystore) throws KeyStoreException {
         // Unused
     }
 
     @Override
-    protected void engineInit(ManagerFactoryParameters managerFactoryParameters)
-        throws InvalidAlgorithmParameterException {
+    protected void engineInit(ManagerFactoryParameters managerFactoryParameters) throws InvalidAlgorithmParameterException {
         // Unused
     }
 }

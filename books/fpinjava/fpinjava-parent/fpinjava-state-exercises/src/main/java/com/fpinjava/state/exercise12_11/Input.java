@@ -1,12 +1,13 @@
 package com.fpinjava.state.exercise12_11;
 
-
 public interface Input {
 
-  Type type();
-  boolean isDeposit();
-  boolean isWithdraw();
-  // ??? getAmount()
+    Type type();
 
-  enum Type {DEPOSIT,WITHDRAW}
+    boolean isDeposit();
+
+    boolean isWithdraw();
+    // ??? getAmount()
+
+    enum Type {DEPOSIT, WITHDRAW}
 }

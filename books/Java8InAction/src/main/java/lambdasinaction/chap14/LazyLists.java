@@ -6,8 +6,7 @@ import java.util.function.Predicate;
 public class LazyLists {
 
     public static void main(String[] args) {
-        MyList<Integer> l = new MyLinkedList<>(5, new MyLinkedList<>(10,
-                new Empty<Integer>()));
+        MyList<Integer> l = new MyLinkedList<>(5, new MyLinkedList<>(10, new Empty<Integer>()));
 
         System.out.println(l.head());
 
