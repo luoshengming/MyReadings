@@ -12,6 +12,7 @@
 
     <artifactId>fpinjava-parent</artifactId>
     <name>fpinjava-parent</name>
+    <packaging>pom</packaging>
 
     <dependencyManagement>
         <dependencies>
