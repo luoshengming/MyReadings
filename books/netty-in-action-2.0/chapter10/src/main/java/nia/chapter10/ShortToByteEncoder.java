@@ -10,9 +10,9 @@ import io.netty.handler.codec.MessageToByteEncoder;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class ShortToByteEncoder extends MessageToByteEncoder<Short> {
+
     @Override
-    public void encode(ChannelHandlerContext ctx, Short msg, ByteBuf out)
-        throws Exception {
+    public void encode(ChannelHandlerContext ctx, Short msg, ByteBuf out) throws Exception {
         out.writeShort(msg);
     }
 }

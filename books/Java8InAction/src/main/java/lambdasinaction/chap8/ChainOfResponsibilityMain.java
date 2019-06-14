@@ -22,7 +22,7 @@ public class ChainOfResponsibilityMain {
         System.out.println(result2);
     }
 
-    static private abstract class ProcessingObject<T> {
+    private static abstract class ProcessingObject<T> {
         protected ProcessingObject<T> successor;
 
         public void setSuccessor(ProcessingObject<T> successor) {
@@ -40,13 +40,15 @@ public class ChainOfResponsibilityMain {
         abstract protected T handleWork(T input);
     }
 
-    static private class HeaderTextProcessing extends ProcessingObject<String> {
+    private static class HeaderTextProcessing extends ProcessingObject<String> {
+        @Override
         public String handleWork(String text) {
             return "From Raoul, Mario and Alan: " + text;
         }
     }
 
-    static private class SpellCheckerProcessing extends ProcessingObject<String> {
+    private static class SpellCheckerProcessing extends ProcessingObject<String> {
+        @Override
         public String handleWork(String text) {
             return text.replaceAll("labda", "lambda");
         }

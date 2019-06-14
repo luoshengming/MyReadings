@@ -9,7 +9,6 @@ public class Debugging {
         points.stream().map(p -> p.getX()).forEach(System.out::println);
     }
 
-
     private static class Point {
         private int x;
         private int y;

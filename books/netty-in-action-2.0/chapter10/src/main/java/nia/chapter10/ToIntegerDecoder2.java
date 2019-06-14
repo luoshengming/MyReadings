@@ -14,8 +14,7 @@ import java.util.List;
 public class ToIntegerDecoder2 extends ReplayingDecoder<Void> {
 
     @Override
-    public void decode(ChannelHandlerContext ctx, ByteBuf in,
-        List<Object> out) throws Exception {
+    public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         out.add(in.readInt());
     }
 }

@@ -15,7 +15,9 @@ public class CollectorHarness {
             long start = System.nanoTime();
             primePartitioner.accept(1_000_000);
             long duration = (System.nanoTime() - start) / 1_000_000;
-            if (duration < fastest) fastest = duration;
+            if (duration < fastest) {
+                fastest = duration;
+            }
             System.out.println("done in " + duration);
         }
         return fastest;
