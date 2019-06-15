@@ -12,19 +12,25 @@
     <artifactId>spring-cloud-in-action</artifactId>
     <packaging>pom</packaging>
 
+    <properties>
+        <spring-boot-starter-parent.version>2.1.5.RELEASE</spring-boot-starter-parent.version>
+        <spring-boot-maven-plugin.version>2.1.5.RELEASE</spring-boot-maven-plugin.version>
+        <spring-cloud-dependencies.version>Greenwich.SR1</spring-cloud-dependencies.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>${spring-boot-starter-parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.SR1</version>
+                <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -59,6 +65,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>

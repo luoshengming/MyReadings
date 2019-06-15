@@ -74,8 +74,8 @@ public class FilteringApples{
     }       
 
     public static class Apple {
-        private int weight = 0;
-        private String color = "";
+        private int weight;
+        private String color;
 
         public Apple(int weight, String color){
             this.weight = weight;
@@ -99,10 +99,7 @@ public class FilteringApples{
         }
 
         public String toString() {
-            return "Apple{" +
-                   "color='" + color + '\'' +
-                   ", weight=" + weight +
-                   '}';
+            return "Apple{" + "color='" + color + '\'' + ", weight=" + weight + '}';
         }
     }
 

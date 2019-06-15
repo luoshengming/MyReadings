@@ -18,7 +18,7 @@ public class StreamForkerExample {
     private static void processMenu() {
         Stream<Dish> menuStream = menu.stream();
 
-        StreamForker.Results results = new StreamForker<Dish>(menuStream)
+        StreamForker.Results results = new StreamForker<>(menuStream)
                 .fork("shortMenu", s -> s.map(Dish::getName).collect(joining(", ")))
                 .fork("totalCalories", s -> s.mapToInt(Dish::getCalories).sum())
                 .fork("mostCaloricDish", s -> s.collect(

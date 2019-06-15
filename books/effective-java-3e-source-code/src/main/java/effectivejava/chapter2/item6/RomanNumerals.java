@@ -1,12 +1,12 @@
 package effectivejava.chapter2.item6;
+
 import java.util.regex.Pattern;
 
 // Reusing expensive object for improved performance (Pages 22 and 23)
 public class RomanNumerals {
     // Performance can be greatly improved! (Page 22)
     static boolean isRomanNumeralSlow(String s) {
-        return s.matches("^(?=.)M*(C[MD]|D?C{0,3})"
-                + "(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+        return s.matches("^(?=.)M*(C[MD]|D?C{0,3})" + "(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
     }
 
     // Reusing expensive object for improved performance (Page 23)
@@ -33,8 +33,9 @@ public class RomanNumerals {
         }
 
         // Prevents VM from optimizing away everything.
-        if (!b)
+        if (!b) {
             System.out.println();
+        }
     }
 }
 

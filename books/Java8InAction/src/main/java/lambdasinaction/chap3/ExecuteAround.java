@@ -23,8 +23,7 @@ public class ExecuteAround {
     }
 
     public static String processFileLimited() throws IOException {
-        try (BufferedReader br =
-                     new BufferedReader(new FileReader("lambdasinaction/chap3/data.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("lambdasinaction/chap3/data.txt"))) {
             return br.readLine();
         }
     }

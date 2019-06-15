@@ -13,8 +13,9 @@ public class Copy {
             try {
                 byte[] buf = new byte[BUFFER_SIZE];
                 int n;
-                while ((n = in.read(buf)) >= 0)
+                while ((n = in.read(buf)) >= 0) {
                     out.write(buf, 0, n);
+                }
             } finally {
                 out.close();
             }
