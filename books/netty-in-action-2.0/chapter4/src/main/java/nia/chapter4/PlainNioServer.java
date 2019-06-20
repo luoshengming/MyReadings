@@ -22,7 +22,9 @@ public class PlainNioServer {
         serverChannel.configureBlocking(false);
         ServerSocket ss = serverChannel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
+        //将服务器绑定到选定的端口
         ss.bind(address);
+        //打开Selector来处理Channel
         Selector selector = Selector.open();
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
         final ByteBuffer msg = ByteBuffer.wrap("Hi!\r\n".getBytes());

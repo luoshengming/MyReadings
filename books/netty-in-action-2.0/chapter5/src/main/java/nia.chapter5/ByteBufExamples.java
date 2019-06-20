@@ -87,8 +87,7 @@ public class ByteBufExamples {
         ByteBuffer[] message = new ByteBuffer[]{header, body};
 
         // Create a new ByteBuffer and use copy to merge the header and body
-        ByteBuffer message2 =
-                ByteBuffer.allocate(header.remaining() + body.remaining());
+        ByteBuffer message2 = ByteBuffer.allocate(header.remaining() + body.remaining());
         message2.put(header);
         message2.put(body);
         message2.flip();

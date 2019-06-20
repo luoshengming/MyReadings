@@ -39,8 +39,7 @@ public class WebSocketConvertHandler extends MessageToMessageCodec<WebSocketFram
                 out.add(new PingWebSocketFrame(payload));
                 break;
             default:
-                throw new IllegalStateException(
-                        "Unsupported websocket msg " + msg);
+                throw new IllegalStateException("Unsupported websocket msg " + msg);
         }
     }
 

@@ -16,7 +16,9 @@ public class EventLoopExamples {
         boolean terminated = true;
         //...
         while (!terminated) {
+            //阻塞，直到有事件已经就绪可被运行
             List<Runnable> readyEvents = blockUntilEventsReady();
+            //循环遍历，并处理所有的事件
             for (Runnable ev : readyEvents) {
                 ev.run();
             }

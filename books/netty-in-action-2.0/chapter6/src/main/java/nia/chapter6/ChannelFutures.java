@@ -5,6 +5,8 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by kerr.
@@ -12,6 +14,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * Listing 6.13 Adding a ChannelFutureListener to a ChannelFuture
  */
 public class ChannelFutures {
+    private static final Logger logger = LoggerFactory.getLogger(ChannelFutures.class);
     private static final Channel CHANNEL_FROM_SOMEWHERE = new NioSocketChannel();
     private static final ByteBuf SOME_MSG_FROM_SOMEWHERE = Unpooled.buffer(1024);
 
@@ -27,7 +30,7 @@ public class ChannelFutures {
             @Override
             public void operationComplete(io.netty.channel.ChannelFuture f) {
                 if (!f.isSuccess()) {
-                    f.cause().printStackTrace();
+                    logger.warn(f.cause().getMessage(),f.cause());
                     f.channel().close();
                 }
             }

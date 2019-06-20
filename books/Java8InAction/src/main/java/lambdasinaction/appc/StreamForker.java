@@ -40,12 +40,10 @@ public class StreamForker<T> {
     private ForkingStreamConsumer<T> build() {
         List<BlockingQueue<T>> queues = new ArrayList<>();
 
-        Map<Object, Future<?>> actions =
-                forks.entrySet().stream().reduce(
+        Map<Object, Future<?>> actions = forks.entrySet().stream().reduce(
                         new HashMap<Object, Future<?>>(),
                         (map, e) -> {
-                            map.put(e.getKey(),
-                                    getOperationResult(queues, e.getValue()));
+                            map.put(e.getKey(), getOperationResult(queues, e.getValue()));
                             return map;
                         },
                         (m1, m2) -> {

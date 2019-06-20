@@ -21,8 +21,7 @@ public class AbsIntegerEncoderTest {
             buf.writeInt(i * -1);
         }
 
-        EmbeddedChannel channel = new EmbeddedChannel(
-            new AbsIntegerEncoder());
+        EmbeddedChannel channel = new EmbeddedChannel(new AbsIntegerEncoder());
         assertTrue(channel.writeOutbound(buf));
         assertTrue(channel.finish());
 

@@ -35,16 +35,6 @@
         <skipTests>true</skipTests>
     </properties>
 
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <profiles>
         <profile>
             <id>server</id>
@@ -53,7 +43,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>2.12.1</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>validate</id>
@@ -76,7 +66,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>2.12.1</version>
+                        <version>3.1.0</version>
                     </plugin>
                 </plugins>
             </reporting>
@@ -93,7 +83,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.8</version>
+                <version>0.8.4</version>
                 <executions>
                     <execution>
                         <goals>
