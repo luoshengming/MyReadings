@@ -4,7 +4,6 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 /**
- * 
  * @author tengfei.fangtf
  * @version $Id: CyclicBarrierTest3.java, v 0.1 2015-8-1 上午12:09:37 tengfei.fangtf Exp $
  */

@@ -3,7 +3,9 @@ package structure;
 import java.util.ArrayList;
 import java.util.List;
 
-/** List to array */
+/**
+ * List to array
+ */
 public class ToArray {
     public static void main(String[] args) {
         // BEGIN main

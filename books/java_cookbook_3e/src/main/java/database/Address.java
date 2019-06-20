@@ -1,7 +1,11 @@
 package database;
 
 // BEGIN main
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Address {
@@ -12,15 +16,16 @@ public class Address {
     private String city;
     private String country;
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
     // Other accessors and methods omitted for brevity
     // END main
-    
+
     public void setId(int id) {
-            this.id = id;
+        this.id = id;
     }
 
     public String getStreetAddress() {

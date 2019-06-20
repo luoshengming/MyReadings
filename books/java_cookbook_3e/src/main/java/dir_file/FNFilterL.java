@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 /**
  * FNFilter - Ls directory lister with a Lambda FilenameFilter
+ *
  * @author Ian Darwin
  */
 public class FNFilterL {
@@ -19,11 +20,11 @@ public class FNFilterL {
         // BEGIN main
         // Generate the selective list, with a Lambda Expression
         String[] dirs = new java.io.File(dirName).list(
-            (dir, s) -> {
-                return s.endsWith(".java") ||
-                    s.endsWith(".class") ||
-                    s.endsWith(".jar");
-            }
+                (dir, s) -> {
+                    return s.endsWith(".java") ||
+                            s.endsWith(".class") ||
+                            s.endsWith(".jar");
+                }
         );
         Arrays.sort(dirs);        // Sort it (see Data Structuring chapter))
         for (String d : dirs) {

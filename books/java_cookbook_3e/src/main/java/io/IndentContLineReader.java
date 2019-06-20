@@ -2,7 +2,8 @@ package io;
 
 import java.io.*;
 
-/** Subclass of ContLineReader for lines continued by indentation of
+/**
+ * Subclass of ContLineReader for lines continued by indentation of
  * following line (like RFC822 mail, Usenet News, etc.).
  * Normally you would read header & body of the message(s) with code like:
  * <pre>
@@ -18,14 +19,17 @@ import java.io.*;
 // BEGIN main
 public class IndentContLineReader extends ContLineReader {
 
-    /** Line number of first line in current (possibly continued) line */
+    /**
+     * Line number of first line in current (possibly continued) line
+     */
     public int getLineNumber() {
         return firstLineNumber;
     }
 
     protected String prevLine;
 
-    /** Read one (possibly continued) line, stripping out the '\'s that
+    /**
+     * Read one (possibly continued) line, stripping out the '\'s that
      * mark the end of all but the last.
      */
     public String readLine() throws IOException {
@@ -38,8 +42,7 @@ public class IndentContLineReader extends ContLineReader {
         if (prevLine != null) {
             s = prevLine;
             prevLine = null;
-        }
-        else  {
+        } else {
             s = readPhysicalLine();
         }
 
@@ -65,7 +68,7 @@ public class IndentContLineReader extends ContLineReader {
             }
             // If the next line begins with space, it's continuation
             if (nextPart.length() > 0 &&
-                Character.isWhitespace(nextPart.charAt(0))) {
+                    Character.isWhitespace(nextPart.charAt(0))) {
                 sb.append(nextPart);    // and add line.
             } else {
                 // else we just read too far, so put in "pushback" holder
@@ -78,13 +81,17 @@ public class IndentContLineReader extends ContLineReader {
     }
 // END main
 
-    /** Construct an IndentContLineReader with the default buffer size. */
-    public IndentContLineReader(Reader in)  {
+    /**
+     * Construct an IndentContLineReader with the default buffer size.
+     */
+    public IndentContLineReader(Reader in) {
         super(in);
     }
 
-    /** Construct an IndentContLineReader using the given buffer size. */
-    public IndentContLineReader(Reader in, int sz)  {
+    /**
+     * Construct an IndentContLineReader using the given buffer size.
+     */
+    public IndentContLineReader(Reader in, int sz) {
         super(in, sz);
     }
 }

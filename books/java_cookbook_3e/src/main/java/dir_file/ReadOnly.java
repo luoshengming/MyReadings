@@ -30,7 +30,7 @@ public class ReadOnly {
         } else {
             System.out.println("Logical, captain!");
             System.out.println(
-                "canWrite() correctly returns false after setReadOnly");
+                    "canWrite() correctly returns false after setReadOnly");
         }
     }
 }

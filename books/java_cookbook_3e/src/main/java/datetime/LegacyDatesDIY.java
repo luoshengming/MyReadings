@@ -30,16 +30,16 @@ public class LegacyDatesDIY {
                 legacyDate.getHours(), legacyDate.getMinutes(),
                 legacyDate.getSeconds());
         System.out.println(convertedDate2);
-        
+
         // Timezone
         TimeZone timeZone = TimeZone.getTimeZone("EST");
         ZoneId zoneId = timeZone.toZoneId();
         System.out.println("EST - > " + zoneId);
-        
+
         // Convert new DateTimeFormatter to old java.util.Format, but it
         // will only format things that implement TemporalAccessor, e.g., new API
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy MM dd");
         Format legacyFormat = dateTimeFormatter.toFormat();
-        System.out.println("Formatted: " +legacyFormat.format(convertedDate2));
+        System.out.println("Formatted: " + legacyFormat.format(convertedDate2));
     }
 }

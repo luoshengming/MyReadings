@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 /**
  * List the Constructors and methods
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -20,9 +21,10 @@ public class ListMethods {
         Method[] meths = c.getMethods();
         printList("Methods", meths);
     }
+
     static void printList(String s, Object[] o) {
         System.out.println("*** " + s + " ***");
-        for (int i=0; i<o.length; i++)
+        for (int i = 0; i < o.length; i++)
             System.out.println(o[i].toString());
     }
 }

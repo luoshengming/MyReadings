@@ -3,7 +3,8 @@ package i18n;
 import java.text.*;
 import java.util.*;
 
-/** Use some locales
+/**
+ * Use some locales
  * choices or -Duser.lang= or -Duser.region=.
  */
 // BEGIN main
@@ -14,19 +15,19 @@ public class UseLocales {
         Locale ukLocale = new Locale("en", "UK");    // English, UK version
 
         DateFormat defaultDateFormatter = DateFormat.getDateInstance(
-            DateFormat.MEDIUM);
+                DateFormat.MEDIUM);
         DateFormat frDateFormatter = DateFormat.getDateInstance(
-            DateFormat.MEDIUM, frLocale);
+                DateFormat.MEDIUM, frLocale);
         DateFormat ukDateFormatter = DateFormat.getDateInstance(
-            DateFormat.MEDIUM, ukLocale);
+                DateFormat.MEDIUM, ukLocale);
 
         Date now = new Date();
         System.out.println("Default: " + ' ' +
-            defaultDateFormatter.format(now));
+                defaultDateFormatter.format(now));
         System.out.println(frLocale.getDisplayName() + ' ' +
-            frDateFormatter.format(now));
+                frDateFormatter.format(now));
         System.out.println(ukLocale.getDisplayName() + ' ' +
-            ukDateFormatter.format(now));
+                ukDateFormatter.format(now));
     }
 }
 // END main

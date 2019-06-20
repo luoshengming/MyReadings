@@ -23,13 +23,13 @@ public class JfxVideo extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("JavaFX Video");
         final List<String> args = getParameters().getRaw();
-        
+
         String url = args.size() > 0 ?
-            args.get(args.size() - 1) :
+                args.get(args.size() - 1) :
                 "http://www.mediacollege.com/" +
-                "video-gallery/testclips/20051210-w50s.flv";
+                        "video-gallery/testclips/20051210-w50s.flv";
         Media media = new Media(url);
-                
+
         MediaPlayer player = new MediaPlayer(media);
         player.play();
 

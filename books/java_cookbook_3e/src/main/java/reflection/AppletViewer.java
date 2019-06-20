@@ -15,30 +15,47 @@ import javax.swing.JFrame;
  */
 // BEGIN main
 public class AppletViewer {
-    /** The main Frame of this program */
+    /**
+     * The main Frame of this program
+     */
     JFrame f;
-    /** The AppletAdapter (gives AppletStub, AppletContext, showStatus) */
+    /**
+     * The AppletAdapter (gives AppletStub, AppletContext, showStatus)
+     */
     static AppletAdapter aa = null;
-    /** The name of the Applet subclass */
+    /**
+     * The name of the Applet subclass
+     */
     String appName = null;
-    /** The Class for the actual applet type */
+    /**
+     * The Class for the actual applet type
+     */
     Class<?> ac = null;
-    /** The Applet instance we are running, or null. Can not be a JApplet
-     * until all the entire world is converted to JApplet. */
+    /**
+     * The Applet instance we are running, or null. Can not be a JApplet
+     * until all the entire world is converted to JApplet.
+     */
     Applet ai = null;
-    /** The width of the Applet */
+    /**
+     * The width of the Applet
+     */
     final int WIDTH = 250;
-    /** The height of the Applet */
+    /**
+     * The height of the Applet
+     */
     final int HEIGHT = 200;
 
-    /** Main is where it all starts. 
+    /**
+     * Main is where it all starts.
      * Construct the GUI. Load the Applet. Start it running.
      */
     public static void main(String[] av) {
-        new AppletViewer(av.length==0?"HelloApplet":av[0]);
+        new AppletViewer(av.length == 0 ? "HelloApplet" : av[0]);
     }
 
-    /** Construct the GUI for an Applet Viewer */
+    /**
+     * Construct the GUI for an Applet Viewer
+     */
     AppletViewer(String appName) {
         super();
 
@@ -67,7 +84,7 @@ public class AppletViewer {
 
         showStatus("Loading Applet " + appName);
 
-        loadApplet(appName , WIDTH, HEIGHT);    // sets ac and ai
+        loadApplet(appName, WIDTH, HEIGHT);    // sets ac and ai
         if (ai == null)
             return;
 
@@ -101,10 +118,10 @@ public class AppletViewer {
             ac = Class.forName(appletName);
             // Construct an instance (as if using no-argument constructor)
             ai = (Applet) ac.newInstance();
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             showStatus("Applet subclass " + appletName + " did not load");
             return;
-        } catch (Exception e ){
+        } catch (Exception e) {
             showStatus("Applet " + appletName + " did not instantiate");
             return;
         }

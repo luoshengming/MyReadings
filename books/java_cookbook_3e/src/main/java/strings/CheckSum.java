@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 /**
  * CheckSum - print a checksum of a file
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class CheckSum {
@@ -15,11 +16,11 @@ public class CheckSum {
         int sum = 0;
         if (args.length == 0) {
             sum = CheckSum.process(new BufferedReader(
-            new InputStreamReader(System.in)));
+                    new InputStreamReader(System.in)));
         } else for (String arg : args) {
             try {
                 sum += CheckSum.process(
-                    new BufferedReader(new FileReader(arg)));
+                        new BufferedReader(new FileReader(arg)));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException("File not found: " + arg, e);
             }
@@ -28,7 +29,9 @@ public class CheckSum {
     }
 
     // BEGIN main
-    /** CheckSum one text file, given an open BufferedReader.
+
+    /**
+     * CheckSum one text file, given an open BufferedReader.
      * Checksumm does not include line endings, so will give the
      * same value for given text on any platform. Do not use
      * on binary files!
@@ -40,7 +43,7 @@ public class CheckSum {
 
             while ((inputLine = is.readLine()) != null) {
                 int i;
-                for (i=0; i<inputLine.length(); i++) {
+                for (i = 0; i < inputLine.length(); i++) {
                     sum += inputLine.charAt(i);
                 }
             }

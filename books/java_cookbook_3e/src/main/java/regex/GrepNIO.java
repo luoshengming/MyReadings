@@ -6,7 +6,8 @@ import java.nio.channels.*;
 import java.nio.charset.*;
 import java.util.regex.*;
 
-/** A grep-like program using NIO but NOT LINE BASED.
+/**
+ * A grep-like program using NIO but NOT LINE BASED.
  * Pattern and file name(s) must be on command line.
  */
 // BEGIN main
@@ -18,8 +19,8 @@ public class GrepNIO {
             System.exit(1);
         }
 
-        Pattern p=Pattern.compile(args[0]);
-        for (int i=1; i<args.length; i++)
+        Pattern p = Pattern.compile(args[0]);
+        for (int i = 1; i < args.length; i++)
             process(p, args[i]);
     }
 
@@ -33,7 +34,7 @@ public class GrepNIO {
 
         // Decode ByteBuffer into CharBuffer
         CharBuffer cbuf =
-            Charset.forName("ISO-8859-1").newDecoder().decode(buf);
+                Charset.forName("ISO-8859-1").newDecoder().decode(buf);
 
         Matcher m = pattern.matcher(cbuf);
         while (m.find()) {

@@ -7,10 +7,12 @@ import java.util.regex.PatternSyntaxException;
 
 
 // BEGIN main
-/** Class to encapsulate the filtration for Find.
+
+/**
+ * Class to encapsulate the filtration for Find.
  * For now just setTTTFilter() methods. Really needs to be a real
  * data structure to allow complex things like
- *    -n "*.html" -a \( -size < 0 -o mtime < 5 \).
+ * -n "*.html" -a \( -size < 0 -o mtime < 5 \).
  */
 public class FindFilter implements FilenameFilter {
     boolean sizeSet;
@@ -24,21 +26,39 @@ public class FindFilter implements FilenameFilter {
         sizeSet = true;
     }
 
-    /** Convert the given shell wildcard pattern into internal form (an RE) */
+    /**
+     * Convert the given shell wildcard pattern into internal form (an RE)
+     */
     void setNameFilter(String nameFilter) {
         name = nameFilter;
         StringBuilder sb = new StringBuilder('^');
         for (char c : nameFilter.toCharArray()) {
-            switch(c) {
-                case '.':    sb.append("\\."); break;
-                case '*':    sb.append(".*"); break;
-                case '?':    sb.append('.'); break;
+            switch (c) {
+                case '.':
+                    sb.append("\\.");
+                    break;
+                case '*':
+                    sb.append(".*");
+                    break;
+                case '?':
+                    sb.append('.');
+                    break;
                 // Some chars are special to RE and have to be escaped
-                case '[':    sb.append("\\["); break;
-                case ']':    sb.append("\\]"); break;
-                case '(':    sb.append("\\("); break;
-                case ')':    sb.append("\\)"); break;
-                default:    sb.append(c); break;
+                case '[':
+                    sb.append("\\[");
+                    break;
+                case ']':
+                    sb.append("\\]");
+                    break;
+                case '(':
+                    sb.append("\\(");
+                    break;
+                case ')':
+                    sb.append("\\)");
+                    break;
+                default:
+                    sb.append(c);
+                    break;
             }
         }
         sb.append('$');
@@ -48,11 +68,13 @@ public class FindFilter implements FilenameFilter {
             nameRE = Pattern.compile(sb.toString());
         } catch (PatternSyntaxException ex) {
             System.err.println("Error: RE " + sb.toString() +
-                " didn't compile: " + ex);
+                    " didn't compile: " + ex);
         }
     }
 
-    /** Do the filtering. For now, only filter on name */
+    /**
+     * Do the filtering. For now, only filter on name
+     */
     public boolean accept(File dir, String fileName) {
         File f = new File(dir, fileName);
         if (f.isDirectory()) {
@@ -68,7 +90,7 @@ public class FindFilter implements FilenameFilter {
         // Catchall
         return false;
     }
-    
+
     public String getName() {
         return name;
     }

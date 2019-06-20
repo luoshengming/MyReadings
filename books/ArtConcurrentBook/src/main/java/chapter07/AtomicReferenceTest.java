@@ -3,7 +3,6 @@ package chapter07;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * 
  * @author tengfei.fangtf
  * @version $Id: AtomicReferenceTest.java, v 0.1 2015-8-1 上午12:05:14 tengfei.fangtf Exp $
  */
@@ -22,7 +21,7 @@ public class AtomicReferenceTest {
 
     public static class User {
         private String name;
-        private int    old;
+        private int old;
 
         public User(String name, int old) {
             this.name = name;

@@ -14,18 +14,24 @@ public class CopyConstructorDemo {
     private int number;
     private String name;
 
-    /** Default constructor */
-    public CopyConstructorDemo()  {
+    /**
+     * Default constructor
+     */
+    public CopyConstructorDemo() {
     }
 
-    /** Normal constructor */
-    public CopyConstructorDemo(int number, String name)  {
+    /**
+     * Normal constructor
+     */
+    public CopyConstructorDemo(int number, String name) {
         this.number = number;
         this.name = name;
     }
 
-    /** Copy Constructor */
-    public CopyConstructorDemo(CopyConstructorDemo other)  {
+    /**
+     * Copy Constructor
+     */
+    public CopyConstructorDemo(CopyConstructorDemo other) {
         this.number = other.number;
         this.name = other.name;
     }

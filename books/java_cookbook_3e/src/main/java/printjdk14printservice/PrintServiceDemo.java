@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
 import com.darwinsys.swingui.UtilGUI;
 
 // BEGIN main
+
 /**
  * Show the latest incarnation of printing, PrintService, from a GUI;
  * the GUI consists only of a "Print" button, and the filename is hardcoded,
@@ -32,11 +33,14 @@ import com.darwinsys.swingui.UtilGUI;
 public class PrintServiceDemo extends JFrame {
 
     private static final long serialVersionUID = 923572304627926023L;
-    
+
     private static final String INPUT_FILE_NAME = "/demo.txt";
 
-    /** main program: instantiate and show. 
-     * @throws IOException */
+    /**
+     * main program: instantiate and show.
+     *
+     * @throws IOException
+     */
     public static void main(String[] av) throws Exception {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -49,7 +53,9 @@ public class PrintServiceDemo extends JFrame {
         });
     }
 
-    /** Constructor for GUI display with pushbutton to print */
+    /**
+     * Constructor for GUI display with pushbutton to print
+     */
     PrintServiceDemo(String title) {
         super(title);
         System.out.println("PrintServiceDemo.PrintServiceDemo()");
@@ -60,13 +66,13 @@ public class PrintServiceDemo extends JFrame {
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(
-                    "PrintServiceDemo.PrintServiceDemo...actionPerformed()");
+                        "PrintServiceDemo.PrintServiceDemo...actionPerformed()");
                 try {
                     print(INPUT_FILE_NAME);
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(
-                        PrintServiceDemo.this, "Error: " + e1, "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                            PrintServiceDemo.this, "Error: " + e1, "Error",
+                            JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace();
                 }
             }
@@ -75,9 +81,11 @@ public class PrintServiceDemo extends JFrame {
         UtilGUI.center(this);
     }
 
-    /** Print a file by name 
+    /**
+     * Print a file by name
+     *
      * @throws IOException
-     * @throws PrintException 
+     * @throws PrintException
      */
     public void print(String fileName) throws IOException, PrintException {
         System.out.println("PrintServiceDemo.print(): Printing " + fileName);
@@ -86,25 +94,25 @@ public class PrintServiceDemo extends JFrame {
         //aset.add(MediaSize.NA.LETTER);
         aset.add(MediaSizeName.NA_LETTER);
         //aset.add(new JobName(INPUT_FILE_NAME, null));
-        PrintService[] pservices = 
-            PrintServiceLookup.lookupPrintServices(flavor, aset);
+        PrintService[] pservices =
+                PrintServiceLookup.lookupPrintServices(flavor, aset);
         int i;
-        switch(pservices.length) {
-        case 0:
-            System.err.println(0);
-            JOptionPane.showMessageDialog(PrintServiceDemo.this,
-                "Error: No PrintService Found", "Error", 
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        case 1:
-            i = 0;    // Only one printer, use it.
-            break;
-        default:
-            i = JOptionPane.showOptionDialog(this, 
-                "Pick a printer", "Choice", 
-                JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, 
-                null, pservices, pservices[0]);
-            break;
+        switch (pservices.length) {
+            case 0:
+                System.err.println(0);
+                JOptionPane.showMessageDialog(PrintServiceDemo.this,
+                        "Error: No PrintService Found", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            case 1:
+                i = 0;    // Only one printer, use it.
+                break;
+            default:
+                i = JOptionPane.showOptionDialog(this,
+                        "Pick a printer", "Choice",
+                        JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, pservices, pservices[0]);
+                break;
         }
         DocPrintJob pj = pservices[i].createPrintJob();
         InputStream is = getClass().getResourceAsStream(INPUT_FILE_NAME);
@@ -112,7 +120,7 @@ public class PrintServiceDemo extends JFrame {
             throw new NullPointerException("Input Stream is null: file not found?");
         }
         Doc doc = new SimpleDoc(is, flavor, null);
-        
+
         pj.print(doc, aset);
     }
 }

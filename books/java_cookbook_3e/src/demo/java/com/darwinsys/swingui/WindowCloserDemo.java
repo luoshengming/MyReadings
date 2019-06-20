@@ -3,6 +3,7 @@ package com.darwinsys.swingui;
 
 import java.awt.Frame;
 import java.awt.Label;
+
 import com.darwinsys.swingui.WindowCloser;
 
 /* Example of closing a Window. */

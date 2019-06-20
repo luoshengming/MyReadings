@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Range {
 
-  public static List<Integer> range(Integer start, Integer end) {
-    return end <= start
-        ? CollectionUtilities.list()
-        : CollectionUtilities.prepend(start, range(start + 1, end));
-  }
+    public static List<Integer> range(Integer start, Integer end) {
+        return end <= start
+                ? CollectionUtilities.list()
+                : CollectionUtilities.prepend(start, range(start + 1, end));
+    }
 }

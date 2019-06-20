@@ -15,17 +15,16 @@
  */
 package com.phei.netty.codec.marshalling;
 
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-
 import com.phei.netty.codec.pojo.SubscribeReq;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * @author lilinfeng
  * @version 1.0
  * @date 2014年2月14日
  */
-public class SubReqClientHandler extends ChannelHandlerAdapter {
+public class SubReqClientHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * Creates a client-side handler.
@@ -52,8 +51,7 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("Receive server response : [" + msg + "]");
     }
 

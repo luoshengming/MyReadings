@@ -24,28 +24,42 @@ import javax.swing.JTabbedPane;
 
 import com.darwinsys.util.FileProperties;
 
-/** Standalone MailClient GUI application.
- * @author    Ian Darwin, http://www.darwinsys.com/
+/**
+ * Standalone MailClient GUI application.
+ *
+ * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 public class MailClient extends JComponent {
 
     private static final long serialVersionUID = 1L;
-    /** The quit button */
+    /**
+     * The quit button
+     */
     JButton quitButton;
-    /** The read mode */
+    /**
+     * The read mode
+     */
     MailReaderBean mrb;
-    /** The send mode */
+    /**
+     * The send mode
+     */
     MailComposeFrame mcb;
-    /** The Aliases panel */
+    /**
+     * The Aliases panel
+     */
     AliasBean alb;
 
-    /** Construct the MailClient JComponent a default Properties filename */
+    /**
+     * Construct the MailClient JComponent a default Properties filename
+     */
     public MailClient() throws Exception {
         this(PROPS_FILE_NAME);
     }
 
-    /** Construct the MailClient JComponent with a Properties filename */
+    /**
+     * Construct the MailClient JComponent with a Properties filename
+     */
     public MailClient(String propsFileName) throws Exception {
         super();
 
@@ -54,11 +68,11 @@ public class MailClient extends JComponent {
 
         // Gather some key values
         String proto = mailProps.getProperty(RECV_PROTO);
-        String user  = mailProps.getProperty(RECV_USER);
-        String pass  = mailProps.getProperty(RECV_PASS);
-        String host  = mailProps.getProperty(RECV_HOST);
+        String user = mailProps.getProperty(RECV_USER);
+        String pass = mailProps.getProperty(RECV_PASS);
+        String host = mailProps.getProperty(RECV_HOST);
 
-        if (proto==null)
+        if (proto == null)
             throw new IllegalArgumentException(RECV_PROTO + "==null");
 
         // Protocols other than "mbox" need a password.
@@ -74,7 +88,7 @@ public class MailClient extends JComponent {
                 JPasswordField jpf = new JPasswordField(20);
                 p.add(jpf);
                 JOptionPane.showMessageDialog(null, p,
-                    "Password request", JOptionPane.QUESTION_MESSAGE);
+                        "Password request", JOptionPane.QUESTION_MESSAGE);
                 np = new String(jpf.getPassword());
             } while (np == null || (np != null && np.length() == 0));
             mailProps.setProperty(RECV_PASS, np);
@@ -92,12 +106,14 @@ public class MailClient extends JComponent {
         tbp.addTab("Sending", mcb = new MailComposeFrame());
         tbp.addTab("Aliases", alb = new AliasBean());
         tbp.addTab("List sending", new JLabel("Under construction",
-            JLabel.CENTER));
-        add(BorderLayout.SOUTH, quitButton = new JButton("Exit")); 
+                JLabel.CENTER));
+        add(BorderLayout.SOUTH, quitButton = new JButton("Exit"));
         // System.out.println("Leaving Constructor");
     }
 
-    /** "main program" method - run the program */
+    /**
+     * "main program" method - run the program
+     */
     public static void main(String[] av) throws Exception {
 
         final JFrame f = new JFrame("MailClient");
@@ -106,9 +122,9 @@ public class MailClient extends JComponent {
         try {
             Class.forName("javax.mail.Session");
         } catch (ClassNotFoundException cnfe) {
-            JOptionPane.showMessageDialog(f, 
-                "Sorry, the javax.mail package was not found\n(" + cnfe + ")",
-                "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(f,
+                    "Sorry, the javax.mail package was not found\n(" + cnfe + ")",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

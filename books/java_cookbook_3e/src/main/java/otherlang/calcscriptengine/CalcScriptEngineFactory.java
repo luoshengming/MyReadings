@@ -20,7 +20,7 @@ public class CalcScriptEngineFactory implements ScriptEngineFactory {
     public String getEngineVersion() {
         return "0.1";
     }
-    
+
     @Override
     public String getLanguageName() {
         return THY_NAME;
@@ -54,17 +54,17 @@ public class CalcScriptEngineFactory implements ScriptEngineFactory {
 
     @Override
     public Object getParameter(String key) {
-        switch(key) {
-        case ScriptEngine.ENGINE:
-            return getEngineName();
-        case ScriptEngine.ENGINE_VERSION:
-            return getEngineVersion();
-        case ScriptEngine.LANGUAGE:
-            return getLanguageName();
-        case ScriptEngine.LANGUAGE_VERSION:
-            return getLanguageVersion();
-        default:
-            throw new IllegalArgumentException("Unknown parameter " + key);
+        switch (key) {
+            case ScriptEngine.ENGINE:
+                return getEngineName();
+            case ScriptEngine.ENGINE_VERSION:
+                return getEngineVersion();
+            case ScriptEngine.LANGUAGE:
+                return getLanguageName();
+            case ScriptEngine.LANGUAGE_VERSION:
+                return getLanguageVersion();
+            default:
+                throw new IllegalArgumentException("Unknown parameter " + key);
         }
     }
 

@@ -46,16 +46,11 @@ public class HttpFileServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast("http-decoder",
-                                    new HttpRequestDecoder()); // 请求消息解码器
-                            ch.pipeline().addLast("http-aggregator",
-                                    new HttpObjectAggregator(65536));// 目的是将多个消息转换为单一的request或者response对象
-                            ch.pipeline().addLast("http-encoder",
-                                    new HttpResponseEncoder());//响应解码器
-                            ch.pipeline().addLast("http-chunked",
-                                    new ChunkedWriteHandler());//目的是支持异步大文件传输（）
-                            ch.pipeline().addLast("fileServerHandler",
-                                    new HttpFileServerHandler(url));// 业务逻辑
+                            ch.pipeline().addLast("http-decoder", new HttpRequestDecoder()); // 请求消息解码器
+                            ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));// 目的是将多个消息转换为单一的request或者response对象
+                            ch.pipeline().addLast("http-encoder", new HttpResponseEncoder());//响应解码器
+                            ch.pipeline().addLast("http-chunked", new ChunkedWriteHandler());//目的是支持异步大文件传输（）
+                            ch.pipeline().addLast("fileServerHandler", new HttpFileServerHandler(url));// 业务逻辑
                         }
                     });
             ChannelFuture future = b.bind("192.168.1.102", port).sync();
@@ -77,8 +72,9 @@ public class HttpFileServer {
             }
         }
         String url = DEFAULT_URL;
-        if (args.length > 1)
+        if (args.length > 1) {
             url = args[1];
+        }
         new HttpFileServer().run(port, url);
     }
 }

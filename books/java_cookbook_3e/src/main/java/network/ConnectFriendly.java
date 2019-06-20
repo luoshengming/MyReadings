@@ -14,7 +14,7 @@ public class ConnectFriendly {
         try (Socket sock = new Socket(server_name, tcp_port)) {
 
             /* If we get here, we can read and write on the socket. */
-            System.out.println(" *** Connected to " + server_name  + " ***");
+            System.out.println(" *** Connected to " + server_name + " ***");
 
             /* Do some I/O here... */
 
@@ -22,7 +22,7 @@ public class ConnectFriendly {
             System.err.println(server_name + " Unknown host");
             return;
         } catch (NoRouteToHostException e) {
-            System.err.println(server_name + " Unreachable" );
+            System.err.println(server_name + " Unreachable");
             return;
         } catch (ConnectException e) {
             System.err.println(server_name + " connect refused");

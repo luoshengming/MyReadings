@@ -11,35 +11,47 @@ import java.util.Stack;
 /**
  * SimpleCalc -- simple calculator to show StringTokenizer
  *
- * @author    Ian Darwin, http://www.darwinsys.com/
+ * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 public class SimpleCalcStreamTok {
-    /** The StreamTokenizer Input */
-    protected  StreamTokenizer tf;
-    /** The Output File */
+    /**
+     * The StreamTokenizer Input
+     */
+    protected StreamTokenizer tf;
+    /**
+     * The Output File
+     */
     protected PrintWriter out = new PrintWriter(System.out, true);
-    /** The variable name (not used in this version) */
+    /**
+     * The variable name (not used in this version)
+     */
     protected String variable;
-    /** The operand stack */
+    /**
+     * The operand stack
+     */
     protected Stack s;
 
     /* Driver - main program */
     public static void main(String[] av) throws IOException {
         if (av.length == 0)
             new SimpleCalcStreamTok(
-                new InputStreamReader(System.in)).doCalc();
-        else 
-            for (int i=0; i<av.length; i++)
+                    new InputStreamReader(System.in)).doCalc();
+        else
+            for (int i = 0; i < av.length; i++)
                 new SimpleCalcStreamTok(av[i]).doCalc();
     }
 
-    /** Construct by filename */
+    /**
+     * Construct by filename
+     */
     public SimpleCalcStreamTok(String fileName) throws IOException {
         this(new FileReader(fileName));
     }
 
-    /** Construct from an existing Reader */
+    /**
+     * Construct from an existing Reader
+     */
     public SimpleCalcStreamTok(Reader rdr) throws IOException {
         tf = new StreamTokenizer(rdr);
         // Control the input character set:
@@ -50,13 +62,14 @@ public class SimpleCalcStreamTok {
         s = new Stack();
     }
 
-    /** Construct from a Reader and a PrintWriter
+    /**
+     * Construct from a Reader and a PrintWriter
      */
     public SimpleCalcStreamTok(Reader in, PrintWriter out) throws IOException {
         this(in);
         setOutput(out);
     }
-    
+
     /**
      * Change the output destination.
      */
@@ -69,49 +82,53 @@ public class SimpleCalcStreamTok {
         double tmp;
 
         while ((iType = tf.nextToken()) != StreamTokenizer.TT_EOF) {
-            switch(iType) {
-            case StreamTokenizer.TT_NUMBER: // Found a number, push value to stack
-                push(tf.nval);
-                break;
-            case StreamTokenizer.TT_WORD:
-                // Found a variable, save its name. Not used here.
-                variable = tf.sval;
-                break;
-            case '+':
-                // + operator is commutative.
-                push(pop() + pop());
-                break;
-            case '-':
-                // - operator: order matters.
-                tmp = pop();
-                push(pop() - tmp);
-                break;
-            case '*':
-                // Multiply is commutative
-                push(pop() * pop());
-                break;
-            case '/':
-                // Handle division carefully: order matters!
-                tmp = pop();
-                push(pop() / tmp);
-                break;
-            case '=':
-                out.println(peek());
-                break;
-            default:
-                out.println("What's this? iType = " + iType);
+            switch (iType) {
+                case StreamTokenizer.TT_NUMBER: // Found a number, push value to stack
+                    push(tf.nval);
+                    break;
+                case StreamTokenizer.TT_WORD:
+                    // Found a variable, save its name. Not used here.
+                    variable = tf.sval;
+                    break;
+                case '+':
+                    // + operator is commutative.
+                    push(pop() + pop());
+                    break;
+                case '-':
+                    // - operator: order matters.
+                    tmp = pop();
+                    push(pop() - tmp);
+                    break;
+                case '*':
+                    // Multiply is commutative
+                    push(pop() * pop());
+                    break;
+                case '/':
+                    // Handle division carefully: order matters!
+                    tmp = pop();
+                    push(pop() / tmp);
+                    break;
+                case '=':
+                    out.println(peek());
+                    break;
+                default:
+                    out.println("What's this? iType = " + iType);
             }
         }
     }
+
     void push(double val) {
         s.push(new Double(val));
     }
+
     double pop() {
-        return ((Double)s.pop()).doubleValue();
+        return ((Double) s.pop()).doubleValue();
     }
+
     double peek() {
-        return ((Double)s.peek()).doubleValue();
+        return ((Double) s.peek()).doubleValue();
     }
+
     void clearStack() {
         s.removeAllElements();
     }

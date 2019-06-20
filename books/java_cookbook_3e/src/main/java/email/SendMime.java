@@ -15,53 +15,67 @@ import javax.mail.internet.MimeMultipart;
 
 import com.darwinsys.util.FileProperties;
 
-/** SendMime -- send a multi-part MIME email message.
+/**
+ * SendMime -- send a multi-part MIME email message.
+ *
  * @author Ian F. Darwin
  */
 // BEGIN main
 public class SendMime {
 
-    /** The message recipient. */
+    /**
+     * The message recipient.
+     */
     protected String message_recip = "spam-magnet@somedomainnamehere.com";
     /* What's it all about, Alfie? */
     protected String message_subject = "Re: your mail";
-    /** The message CC recipient. */
+    /**
+     * The message CC recipient.
+     */
     protected String message_cc = "nobody@erewhon.com";
-    /** The text/plain message body */
+    /**
+     * The text/plain message body
+     */
     protected String message_body =
-        "I am unable to attend to your message, as I am busy sunning " +
-        "myself on the beach in Maui, where it is warm and peaceful. " +
-        "Perhaps when I return I'll get around to reading your mail. " +
-        "Or not.";
+            "I am unable to attend to your message, as I am busy sunning " +
+                    "myself on the beach in Maui, where it is warm and peaceful. " +
+                    "Perhaps when I return I'll get around to reading your mail. " +
+                    "Or not.";
     /* The text/html data. */
-    protected String html_data = 
-        "<html><head><title>My Goodness</title></head>" +
-        "<body><p>You <em>do</em> look a little " +
-        "<font color='green'>GREEN</font> " +
-        "around the edges..." +
-        "</body></html>";
+    protected String html_data =
+            "<html><head><title>My Goodness</title></head>" +
+                    "<body><p>You <em>do</em> look a little " +
+                    "<font color='green'>GREEN</font> " +
+                    "around the edges..." +
+                    "</body></html>";
 
-    /** The JavaMail session object */
+    /**
+     * The JavaMail session object
+     */
     protected Session session;
-    /** The JavaMail message object */
+    /**
+     * The JavaMail message object
+     */
     protected Message mesg;
 
-    /** Do the work: send the mail to the SMTP server.  */
+    /**
+     * Do the work: send the mail to the SMTP server.
+     */
     public void doSend() throws IOException, MessagingException {
 
         // We need to pass info to the mail server as a Properties, since
         // JavaMail (wisely) allows room for LOTS of properties...
-        FileProperties props = 
-            new FileProperties(MailConstants.PROPS_FILE_NAME);
+        FileProperties props =
+                new FileProperties(MailConstants.PROPS_FILE_NAME);
 
         // Copy the value of Mail.send.host into mail.smtp.host
-        props.setProperty("mail.smtp.host", 
-            props.getProperty(MailConstants.SEND_HOST));
+        props.setProperty("mail.smtp.host",
+                props.getProperty(MailConstants.SEND_HOST));
 
         // Create the Session object
         session = Session.getDefaultInstance(props, null);
         session.setDebug(true);        // Verbose!
-        
+
         try {
             // create a message
             mesg = new MimeMessage(session);
@@ -95,7 +109,7 @@ public class SendMime {
 
             // Put the MultiPart into the Message
             mesg.setContent(mp);
-            
+
             // Finally, send the message!
             Transport.send(mesg);
 
@@ -106,7 +120,9 @@ public class SendMime {
     }
     // END main
 
-    /** Simple test case driver */
+    /**
+     * Simple test case driver
+     */
     public static void main(String[] av) throws Exception {
         SendMime sm = new SendMime();
         sm.doSend();

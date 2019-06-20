@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/** Simple demo of CSV matching using Regular Expressions.
+/**
+ * Simple demo of CSV matching using Regular Expressions.
  * Does NOT use the "CSV" class defined in the Java CookBook, but uses
  * a regex pattern simplified from Chapter 7 of <em>Mastering Regular
  * Expressions</em> (p. 205, first edn.)
@@ -23,22 +24,25 @@ import java.util.regex.Pattern;
 // BEGIN main
 // package com.darwinsys.csv;
 public class CSVRE implements CSVParser {
-    /** The rather involved pattern used to match CSV's consists of three
+    /**
+     * The rather involved pattern used to match CSV's consists of three
      * alternations: the first matches a quoted field, the second unquoted,
      * the third a null field.
      */
     public static final String CSV_PATTERN =
-        "\"([^\"]+?)\",?|([^,]+),?|,";
+            "\"([^\"]+?)\",?|([^,]+),?|,";
 
     private final static Pattern csvRE = Pattern.compile(CSV_PATTERN);
 
     public static void main(final String[] argv) throws IOException {
         System.out.println(CSV_PATTERN);
         new CSVRE().process(
-            new BufferedReader(new InputStreamReader(System.in)));
+                new BufferedReader(new InputStreamReader(System.in)));
     }
 
-    /** Process one file. Delegates to parse() a line at a time */
+    /**
+     * Process one file. Delegates to parse() a line at a time
+     */
     public void process(final BufferedReader input) throws IOException {
         String line;
 
@@ -54,7 +58,9 @@ public class CSVRE implements CSVParser {
         }
     }
 
-    /** Parse one line.
+    /**
+     * Parse one line.
+     *
      * @return List of Strings, minus their double quotes
      */
     public List<String> parse(final String line) {
@@ -72,7 +78,7 @@ public class CSVRE implements CSVParser {
             if (match.startsWith("\"")) { // must also end with \"
                 if (!match.endsWith("\"")) {
                     throw new IllegalArgumentException(
-                        "Quoted column missing end quote: " + line);
+                            "Quoted column missing end quote: " + line);
                 }
                 match = match.substring(1, match.length() - 1);
             }

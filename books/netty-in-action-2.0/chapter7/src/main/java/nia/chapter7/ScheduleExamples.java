@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Listing 7.2 Scheduling a task with a ScheduledExecutorService
- *
+ * <p>
  * Listing 7.3 Scheduling a task with EventLoop
- *
+ * <p>
  * Listing 7.4 Scheduling a recurring task with EventLoop
- *
+ * <p>
  * Listing 7.5 Canceling a task using ScheduledFuture
  *
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
@@ -82,11 +82,11 @@ public class ScheduleExamples {
         Channel ch = CHANNEL_FROM_SOMEWHERE; // get reference from somewhere
         //调度任务，并获得所返回的ScheduledFuture
         ScheduledFuture<?> future = ch.eventLoop().scheduleAtFixedRate(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Run every 60 seconds");
-                    }
-                }, 60, 60, TimeUnit.SECONDS);
+            @Override
+            public void run() {
+                System.out.println("Run every 60 seconds");
+            }
+        }, 60, 60, TimeUnit.SECONDS);
         // Some other code that runs...
         boolean mayInterruptIfRunning = false;
         //取消该任务，防止它再次运行

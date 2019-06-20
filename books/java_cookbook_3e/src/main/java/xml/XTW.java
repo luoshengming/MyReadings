@@ -11,8 +11,10 @@ import org.w3c.dom.NodeList;
 
 import com.darwinsys.util.Debug;
 
-/** XML Tree Walker
+/**
+ * XML Tree Walker
  * UPDATED FOR JAXP.
+ *
  * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -23,15 +25,17 @@ public class XTW {
             System.err.println("Usage: XTW file [...]");
             return;
         }
-        for (int i=0; i<av.length; i++) {
+        for (int i = 0; i < av.length; i++) {
             String name = av[i];
             new XTW().convert(name, true);
         }
     }
 
-    /** Convert the file */
+    /**
+     * Convert the file
+     */
     protected void convert(String fileName, boolean verbose) {
-        
+
         try {
             if (verbose)
                 System.err.println(">>>Parsing " + fileName + "...");
@@ -39,10 +43,10 @@ public class XTW {
             String uri = "file:" + new File(fileName).getAbsolutePath();
 
             DocumentBuilderFactory factory =
-                DocumentBuilderFactory.newInstance();
+                    DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse( uri );
- 
+            Document doc = builder.parse(uri);
+
             if (verbose)
                 System.err.println(">>>Walking " + fileName + "...");
             doRecursive(doc);
@@ -66,8 +70,8 @@ public class XTW {
             return;
         }
         NodeList nodes = p.getChildNodes();
-        Debug.println("xml-tree", "Element has " + 
-            nodes.getLength() + " children");
+        Debug.println("xml-tree", "Element has " +
+                nodes.getLength() + " children");
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
             if (n == null) {
@@ -81,22 +85,22 @@ public class XTW {
 
     protected void doNode(Node n) {
 
-        switch(n.getNodeType()) {
+        switch (n.getNodeType()) {
             case Node.ELEMENT_NODE:
                 System.out.println("ELEMENT<" + n.getNodeName() + ">");
                 doRecursive(n);
                 break;
             case Node.TEXT_NODE:
                 String text = n.getNodeValue();
-                if (text.length() == 0 || 
-                    text.equals("\n") || text.equals("\\r")) {
+                if (text.length() == 0 ||
+                        text.equals("\n") || text.equals("\\r")) {
                     break;
                 }
                 System.out.println("TEXT: " + text);
                 break;
             default:
-                System.err.println( "OTHER NODE " +
-                    n.getNodeType() + ": " + n.getClass());
+                System.err.println("OTHER NODE " +
+                        n.getNodeType() + ": " + n.getClass());
                 break;
         }
     }

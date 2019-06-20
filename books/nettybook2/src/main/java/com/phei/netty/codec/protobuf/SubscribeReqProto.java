@@ -703,16 +703,12 @@ public final class SubscribeReqProto {
             // required int32 subReqID = 1;
             private int subReqID_;
 
-            /**
-             * <code>required int32 subReqID = 1;</code>
-             */
+            @Override
             public boolean hasSubReqID() {
                 return ((bitField0_ & 0x00000001) == 0x00000001);
             }
 
-            /**
-             * <code>required int32 subReqID = 1;</code>
-             */
+            @Override
             public int getSubReqID() {
                 return subReqID_;
             }

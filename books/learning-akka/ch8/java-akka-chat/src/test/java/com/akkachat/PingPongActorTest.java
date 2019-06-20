@@ -1,14 +1,6 @@
 package com.akkachat;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
-import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.testkit.JavaTestKit;
 
 public class PingPongActorTest {
 

@@ -3,7 +3,8 @@ package io;
 import java.util.Calendar;
 import java.util.Date;
 
-/** Demonstrate some usage patterns and format-code examples 
+/**
+ * Demonstrate some usage patterns and format-code examples
  * of the Formatter class.
  */
 // BEGIN main

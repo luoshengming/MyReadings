@@ -1,6 +1,8 @@
 package effectivejava.chapter2.item2.hierarchicalbuilder;
 
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Objects;
+import java.util.Set;
 
 // Builder pattern for class hierarchies (Page 14)
 

@@ -16,7 +16,7 @@ public class PathsFilesDemo {
         System.out.println(newFileSize);                       // <5>
         final Path realPath = p.toRealPath();                  // <6>
         System.out.println(realPath);
-        realPath.forEach(pc-> System.out.println(pc));         // <7>
+        realPath.forEach(pc -> System.out.println(pc));         // <7>
         Files.delete(p);                                       // <8>
         // END main
     }

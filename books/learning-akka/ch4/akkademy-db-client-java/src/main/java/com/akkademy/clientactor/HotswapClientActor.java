@@ -33,16 +33,16 @@ public class HotswapClientActor extends AbstractActorWithStash {
                 }).build();
 
         online = ReceiveBuilder.
-                        match(Request.class, x -> {
-                            remoteDb.forward(x, context()); //forward instead of tell to preserve sender
-                        }).
-                        build();
+                match(Request.class, x -> {
+                    remoteDb.forward(x, context()); //forward instead of tell to preserve sender
+                }).
+                build();
 
         receive(disconnected); //initial state.
     }
 }
 
- /**
+/**
  * Disconnect msg is unimplemented in this example.
  * Because we're not dealing w/ sockets directly,
  * we could instead implement an occasional ping/heartbeat that restarts

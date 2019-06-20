@@ -14,25 +14,25 @@ import org.springframework.stereotype.Component;
 @SpringBootApplication
 @EnableZuulProxy
 public class ZuulApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(ZuulApplication.class, args);
-  }
-
-  @Component
-  public static class MyCommandLineRunner implements CommandLineRunner {
-    @Override
-    public void run(String... args) throws Exception {
-      MonitoringHelper.initMocks();
-      FilterLoader.getInstance().setCompiler(new GroovyCompiler());
-      try {
-        FilterFileManager.setFilenameFilter(new GroovyFileFilter());
-
-        String basePath = "D:/写书/code/microservice-gateway-zuul-filter-groovy/src/main/filters/";
-
-        FilterFileManager.init(1, basePath + "pre", basePath + "post");
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulApplication.class, args);
     }
-  }
+
+    @Component
+    public static class MyCommandLineRunner implements CommandLineRunner {
+        @Override
+        public void run(String... args) throws Exception {
+            MonitoringHelper.initMocks();
+            FilterLoader.getInstance().setCompiler(new GroovyCompiler());
+            try {
+                FilterFileManager.setFilenameFilter(new GroovyFileFilter());
+
+                String basePath = "D:/写书/code/microservice-gateway-zuul-filter-groovy/src/main/filters/";
+
+                FilterFileManager.init(1, basePath + "pre", basePath + "post");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

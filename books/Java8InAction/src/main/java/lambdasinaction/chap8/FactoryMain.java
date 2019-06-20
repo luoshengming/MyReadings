@@ -32,24 +32,26 @@ public class FactoryMain {
 
         public static Product createProductLambda(String name) {
             Supplier<Product> p = map.get(name);
-            if (p != null) return p.get();
+            if (p != null) {
+                return p.get();
+            }
             throw new RuntimeException("No such product " + name);
         }
     }
 
-    static private interface Product {
+    private interface Product {
     }
 
-    static private class Loan implements Product {
+    private static class Loan implements Product {
     }
 
-    static private class Stock implements Product {
+    private static class Stock implements Product {
     }
 
-    static private class Bond implements Product {
+    private static class Bond implements Product {
     }
 
-    final static private Map<String, Supplier<Product>> map = new HashMap<>();
+    private static final Map<String, Supplier<Product>> map = new HashMap<>();
 
     static {
         map.put("loan", Loan::new);

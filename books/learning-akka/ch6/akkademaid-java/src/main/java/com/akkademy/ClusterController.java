@@ -10,7 +10,7 @@ import akka.japi.pf.ReceiveBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static akka.cluster.ClusterEvent.*   ;
+import static akka.cluster.ClusterEvent.*;
 
 public class ClusterController extends AbstractActor {
     protected final LoggingAdapter log = Logging.getLogger(context().system(), this);
@@ -29,17 +29,17 @@ public class ClusterController extends AbstractActor {
         cluster.unsubscribe(self());
     }
 
-    private ClusterController(){
+    private ClusterController() {
         receive(ReceiveBuilder.
-                        match(MemberEvent.class, message -> {
-                            if(message.getClass() == MemberUp.class){
-                                System.out.println("member up: " + message.member().address());
-                            }
-                            log.info("MemberEvent: {}", message);
-                        }).
-                        match(UnreachableMember.class, message -> {
-                            log.info("UnreachableMember: {}", message);
-                        }).build()
+                match(MemberEvent.class, message -> {
+                    if (message.getClass() == MemberUp.class) {
+                        System.out.println("member up: " + message.member().address());
+                    }
+                    log.info("MemberEvent: {}", message);
+                }).
+                match(UnreachableMember.class, message -> {
+                    log.info("UnreachableMember: {}", message);
+                }).build()
         );
     }
 }

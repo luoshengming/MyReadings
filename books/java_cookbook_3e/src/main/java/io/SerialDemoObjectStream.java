@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/** Demonstrate use of standard Object Serialization. */
+/**
+ * Demonstrate use of standard Object Serialization.
+ */
 // BEGIN main
 public class SerialDemoObjectStream extends SerialDemoAbstractBase {
     protected static final String FILENAME = "serial.dat";
@@ -17,19 +19,21 @@ public class SerialDemoObjectStream extends SerialDemoAbstractBase {
         new SerialDemoObjectStream().dump();    // here
     }
 
-    /** Does the actual serialization */
+    /**
+     * Does the actual serialization
+     */
     public void write(Object theGraph) throws IOException {
         // Save the data to disk.
         ObjectOutputStream os = new ObjectOutputStream(
-            new BufferedOutputStream(
-                new FileOutputStream(FILENAME)));
+                new BufferedOutputStream(
+                        new FileOutputStream(FILENAME)));
         os.writeObject(theGraph);
         os.close();
     }
 
     public void dump() throws IOException, ClassNotFoundException {
         ObjectInputStream is = new ObjectInputStream(
-            new FileInputStream(FILENAME));
+                new FileInputStream(FILENAME));
         System.out.println(is.readObject());
         is.close();
     }

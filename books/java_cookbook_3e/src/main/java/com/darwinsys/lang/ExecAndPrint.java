@@ -14,17 +14,23 @@ import com.darwinsys.io.FileIO;
 public class ExecAndPrint {
 
     // BEGIN main
-    /** Need a Runtime object for any of these methods */
+    /**
+     * Need a Runtime object for any of these methods
+     */
     protected final static Runtime r = Runtime.getRuntime();
 
-    /** Run the command given as a String, printing its output to System.out */
-    public static int run(String cmd) throws IOException { 
+    /**
+     * Run the command given as a String, printing its output to System.out
+     */
+    public static int run(String cmd) throws IOException {
         return run(cmd, new OutputStreamWriter(System.out));
     }
 
-    /** Run the command given as a String, print its output to "out" */
+    /**
+     * Run the command given as a String, print its output to "out"
+     */
     public static int run(String cmd, Writer out) throws IOException {
-        
+
         Process p = r.exec(cmd);
 
         FileIO.copyFile(new InputStreamReader(p.getInputStream()), out, true);
@@ -37,14 +43,18 @@ public class ExecAndPrint {
     }
     // END main
 
-    /** Run the command given as a String[], print its output to System.out */
-    public static int run(String[] cmd) throws IOException { 
+    /**
+     * Run the command given as a String[], print its output to System.out
+     */
+    public static int run(String[] cmd) throws IOException {
         return run(cmd, new OutputStreamWriter(System.out));
     }
 
-    /** Run the command given as a String[], print its output to "out" */
+    /**
+     * Run the command given as a String[], print its output to "out"
+     */
     public static int run(String[] cmd, Writer out) throws IOException {
-        
+
         Process p = r.exec(cmd);
 
         FileIO.copyFile(new InputStreamReader(p.getInputStream()), out, true);

@@ -11,11 +11,12 @@ import java.util.stream.IntStream;
 
 public class ReadFilesWithActorsTest {
     ActorSystem system = ActorSystem.create();
+
     @Test
     public void shouldReadFilesWithActors() throws Exception {
 
         ActorRef workerRouter = system.actorOf(Props.create(ArticleParseActor.class).
-                        withRouter(new RoundRobinPool(8)));
+                withRouter(new RoundRobinPool(8)));
 
         CompletableFuture future = new CompletableFuture();
         ActorRef cameoActor = system.actorOf(Props.create(TestCameoActor.class, future));

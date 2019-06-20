@@ -6,19 +6,27 @@ import java.net.*;
 /**
  * EchoServer - create server socket, do I-O on it.
  *
- * @author  Ian Darwin
+ * @author Ian Darwin
  * Copyright (c) 1995, 1996, 1997, 2000 Ian F. Darwin
  */
 // BEGIN main
 public class EchoServer {
-    /** Our server-side rendezvous socket */
+    /**
+     * Our server-side rendezvous socket
+     */
     protected ServerSocket sock;
-    /** The port number to use by default */
+    /**
+     * The port number to use by default
+     */
     public final static int ECHOPORT = 7;
-    /** Flag to control debugging */
+    /**
+     * Flag to control debugging
+     */
     protected boolean debug = true;
 
-    /** main: construct and run */
+    /**
+     * main: construct and run
+     */
     public static void main(String[] args) {
         int p = ECHOPORT;
         if (args.length == 1) {
@@ -32,7 +40,9 @@ public class EchoServer {
         new EchoServer(p).handle();
     }
 
-    /** Construct an EchoServer on the given port number */
+    /**
+     * Construct an EchoServer on the given port number
+     */
     public EchoServer(int port) {
         try {
             sock = new ServerSocket(port);
@@ -43,7 +53,9 @@ public class EchoServer {
         }
     }
 
-    /** This handles the connections */
+    /**
+     * This handles the connections
+     */
     protected void handle() {
         Socket ios = null;
         BufferedReader is = null;
@@ -53,12 +65,12 @@ public class EchoServer {
                 System.out.println("Waiting for client...");
                 ios = sock.accept();
                 System.err.println("Accepted from " +
-                    ios.getInetAddress().getHostName());
+                        ios.getInetAddress().getHostName());
                 is = new BufferedReader(
-                    new InputStreamReader(ios.getInputStream(), "8859_1"));
+                        new InputStreamReader(ios.getInputStream(), "8859_1"));
                 os = new PrintWriter(
                         new OutputStreamWriter(
-                            ios.getOutputStream(), "8859_1"), true);
+                                ios.getOutputStream(), "8859_1"), true);
                 String echoLine;
                 while ((echoLine = is.readLine()) != null) {
                     System.err.println("Read " + echoLine);

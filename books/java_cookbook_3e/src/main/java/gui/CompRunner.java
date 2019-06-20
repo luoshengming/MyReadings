@@ -9,19 +9,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 // BEGIN main
-/** 
+
+/**
  * CompRunner -- Component Runner.
- * A generic main program, for testing a Component-based GUI class that 
+ * A generic main program, for testing a Component-based GUI class that
  * has a no-argument constructor. This seemed easier than adding a trivial
  * main program to every GUI component that I ever wrote...
- * @author    Ian F. Darwin, http://darwinsys.com/
+ *
+ * @author Ian F. Darwin, http://darwinsys.com/
  */
 public class CompRunner {
 
-    /** The component being displayed. */
+    /**
+     * The component being displayed.
+     */
     static Component comp = null;
 
-    /** "main program" method - construct and show */
+    /**
+     * "main program" method - construct and show
+     */
     @SuppressWarnings("unchecked")
     public static void main(final String[] args) {
         if (args.length == 0) {
@@ -42,10 +48,10 @@ public class CompRunner {
             Object o = clazz.newInstance();
             if (!(o instanceof Component)) {
                 System.err.println("ERROR: Class " + className +
-                    " is not a subclass of Component");
+                        " is not a subclass of Component");
                 System.exit(1);
             }
-            comp = (Component)o;
+            comp = (Component) o;
         } catch (Exception e) {
             System.err.println(className + " got exception in construction or initialization");
             System.err.println(e.toString());

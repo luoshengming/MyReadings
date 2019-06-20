@@ -7,8 +7,9 @@ import java.util.Map;
 
 import com.darwinsys.util.Debug;
 
-/** GetOpt implements UNIX-style (single-character) command line argument
- * parsing. Originally patterned after (but not using code from) the UNIX 
+/**
+ * GetOpt implements UNIX-style (single-character) command line argument
+ * parsing. Originally patterned after (but not using code from) the UNIX
  * getopt(3) program, this has been redesigned to be more Java-friendly.
  * As a result, there are two ways of using it, referred to as
  * "the Unix way" and "the Java way".
@@ -97,41 +98,61 @@ import com.darwinsys.util.Debug;
  * For another way of dealing with command lines, see the
  * <a href="http://jakarta.apache.org/commons/cli/">Jakarta Commons
  * Command Line Interface</a>.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 // package com.darwinsys.lang;
 public class GetOpt {
-    /** The List of File Names found after args */
+    /**
+     * The List of File Names found after args
+     */
     protected List<String> fileNameArguments;
-    /** The set of characters to look for */
+    /**
+     * The set of characters to look for
+     */
     protected final GetOptDesc[] options;
-    /** Where we are in the options */
+    /**
+     * Where we are in the options
+     */
     protected int optind = 0;
-    /** Public constant for "no more options" */
+    /**
+     * Public constant for "no more options"
+     */
     public static final int DONE = 0;
-    /** Internal flag - whether we are done all the options */
+    /**
+     * Internal flag - whether we are done all the options
+     */
     protected boolean done = false;
-    /** The current option argument. */
+    /**
+     * The current option argument.
+     */
     protected String optarg;
 
-    /** Retrieve the current option argument; UNIX variant spelling. */
+    /**
+     * Retrieve the current option argument; UNIX variant spelling.
+     */
     public String optarg() {
         return optarg;
     }
-    /** Retrieve the current option argument; Java variant spelling. */
+
+    /**
+     * Retrieve the current option argument; Java variant spelling.
+     */
     public String optArg() {
         return optarg;
     }
 
-    /** Construct a GetOpt parser, given the option specifications
+    /**
+     * Construct a GetOpt parser, given the option specifications
      * in an array of GetOptDesc objects. This is the preferred constructor.
      */
     public GetOpt(final GetOptDesc[] opt) {
         this.options = opt.clone();
     }
 
-    /** Construct a GetOpt parser, storing the set of option characters.
+    /**
+     * Construct a GetOpt parser, storing the set of option characters.
      * This is a legacy constructor for backward compatibility.
      * That said, it is easier to use if you don't need long-name options,
      * so it has not been and will not be marked "deprecated".
@@ -142,7 +163,7 @@ public class GetOpt {
         }
         if (patt.charAt(0) == ':') {
             throw new IllegalArgumentException(
-                "Pattern incorrect, may not begin with ':'");
+                    "Pattern incorrect, may not begin with ':'");
         }
 
         // Pass One: just count the option letters in the pattern
@@ -153,25 +174,27 @@ public class GetOpt {
         }
         if (n == 0) {
             throw new IllegalArgumentException(
-                "No option letters found in " + patt);
+                    "No option letters found in " + patt);
         }
 
         // Pass Two: construct an array of GetOptDesc objects.
         options = new GetOptDesc[n];
-        for (int i = 0, ix = 0; i<patt.length(); i++) {
+        for (int i = 0, ix = 0; i < patt.length(); i++) {
             final char c = patt.charAt(i);
             boolean argTakesValue = false;
-            if (i < patt.length() - 1 && patt.charAt(i+1) == ':') {
+            if (i < patt.length() - 1 && patt.charAt(i + 1) == ':') {
                 argTakesValue = true;
                 ++i;
             }
             Debug.println("getopt",
-                "CONSTR: options[" + ix + "] = " + c + ", " + argTakesValue);
+                    "CONSTR: options[" + ix + "] = " + c + ", " + argTakesValue);
             options[ix++] = new GetOptDesc(c, null, argTakesValue);
         }
     }
 
-    /** Reset this GetOpt parser */
+    /**
+     * Reset this GetOpt parser
+     */
     public void rewind() {
         fileNameArguments = null;
         done = false;
@@ -179,17 +202,18 @@ public class GetOpt {
         optarg = null;
     }
 
-    /** 
+    /**
      * Modern way of using GetOpt: call this once and get all options.
      * <p>
      * This parses the options, returns a Map whose keys are the found options.
      * Normally followed by a call to getFilenameList().
      * <br>Side effect: sets "fileNameArguments" to a new List
+     *
      * @return a Map whose keys are Strings of length 1 (containing the char
      * from the option that was matched) and whose value is a String
      * containing the value, or null for a non-option argument.
      */
-    public Map<String,String> parseArguments(String[] argv) {
+    public Map<String, String> parseArguments(String[] argv) {
         Map<String, String> optionsValueMap = new HashMap<String, String>();
         fileNameArguments = new ArrayList<String>();
         for (int i = 0; i < argv.length; i++) {    // Cannot use foreach, need i
@@ -208,24 +232,26 @@ public class GetOpt {
         return optionsValueMap;
     }
 
-    /** Get the list of filename-like arguments after options;
+    /**
+     * Get the list of filename-like arguments after options;
      * only for use if you called parseArguments.
      */
     public List<String> getFilenameList() {
         if (fileNameArguments == null) {
             throw new IllegalArgumentException(
-                "Illegal call to getFilenameList() before parseOptions()");
+                    "Illegal call to getFilenameList() before parseOptions()");
         }
         return fileNameArguments;
     }
 
-    /** The true heart of getopt, whether used old way or new way:
+    /**
+     * The true heart of getopt, whether used old way or new way:
      * returns one argument; call repeatedly until it returns DONE.
      * Side-effect: sets globals optarg, optind
      */
     public char getopt(String argv[]) {
         Debug.println("getopt",
-            "optind=" + optind + ", argv.length="+argv.length);
+                "optind=" + optind + ", argv.length=" + argv.length);
 
         if (optind >= (argv.length) || !argv[optind].startsWith("-")) {
             done = true;
@@ -236,7 +262,7 @@ public class GetOpt {
         if (done) {
             return DONE;
         }
-        
+
         optarg = null;
 
         // XXX TODO - two-pass, 1st check long args, 2nd check for
@@ -250,16 +276,16 @@ public class GetOpt {
             for (GetOptDesc option : options) {
                 if ((thisArg.length() == 2 &&
                         option.getArgLetter() == thisArg.charAt(1)) ||
-                   (option.getArgName() != null &&
-                    option.getArgName().equals(thisArg.substring(1)))) { // found it
+                        (option.getArgName() != null &&
+                                option.getArgName().equals(thisArg.substring(1)))) { // found it
                     // If it needs an option argument, get it.
                     if (option.takesArgument()) {
-                        if (optind < argv.length-1) {
-                            optarg = argv[++optind];                             
+                        if (optind < argv.length - 1) {
+                            optarg = argv[++optind];
                         } else {
                             throw new IllegalArgumentException(
-                                "Option " + option.getArgLetter() +
-                                " needs value but found end of arg list");
+                                    "Option " + option.getArgLetter() +
+                                            " needs value but found end of arg list");
                         }
                     }
                     ++optind;
@@ -275,12 +301,13 @@ public class GetOpt {
             done = true;
             return DONE;
         }
-        
 
-        
+
     }
 
-    /** Return optind, the index into args of the last option we looked at */
+    /**
+     * Return optind, the index into args of the last option we looked at
+     */
     public int getOptInd() {
         return optind;
     }

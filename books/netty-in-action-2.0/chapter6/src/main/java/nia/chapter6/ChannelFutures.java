@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by kerr.
- *
+ * <p>
  * Listing 6.13 Adding a ChannelFutureListener to a ChannelFuture
  */
 public class ChannelFutures {
@@ -30,7 +30,7 @@ public class ChannelFutures {
             @Override
             public void operationComplete(io.netty.channel.ChannelFuture f) {
                 if (!f.isSuccess()) {
-                    logger.warn(f.cause().getMessage(),f.cause());
+                    logger.warn(f.cause().getMessage(), f.cause());
                     f.channel().close();
                 }
             }

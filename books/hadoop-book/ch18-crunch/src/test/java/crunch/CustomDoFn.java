@@ -5,19 +5,20 @@ import org.apache.crunch.Emitter;
 
 public class CustomDoFn<S, T> extends DoFn<S, T> {
 
-  static class NonSerializableHelper { }
+    static class NonSerializableHelper {
+    }
 
-  transient NonSerializableHelper helper;
+    transient NonSerializableHelper helper;
 
-  @Override
-  public void initialize() {
-    helper = new NonSerializableHelper();
-  }
+    @Override
+    public void initialize() {
+        helper = new NonSerializableHelper();
+    }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public void process(S input, Emitter<T> emitter) {
-    // use helper here
-    emitter.emit((T) input);
-  }
+    @SuppressWarnings("unchecked")
+    @Override
+    public void process(S input, Emitter<T> emitter) {
+        // use helper here
+        emitter.emit((T) input);
+    }
 }

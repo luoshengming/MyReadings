@@ -2,7 +2,9 @@ package numbers;
 
 import java.util.*;
 
-/** Print the current year in Roman Numerals */
+/**
+ * Print the current year in Roman Numerals
+ */
 // BEGIN main
 public class RomanYear {
 
@@ -17,9 +19,9 @@ public class RomanYear {
             System.out.println(rf.format(year));
             return;
         }
-        
+
         // Else a micro-formatter: replace "-" arg with year, else print.
-        for (int i=0; i<argv.length; i++) {
+        for (int i = 0; i < argv.length; i++) {
             if (argv[i].equals("-"))
                 System.out.print(rf.format(year));
             else

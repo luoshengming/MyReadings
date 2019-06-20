@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 /**
  * JavadocDemo - a simple example to show JavaDoc comments.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -16,6 +17,7 @@ public class JavadocDemo extends JPanel {
 
     /**
      * Construct the GUI
+     *
      * @throws java.lang.IllegalArgumentException if constructed on a Sunday.
      */
     public void JavadocDemo() {
@@ -29,19 +31,20 @@ public class JavadocDemo extends JPanel {
         }
     }
 
-    /** paint() is an AWT Component method, called when the 
-     *  component needs to be painted. This one just draws colored
+    /**
+     * paint() is an AWT Component method, called when the
+     * component needs to be painted. This one just draws colored
      * boxes in the window.
      *
      * @param g A java.awt.Graphics that we use for all our
-     * drawing methods.
+     *          drawing methods.
      */
     public void paint(Graphics g) {
         int w = getSize().width, h = getSize().height;
         g.setColor(Color.YELLOW);
-        g.fillRect(0, 0, w/2, h);
+        g.fillRect(0, 0, w / 2, h);
         g.setColor(Color.GREEN);
-        g.fillRect(w/2, 0, w, h);
+        g.fillRect(w / 2, 0, w, h);
         g.setColor(Color.BLACK);
         g.drawString("Welcome to Java", 50, 50);
     }

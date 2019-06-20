@@ -13,14 +13,22 @@ import java.util.StringTokenizer;
  */
 // BEGIN main
 public class Fmt {
-    /** The maximum column width */
-    public static final int COLWIDTH=72;
-    /** The file that we read and format */
+    /**
+     * The maximum column width
+     */
+    public static final int COLWIDTH = 72;
+    /**
+     * The file that we read and format
+     */
     final BufferedReader in;
-    /** Where the output goes */
+    /**
+     * Where the output goes
+     */
     PrintWriter out;
 
-    /** If files present, format each, else format the standard input. */
+    /**
+     * If files present, format each, else format the standard input.
+     */
     public static void main(String[] av) throws IOException {
         if (av.length == 0)
             new Fmt(System.in).format();
@@ -28,32 +36,40 @@ public class Fmt {
             new Fmt(name).format();
         }
     }
-    
+
     public Fmt(BufferedReader inFile, PrintWriter outFile) {
         this.in = inFile;
         this.out = outFile;
     }
-    
+
     public Fmt(PrintWriter out) {
         this(new BufferedReader(new InputStreamReader(System.in)), out);
     }
 
-    /** Construct a Formatter given an open Reader */
+    /**
+     * Construct a Formatter given an open Reader
+     */
     public Fmt(BufferedReader file) throws IOException {
         this(file, new PrintWriter(System.out));
     }
-    
-    /** Construct a Formatter given a filename */
+
+    /**
+     * Construct a Formatter given a filename
+     */
     public Fmt(String fname) throws IOException {
         this(new BufferedReader(new FileReader(fname)));
     }
 
-    /** Construct a Formatter given an open Stream */
+    /**
+     * Construct a Formatter given an open Stream
+     */
     public Fmt(InputStream file) throws IOException {
         this(new BufferedReader(new InputStreamReader(file)));
     }
 
-    /** Format the File contained in a constructed Fmt object */
+    /**
+     * Format the File contained in a constructed Fmt object
+     */
     public void format() throws IOException {
         String line;
         StringBuilder outBuf = new StringBuilder();

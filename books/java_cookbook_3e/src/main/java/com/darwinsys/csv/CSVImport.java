@@ -5,7 +5,8 @@ import java.util.List;
 
 import com.darwinsys.util.Debug;
 
-/** Parse comma-separated values (CSV), a common Windows file format.
+/**
+ * Parse comma-separated values (CSV), a common Windows file format.
  * Sample input: "LU",86.25,"11/4/1998","2:19PM",+4.0625
  * <p>
  * Inner logic adapted from a C++ original that was
@@ -17,6 +18,7 @@ import com.darwinsys.util.Debug;
  * which says:
  * "You may use this code for any purpose, as long as you leave
  * the copyright notice and book citation attached." I have done so.
+ *
  * @author Brian W. Kernighan and Rob Pike (C++ original)
  * @author Ian F. Darwin (translation into Java and removal of I/O)
  * @author Ben Ballard (rewrote advQuoted to handle '""' and for readability)
@@ -28,26 +30,36 @@ public class CSVImport implements CSVParser {
 
     public static final char DEFAULT_SEP = ',';
 
-    /** Construct a CSV parser, with the default separator (`,'). */
+    /**
+     * Construct a CSV parser, with the default separator (`,').
+     */
     public CSVImport() {
         this(DEFAULT_SEP);
     }
 
-    /** Construct a CSV parser with a given separator.
+    /**
+     * Construct a CSV parser with a given separator.
+     *
      * @param sep The single char for the separator (not a list of
-     * separator characters)
+     *            separator characters)
      */
     public CSVImport(char sep) {
         fieldSep = sep;
     }
 
-    /** The fields in the current String */
+    /**
+     * The fields in the current String
+     */
     protected List<String> list = new ArrayList<>();
 
-    /** the separator char for this parser */
+    /**
+     * the separator char for this parser
+     */
     protected char fieldSep;
 
-    /** parse: break the input String into fields
+    /**
+     * parse: break the input String into fields
+     *
      * @return java.util.Iterator containing each field
      * from the original as a String, in order.
      */
@@ -75,20 +87,21 @@ public class CSVImport implements CSVParser {
         return list;
     }
 
-    /** advQuoted: quoted field; return index of next separator */
-    protected int advQuoted(String s, StringBuffer sb, int i)
-    {
+    /**
+     * advQuoted: quoted field; return index of next separator
+     */
+    protected int advQuoted(String s, StringBuffer sb, int i) {
         int j;
-        int len= s.length();
-        for (j=i; j<len; j++) {
-            if (s.charAt(j) == '"' && j+1 < len) {
-                if (s.charAt(j+1) == '"') {
+        int len = s.length();
+        for (j = i; j < len; j++) {
+            if (s.charAt(j) == '"' && j + 1 < len) {
+                if (s.charAt(j + 1) == '"') {
                     j++; // skip escape char
-                } else if (s.charAt(j+1) == fieldSep) { //next delimeter
+                } else if (s.charAt(j + 1) == fieldSep) { //next delimeter
                     j++; // skip end quotes
                     break;
                 }
-            } else if (s.charAt(j) == '"' && j+1 == len) { // end quote @ line end
+            } else if (s.charAt(j) == '"' && j + 1 == len) { // end quote @ line end
                 break; //done
             }
             sb.append(s.charAt(j));    // regular character.
@@ -96,9 +109,10 @@ public class CSVImport implements CSVParser {
         return j;
     }
 
-    /** advPlain: unquoted field; return index of next separator */
-    protected int advPlain(String s, StringBuffer sb, int i)
-    {
+    /**
+     * advPlain: unquoted field; return index of next separator
+     */
+    protected int advPlain(String s, StringBuffer sb, int i) {
         int j;
 
         j = s.indexOf(fieldSep, i); // look for separator

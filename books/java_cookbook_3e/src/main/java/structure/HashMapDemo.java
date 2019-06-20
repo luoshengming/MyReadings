@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Demonstrate the HashMap class, and an Iterator.
+ *
  * @see HashTableDemo, for the older Hashtable.
  */
 // BEGIN main
@@ -15,7 +16,7 @@ public class HashMapDemo {
         // Construct and load the hash. This simulates loading a
         // database or reading from a file, or wherever the data is.
 
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String, String> map = new HashMap<String, String>();
 
         // The hash maps from company name to address.
         // In real life this might map to an Address object...
@@ -38,15 +39,15 @@ public class HashMapDemo {
 
         // Version 2: get ALL the keys and values 
         // (maybe to print a report, or to save to disk)
-        for( String key : map.keySet()) {
-            System.out.println("Key " + key + 
-                "; Value " + map.get(key));
+        for (String key : map.keySet()) {
+            System.out.println("Key " + key +
+                    "; Value " + map.get(key));
         }
-        
+
         // Version 3: Same but using a Map.Entry lambda
-        map.entrySet().forEach(mE -> 
-            System.out.println("Key + " + mE.getKey()+ 
-                "; Value " +mE.getValue()));
+        map.entrySet().forEach(mE ->
+                System.out.println("Key + " + mE.getKey() +
+                        "; Value " + mE.getValue()));
     }
 }
 // END main

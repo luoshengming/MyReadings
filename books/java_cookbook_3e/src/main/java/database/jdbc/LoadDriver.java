@@ -1,7 +1,7 @@
 package database.jdbc;
 
 
-/** 
+/**
  * Load some drivers.
  */
 // BEGIN main

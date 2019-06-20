@@ -15,6 +15,9 @@
  */
 package com.phei.netty.aio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
@@ -26,6 +29,7 @@ import java.util.concurrent.CountDownLatch;
  * @date 2014年2月16日
  */
 public class AsyncTimeServerHandler implements Runnable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTimeServerHandler.class);
     private int port;
     CountDownLatch latch;
     AsynchronousServerSocketChannel asynchronousServerSocketChannel;
@@ -48,7 +52,8 @@ public class AsyncTimeServerHandler implements Runnable {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.warn(e.getMessage(), e);
+            Thread.currentThread().interrupt();
         }
     }
 

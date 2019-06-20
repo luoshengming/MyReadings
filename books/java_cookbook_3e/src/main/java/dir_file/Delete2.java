@@ -4,6 +4,7 @@ import java.io.File;
 
 /**
  * Delete a file from within Java, with error handling.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -21,8 +22,8 @@ public class Delete2 {
             File target = new File(fileName);
 
             if (!target.exists()) {
-                System.err.println("File " + fileName + 
-                    " not present to begin with!");
+                System.err.println("File " + fileName +
+                        " not present to begin with!");
                 return;
             }
 
@@ -31,9 +32,9 @@ public class Delete2 {
                 System.err.println("** Deleted " + fileName + " **");
             else
                 System.err.println("Failed to delete " + fileName);
-        } catch (SecurityException e) {    
+        } catch (SecurityException e) {
             System.err.println("Unable to delete " + fileName +
-                "(" + e.getMessage() + ")");
+                    "(" + e.getMessage() + ")");
         }
     }
 }

@@ -2,8 +2,9 @@ package structure;
 
 // BEGIN main
 public class AutoboxDemo {
-    
-    /** Shows autoboxing (in the call to foo(i), i is wrapped automatically)
+
+    /**
+     * Shows autoboxing (in the call to foo(i), i is wrapped automatically)
      * and auto-unboxing (the return value is automatically unwrapped).
      */
     public static void main(String[] args) {

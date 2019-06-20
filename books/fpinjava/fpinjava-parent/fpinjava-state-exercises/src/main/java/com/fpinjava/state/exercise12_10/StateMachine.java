@@ -1,10 +1,6 @@
 package com.fpinjava.state.exercise12_10;
 
-import com.fpinjava.common.Function;
-import com.fpinjava.common.List;
-import com.fpinjava.common.Nothing;
-import com.fpinjava.common.Result;
-import com.fpinjava.common.Tuple;
+import com.fpinjava.common.*;
 
 public class StateMachine<A, S> {
 

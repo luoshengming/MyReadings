@@ -21,7 +21,7 @@ public class Counter {
 
     public static void main(String[] args) {
         final Counter cas = new Counter();
-        List<Thread> ts = new ArrayList<Thread>(600);
+        List<Thread> ts = new ArrayList<>(600);
         long start = System.currentTimeMillis();
         for (int j = 0; j < 100; j++) {
             Thread t = new Thread(new Runnable() {

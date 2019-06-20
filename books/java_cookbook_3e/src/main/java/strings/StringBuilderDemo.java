@@ -25,12 +25,7 @@ public class StringBuilderDemo {
         // Now do the above all over again, but in a more 
         // concise (and typical "real-world" Java) fashion.
 
-        System.out.println(
-          new StringBuilder()
-            .append("Hello")
-            .append(',')
-            .append(' ')
-            .append("World"));
+        System.out.println(new StringBuilder().append("Hello").append(',').append(' ').append("World"));
     }
 }
 // END main

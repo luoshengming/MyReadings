@@ -11,9 +11,9 @@ public class SoftwareParseOrgJson {
     final static String FILE_NAME = "/json/softwareinfo.json";
 
     public static void main(String[] args) throws Exception {
-        
+
         InputStream jsonInput =
-            SoftwareParseOrgJson.class.getResourceAsStream(FILE_NAME);
+                SoftwareParseOrgJson.class.getResourceAsStream(FILE_NAME);
         if (jsonInput == null) {
             throw new NullPointerException("can't find" + FILE_NAME);
         }

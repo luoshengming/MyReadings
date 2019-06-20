@@ -27,13 +27,14 @@ import javax.swing.JTextField;
 import com.darwinsys.mail.Mailer;
 import com.darwinsys.util.FileProperties;
 
-/** MailComposeBean - Mail gather and send Component Bean.
- *
+/**
+ * MailComposeBean - Mail gather and send Component Bean.
+ * <p>
  * Can be used as a Visible bean or as a Non-Visible bean.
  * If setVisible(true), puts up a mail compose window with a Send button.
  * If user clicks on it, tries to send the mail to a Mail Server
  * for delivery on the Internet.
- *
+ * <p>
  * If not visible, use addXXX(), setXXX(), and doSend() methods.
  *
  * @author Ian F. Darwin
@@ -41,8 +42,10 @@ import com.darwinsys.util.FileProperties;
 // BEGIN main
 public class MailComposeBean extends JPanel {
 
-    /** The parent frame to be hidden/disposed; may be JFrame, JInternalFrame
-     * or JPanel, as necessary */
+    /**
+     * The parent frame to be hidden/disposed; may be JFrame, JInternalFrame
+     * or JPanel, as necessary
+     */
     private Container parent;
 
     private JButton sendButton, cancelButton;
@@ -55,36 +58,45 @@ public class MailComposeBean extends JPanel {
     private int tfsMax = 3;
     private final int TO = 0, SUBJ = 1, CC = 2, BCC = 3, MAXTF = 8;
 
-    /** The JavaMail session object */
+    /**
+     * The JavaMail session object
+     */
     private Session session = null;
-    /** The JavaMail message object */
+    /**
+     * The JavaMail message object
+     */
     private Message mesg = null;
 
     private int mywidth;
     private int myheight;
 
-    /** Construct a MailComposeBean with no default recipient */
+    /**
+     * Construct a MailComposeBean with no default recipient
+     */
     MailComposeBean(Container parent, String title, int height, int width) {
         this(parent, title, null, height, width);
     }
 
-    /** Construct a MailComposeBean with no arguments (needed for Beans) */
+    /**
+     * Construct a MailComposeBean with no arguments (needed for Beans)
+     */
     MailComposeBean() {
         this(null, "Compose", null, 300, 200);
     }
 
-    /** Constructor for MailComposeBean object.
+    /**
+     * Constructor for MailComposeBean object.
      *
      * @param parent    Container parent. If JFrame or JInternalFrame,
-     *                    will setvisible(false) and dispose() when
-     *                    message has been sent. Not done if "null" or JPanel.
-     * @param title        Title to display in the titlebar
-     * @param recipient    Email address of recipient
+     *                  will setvisible(false) and dispose() when
+     *                  message has been sent. Not done if "null" or JPanel.
+     * @param title     Title to display in the titlebar
+     * @param recipient Email address of recipient
      * @param height    Height of mail compose window
-     * @param width        Width of mail compose window
+     * @param width     Width of mail compose window
      */
     MailComposeBean(Container parent, String title, String recipient,
-            int width, int height) {
+                    int width, int height) {
         super();
 
         this.parent = parent;
@@ -101,7 +113,7 @@ public class MailComposeBean extends JPanel {
         // Center is the TextArea.
         // Bottom is a panel with Send and Cancel buttons.
         JPanel tp = new JPanel();
-        tp.setLayout(new GridLayout(3,2));
+        tp.setLayout(new GridLayout(3, 2));
         cp.add(BorderLayout.NORTH, tp);
 
         tfs = new JTextField[MAXTF];
@@ -131,11 +143,11 @@ public class MailComposeBean extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     doSend();
-                } catch(Exception err) {
+                } catch (Exception err) {
                     System.err.println("Error: " + err);
                     JOptionPane.showMessageDialog(null,
-                        "Sending error:\n" + err.toString(),
-                        "Send failed", JOptionPane.ERROR_MESSAGE);
+                            "Sending error:\n" + err.toString(),
+                            "Send failed", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -151,12 +163,14 @@ public class MailComposeBean extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(mywidth, myheight);
     }
+
     public Dimension getMinimumSize() {
         return getPreferredSize();
     }
 
-    /** Do the work: send the mail to the SMTP server.
-     *
+    /**
+     * Do the work: send the mail to the SMTP server.
+     * <p>
      * ASSERT: must have set at least one recipient.
      */
     public void doSend() {
@@ -165,14 +179,14 @@ public class MailComposeBean extends JPanel {
             Mailer m = new Mailer();
 
             FileProperties props =
-                new FileProperties(MailConstants.PROPS_FILE_NAME);
+                    new FileProperties(MailConstants.PROPS_FILE_NAME);
             String serverHost = props.getProperty(MailConstants.SEND_HOST);
             if (serverHost == null) {
                 JOptionPane.showMessageDialog(parent,
-                    "\"" + MailConstants.SEND_HOST +
-                        "\" must be set in properties",
-                    "No server!",
-                    JOptionPane.ERROR_MESSAGE);
+                        "\"" + MailConstants.SEND_HOST +
+                                "\" must be set in properties",
+                        "No server!",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
             m.setServer(serverHost);
@@ -183,9 +197,9 @@ public class MailComposeBean extends JPanel {
             String myAddress = props.getProperty("Mail.address");
             if (myAddress == null) {
                 JOptionPane.showMessageDialog(parent,
-                    "\"Mail.address\" must be set in properties",
-                    "No From: address!",
-                    JOptionPane.ERROR_MESSAGE);
+                        "\"Mail.address\" must be set in properties",
+                        "No From: address!",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
             m.setFrom(myAddress);
@@ -201,7 +215,7 @@ public class MailComposeBean extends JPanel {
             // Now copy the text from the Compose TextArea.
             m.setBody(msgText.getText());
             // XXX I18N: use setBody(msgText.getText(), charset)
-                
+
             // Finally, send the sucker!
             m.doSend();
 
@@ -210,16 +224,16 @@ public class MailComposeBean extends JPanel {
 
         } catch (MessagingException me) {
             me.printStackTrace();
-            while ((me = (MessagingException)me.getNextException()) != null) {
+            while ((me = (MessagingException) me.getNextException()) != null) {
                 me.printStackTrace();
             }
             JOptionPane.showMessageDialog(null,
-                "Mail Sending Error:\n" + me.toString(),
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Mail Sending Error:\n" + me.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
-                "Mail Sending Error:\n" + e.toString(),
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Mail Sending Error:\n" + e.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -227,33 +241,35 @@ public class MailComposeBean extends JPanel {
         if (parent == null)
             return;
         if (parent instanceof Frame) {
-            ((Frame)parent).setVisible(true);
-            ((Frame)parent).dispose();
+            ((Frame) parent).setVisible(true);
+            ((Frame) parent).dispose();
         }
         if (parent instanceof JInternalFrame) {
-            ((JInternalFrame)parent).setVisible(true);
-            ((JInternalFrame)parent).dispose();
+            ((JInternalFrame) parent).setVisible(true);
+            ((JInternalFrame) parent).dispose();
         }
     }
 
 
-    /** Simple test case driver */
+    /**
+     * Simple test case driver
+     */
     public static void main(String[] av) {
         final JFrame jf = new JFrame("DarwinSys Compose Mail Tester");
         System.getProperties().setProperty("Mail.server", "mailhost");
         System.getProperties().setProperty("Mail.address", "nobody@home");
         MailComposeBean sm =
-            new MailComposeBean(jf, 
-            "Test Mailer", "spam-magnet@darwinsys.com", 500, 400);
+                new MailComposeBean(jf,
+                        "Test Mailer", "spam-magnet@darwinsys.com", 500, 400);
         sm.setSize(500, 400);
         jf.getContentPane().add(sm);
         jf.setLocation(100, 100);
         jf.setVisible(true);
         jf.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-            jf.setVisible(false);
-            jf.dispose();
-            System.exit(0);
+                jf.setVisible(false);
+                jf.dispose();
+                System.exit(0);
             }
         });
         jf.pack();

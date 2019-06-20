@@ -17,7 +17,7 @@ public class OperationsWithOptional {
         System.out.println(of(5).or(() -> of(4)));
     }
 
-    public static final Optional<Integer> max(Optional<Integer> i, Optional<Integer> j) {
+    public static Optional<Integer> max(Optional<Integer> i, Optional<Integer> j) {
         return i.flatMap(a -> j.map(b -> Math.max(a, b)));
     }
 }

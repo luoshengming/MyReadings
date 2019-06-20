@@ -43,23 +43,23 @@ public class AskDemoArticleParser extends AbstractActor {
                                 ? CompletableFuture.completedFuture(x)
                                 : toJava(ask(httpClientActor, msg.url, timeout)).
                                 thenCompose(rawArticle -> toJava(
-                                                ask(artcileParseActor,
-                                                        new ParseHtmlArticle(msg.url,
-                                                                ((HttpResponse) rawArticle).body), timeout))
+                                        ask(artcileParseActor,
+                                                new ParseHtmlArticle(msg.url,
+                                                        ((HttpResponse) rawArticle).body), timeout))
                                 );
                     }).thenCompose(x -> x);
 
                     final ActorRef senderRef = sender();
-                    result.handle((x,t) -> {
-                        if(x != null){
-                            if(x instanceof ArticleBody){
+                    result.handle((x, t) -> {
+                        if (x != null) {
+                            if (x instanceof ArticleBody) {
                                 String body = ((ArticleBody) x).body; //parsed article
                                 cacheActor.tell(body, self()); //cache it
                                 senderRef.tell(body, self()); //reply
-                            } else if(x instanceof String) //cached article
+                            } else if (x instanceof String) //cached article
                                 senderRef.tell(x, self());
-                        } else if( x == null )
-                            senderRef.tell(new akka.actor.Status.Failure((Throwable)t), self());
+                        } else if (x == null)
+                            senderRef.tell(new akka.actor.Status.Failure((Throwable) t), self());
                         return null;
                     });
 

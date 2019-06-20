@@ -25,12 +25,10 @@ public class HttpCompressionInitializer extends ChannelInitializer<Channel> {
         ChannelPipeline pipeline = ch.pipeline();
         if (isClient) {
             pipeline.addLast("codec", new HttpClientCodec());
-            pipeline.addLast("decompressor",
-            new HttpContentDecompressor());
+            pipeline.addLast("decompressor", new HttpContentDecompressor());
         } else {
             pipeline.addLast("codec", new HttpServerCodec());
-            pipeline.addLast("compressor",
-            new HttpContentCompressor());
+            pipeline.addLast("compressor", new HttpContentCompressor());
         }
     }
 }

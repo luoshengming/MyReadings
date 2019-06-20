@@ -15,14 +15,18 @@ import javax.swing.JButton;
 // BEGIN main
 public class HelloApplet extends JApplet {
 
-    /** The flag which controls drawing the message. */
+    /**
+     * The flag which controls drawing the message.
+     */
     protected boolean requested;
 
-    /** init() is an Applet method called by the browser to initialize */
+    /**
+     * init() is an Applet method called by the browser to initialize
+     */
     public void init() {
         JButton b;
         requested = false;
-        Container cp = (Container)getContentPane();
+        Container cp = (Container) getContentPane();
         cp.setLayout(new FlowLayout());
         String buttonLabel = getParameter("buttonlabel");
         if (buttonLabel == null) {
@@ -42,8 +46,9 @@ public class HelloApplet extends JApplet {
         });
     }
 
-    /** paint() is an AWT Component method, called when the 
-     *  component needs to be painted.
+    /**
+     * paint() is an AWT Component method, called when the
+     * component needs to be painted.
      */
     public void do_the_work() {
         /* If the Draw button is selected, draw something */

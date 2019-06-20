@@ -9,7 +9,8 @@ import java.io.InputStream;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-/** Demo of making TrueType font usable in Java. This facility
+/**
+ * Demo of making TrueType font usable in Java. This facility
  * allows you to have "application-specific" fonts in Java;
  * your application can have its own distinctive font that the user does
  * NOT have to install into the JRE before you can use it.
@@ -21,7 +22,8 @@ import javax.swing.JLabel;
  * Did NOT work for me in Applet nor JApplet due to
  * security problems (requires to create a temp file). Could be made
  * to work by providing a policy file.
- * @author    Ian Darwin
+ *
+ * @author Ian Darwin
  * @since 1.3
  */
 // BEGIN main
@@ -29,10 +31,11 @@ public class TTFontDemo extends JLabel {
 
     private static final long serialVersionUID = -2774152065764538894L;
 
-    /** Construct a TTFontDemo -- Create a Font from TTF.
+    /**
+     * Construct a TTFontDemo -- Create a Font from TTF.
      */
     public TTFontDemo(String fontFileName, String text)
-    throws IOException, FontFormatException {
+            throws IOException, FontFormatException {
         super(text, JLabel.CENTER);
 
         setBackground(Color.white);
@@ -52,11 +55,13 @@ public class TTFontDemo extends JLabel {
         setFont(ttfReal);
     }
 
-    /** Simple main program for TTFontDemo */
+    /**
+     * Simple main program for TTFontDemo
+     */
     public static void main(String[] args) throws Exception {
 
         String DEFAULT_MESSAGE =
-            "What hath man wrought? Or at least rendered?";
+                "What hath man wrought? Or at least rendered?";
         // Loaded as Resource so don't need graphics/ in front
         String DEFAULT_FONTFILE = "Kellyag_.ttf";
         String message = args.length == 1 ? args[0] : DEFAULT_MESSAGE;

@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/** This class provides a dbm-compatible interface to the UNIX-style
+/**
+ * This class provides a dbm-compatible interface to the UNIX-style
  * database access methods described in dbm(3) (which is on some UNIXes
  * a front-end to db(3).
  * <P>Each unique record in the database is a unique key/value pair,
@@ -18,28 +19,34 @@ import java.io.ObjectOutputStream;
  */
 // BEGIN main
 public class DBM {
-    /** Since you can only have one DBM database in use at a time due
+    /**
+     * Since you can only have one DBM database in use at a time due
      * to implementation restrictions, we enforce this rule with a
      * class-wide boolean.
      */
     static boolean inuse = false;
 
-    /** Save the filename for messages, etc. */
+    /**
+     * Save the filename for messages, etc.
+     */
     protected String fileName;
 
-    /** Construct a DBM given its filename */
+    /**
+     * Construct a DBM given its filename
+     */
     public DBM(String file) {
-        synchronized(this) {
-            if (isInuse())
-                throw new IllegalArgumentException(
-                    "Only one DBM object at a time per Java Machine");
+        synchronized (this) {
+            if (isInuse()) {
+                throw new IllegalArgumentException("Only one DBM object at a time per Java Machine");
+            }
             setInuse(true);
         }
         fileName = file;
         int retCode = dbminit(fileName);
-        if (retCode < 0)
+        if (retCode < 0) {
             throw new IllegalArgumentException(
-                "dbminit failed, code = " + retCode);
+                    "dbminit failed, code = " + retCode);
+        }
     }
 
     // Static code blocks are executed once, when class file is loaded.
@@ -50,7 +57,9 @@ public class DBM {
 
     protected ByteArrayOutputStream bo;
 
-    /** serialize an Object to byte array. */
+    /**
+     * serialize an Object to byte array.
+     */
     protected byte[] toByteArray(Object o) throws IOException {
         if (bo == null)
             bo = new ByteArrayOutputStream(1024);
@@ -61,7 +70,9 @@ public class DBM {
         return bo.toByteArray();
     }
 
-    /** un-serialize an Object from a byte array. */
+    /**
+     * un-serialize an Object from a byte array.
+     */
     protected Object toObject(byte[] b) throws IOException {
         Object o;
 
@@ -81,7 +92,9 @@ public class DBM {
 
     protected native int dbmclose();
 
-    /** Public wrapper for close method. */
+    /**
+     * Public wrapper for close method.
+     */
     public void close() {
         this.dbmclose();
         setInuse(false);
@@ -94,13 +107,17 @@ public class DBM {
 
     protected native byte[] dbmfetch(byte[] key);
 
-    /** Fetch using byte arrays */
+    /**
+     * Fetch using byte arrays
+     */
     public byte[] fetch(byte[] key) throws IOException {
         checkInUse();
         return dbmfetch(key);
     }
 
-    /** Fetch using Objects */
+    /**
+     * Fetch using Objects
+     */
     public Object fetch(Object key) throws IOException {
         checkInUse();
         byte[] datum = dbmfetch(toByteArray(key));
@@ -109,13 +126,17 @@ public class DBM {
 
     protected native int dbmstore(byte[] key, byte[] content);
 
-    /** Store using byte arrays */
+    /**
+     * Store using byte arrays
+     */
     public void store(byte[] key, byte[] value) throws IOException {
         checkInUse();
         dbmstore(key, value);
     }
 
-    /** Store using Objects */
+    /**
+     * Store using Objects
+     */
     public void store(Object key, Object value) throws IOException {
         checkInUse();
         dbmstore(toByteArray(key), toByteArray(value));

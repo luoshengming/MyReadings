@@ -8,7 +8,7 @@ import scala.runtime.BoxedUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chatroom extends AbstractActor{
+public class Chatroom extends AbstractActor {
     List<Messages.PostToChatroom> chatHistory = new ArrayList<>();
     List<UserRef> joinedUsers = new ArrayList<>();
 

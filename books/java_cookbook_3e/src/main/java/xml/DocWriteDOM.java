@@ -1,16 +1,20 @@
 package xml;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
 
-/** Make up and write an XML document, using DOM
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+/**
+ * Make up and write an XML document, using DOM
  * Updated for JAXP, using identity Transformer
+ *
  * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -26,7 +30,9 @@ public class DocWriteDOM {
         tx.transform(new DOMSource(doc), new StreamResult(System.out));
     }
 
-    /** Generate the XML document */
+    /**
+     * Generate the XML document
+     */
     protected Document makeDoc() {
         try {
             DocumentBuilderFactory fact = DocumentBuilderFactory.newInstance();
@@ -38,7 +44,7 @@ public class DocWriteDOM {
 
             Node stanza = doc.createElement("Stanza");
             root.appendChild(stanza);
-            
+
             Node line = doc.createElement("Line");
             stanza.appendChild(line);
             line.appendChild(doc.createTextNode("Once, upon a midnight dreary"));

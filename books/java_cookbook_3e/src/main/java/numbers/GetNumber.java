@@ -16,12 +16,18 @@ import java.awt.event.ActionListener;
 // BEGIN main
 public class GetNumber extends Frame {
 
-    /** The input textField */
+    /**
+     * The input textField
+     */
     private TextField textField;
-    /** The results area */
+    /**
+     * The results area
+     */
     private TextField statusLabel;
 
-    /** Constructor: set up the GUI */
+    /**
+     * Constructor: set up the GUI
+     */
     public GetNumber() {
         Panel p = new Panel();
         p.add(new Label("Number:"));

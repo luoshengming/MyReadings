@@ -22,7 +22,7 @@ public class Shutdown {
     }
 
     private static class Runner implements Runnable {
-        private long             i;
+        private long i;
 
         private volatile boolean on = true;
 

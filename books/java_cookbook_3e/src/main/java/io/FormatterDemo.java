@@ -2,8 +2,9 @@ package io;
 
 import java.util.Formatter;
 
-/** Demonstrate some usage patterns and format-code examples 
- * of the Formatter class and PrintStream/PrintWriter 
+/**
+ * Demonstrate some usage patterns and format-code examples
+ * of the Formatter class and PrintStream/PrintWriter
  * printf() methods introduced way back in Java 5.
  */
 // BEGIN main

@@ -6,9 +6,10 @@ import di.View;
 
 // BEGIN main
 public class ConsoleViewer implements View {
-    @Inject @MyModel
+    @Inject
+    @MyModel
     private String message;
-    
+
     @Override
     public void displayMessage() {
         System.out.println(message);

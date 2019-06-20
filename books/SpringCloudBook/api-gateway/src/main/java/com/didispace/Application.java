@@ -23,9 +23,7 @@ public class Application {
 
     @Bean
     public PatternServiceRouteMapper serviceRouteMapper() {
-        return new PatternServiceRouteMapper(
-                "(?<name>^.+)-(?<version>v.+$)",
-                "${version}/${name}");
+        return new PatternServiceRouteMapper("(?<name>^.+)-(?<version>v.+$)", "${version}/${name}");
     }
 
 }

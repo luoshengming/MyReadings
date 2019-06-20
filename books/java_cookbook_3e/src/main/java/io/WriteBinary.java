@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * Write some data in binary.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -13,7 +14,7 @@ public class WriteBinary {
         double d = Math.PI;
         String FILENAME = "binary.dat";
         DataOutputStream os = new DataOutputStream(
-            new FileOutputStream(FILENAME));
+                new FileOutputStream(FILENAME));
         os.writeInt(i);
         os.writeDouble(d);
         os.close();

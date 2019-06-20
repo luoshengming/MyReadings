@@ -17,16 +17,16 @@ import java.io.Writer;
 /**
  * Save a user data file, as safely as we can.
  * The basic algorithm is:
- <ol>
- <li>We create a temporary file, in the same directory as the input
- file so we can safely rename it. Set it to with deleteOnExit(true);
- <li>Our client writes the user data to this file.  Data format or
- translation errors, if any, will be thrown during this process,
- leaving the user's original file intact. Client closes file.
- <li>We delete the previous backup file, if one exists;
- <li>We rename the user's previous file to filename.bak;
- <li>We rename the temporary file to the save file.
- </ol>
+ * <ol>
+ * <li>We create a temporary file, in the same directory as the input
+ * file so we can safely rename it. Set it to with deleteOnExit(true);
+ * <li>Our client writes the user data to this file.  Data format or
+ * translation errors, if any, will be thrown during this process,
+ * leaving the user's original file intact. Client closes file.
+ * <li>We delete the previous backup file, if one exists;
+ * <li>We rename the user's previous file to filename.bak;
+ * <li>We rename the temporary file to the save file.
+ * </ol>
  * This algorithm all but guarantees not to fail for reasons of
  * disk full, permission denied, etc.  Alternate algorithms could
  * be employed that would preserve the original file ownership and
@@ -55,6 +55,7 @@ import java.io.Writer;
  * Objects of this class may be re-used sequentially (for the
  * same file) but are not thread-safe and should not be shared
  * among different threads.
+ *
  * @author Extracted and updated by Ian Darwin from an older
  * application I wrote, prompted by discussion started by Brendon McLean
  * on a private mailing list.
@@ -64,11 +65,16 @@ import java.io.Writer;
 public class FileSaver {
 
     private enum State {
-        /** The state before and after use */
+        /**
+         * The state before and after use
+         */
         AVAILABLE,
-        /** The state while in use */
+        /**
+         * The state while in use
+         */
         INUSE
     }
+
     private State state;
     private final File inputFile;
     private final File tmpFile;
@@ -100,10 +106,12 @@ public class FileSaver {
         return inputFile;
     }
 
-    /** Return an output file that the client should use to
+    /**
+     * Return an output file that the client should use to
      * write the client's data to.
+     *
      * @return An OutputStream, which should be wrapped in a
-     *     buffered OutputStream to ensure reasonable performance.
+     * buffered OutputStream to ensure reasonable performance.
      * @throws IOException if the temporary file cannot be written
      */
     public OutputStream getOutputStream() throws IOException {
@@ -116,10 +124,12 @@ public class FileSaver {
         return out;
     }
 
-    /** Return an output file that the client should use to
+    /**
+     * Return an output file that the client should use to
      * write the client's data to.
+     *
      * @return A Writer, which should be wrapped in a
-     *     buffered Writer to ensure reasonable performance.
+     * buffered Writer to ensure reasonable performance.
      * @throws IOException if the temporary file cannot be written
      */
     public Writer getWriter() throws IOException {
@@ -132,7 +142,9 @@ public class FileSaver {
         return out;
     }
 
-    /** Close the output file and rename the temp file to the original name.
+    /**
+     * Close the output file and rename the temp file to the original name.
+     *
      * @throws IOException If anything goes wrong
      */
     public void finish() throws IOException {

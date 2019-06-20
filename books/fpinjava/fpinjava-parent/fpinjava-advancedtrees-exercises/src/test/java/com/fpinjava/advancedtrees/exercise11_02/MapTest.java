@@ -1,19 +1,12 @@
 package com.fpinjava.advancedtrees.exercise11_02;
 
-import com.fpinjava.common.List;
-import com.fpinjava.state.SimpleRNG;
-import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
-
-
 public class MapTest {
 
-  /*
-   * Adjust according to your environment. The faster the computer,
-   * the lower this value should be.
-   */
-  int timeFactor = 500;
+    /*
+     * Adjust according to your environment. The faster the computer,
+     * the lower this value should be.
+     */
+    int timeFactor = 500;
 
   /*- Uncomment when needed
   @Test

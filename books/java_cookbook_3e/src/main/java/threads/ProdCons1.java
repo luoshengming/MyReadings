@@ -43,7 +43,8 @@ package threads;
 import java.io.IOException;
 import java.util.LinkedList;
 
-/** Producer-Consumer in Java. Version 1.
+/**
+ * Producer-Consumer in Java. Version 1.
  */
 // BEGIN main
 public class ProdCons1 {
@@ -52,7 +53,7 @@ public class ProdCons1 {
 
     protected void produce() {
         int len = 0;
-        synchronized(list) {
+        synchronized (list) {
             Object justProduced = new Object();
             list.addFirst(justProduced);
             len = list.size();
@@ -64,7 +65,7 @@ public class ProdCons1 {
     protected void consume() {
         Object obj = null;
         int len = 0;
-        synchronized(list) {
+        synchronized (list) {
             while (list.size() == 0) {
                 try {
                     list.wait();
@@ -84,10 +85,14 @@ public class ProdCons1 {
         System.out.println("Ready (p to produce, c to consume):");
         int i;
         while ((i = System.in.read()) != -1) {
-            char ch = (char)i;
-            switch(ch) {
-                case 'p':    pc.produce(); break;
-                case 'c':    pc.consume(); break;
+            char ch = (char) i;
+            switch (ch) {
+                case 'p':
+                    pc.produce();
+                    break;
+                case 'c':
+                    pc.consume();
+                    break;
             }
         }
     }

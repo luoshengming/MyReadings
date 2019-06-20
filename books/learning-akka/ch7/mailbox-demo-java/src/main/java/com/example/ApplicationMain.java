@@ -1,12 +1,13 @@
 package com.example;
 
-import akka.actor.ActorSystem;
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
 import akka.pattern.CircuitBreaker;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import scala.concurrent.Future;
 import scala.concurrent.duration.FiniteDuration;
+
 import static scala.compat.java8.FutureConverters.*;
 
 /**
@@ -49,19 +50,19 @@ public class ApplicationMain {
                 -> Patterns.ask(pongActor, new PingActor.PingMessage("ping"), timeout));
 
 
-        toJava(future1).handle((x,t) -> {
-            if(t != null){
+        toJava(future1).handle((x, t) -> {
+            if (t != null) {
                 System.out.println("got it: " + x);
-            }else{
+            } else {
                 System.out.println("error: " + t.toString());
             }
             return null;
         });
 
-        toJava(future2).handle((x,t) -> {
-            if(t != null){
+        toJava(future2).handle((x, t) -> {
+            if (t != null) {
                 System.out.println("got it: " + x);
-            }else{
+            } else {
                 System.out.println("error: " + t.toString());
             }
             return null;

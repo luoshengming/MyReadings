@@ -1,7 +1,8 @@
 package oo;
 
-/** Demonstrate how finalize() methods and shutdownHooks interact
- *  with calls to System.exit().
+/**
+ * Demonstrate how finalize() methods and shutdownHooks interact
+ * with calls to System.exit().
  */
 // BEGIN main
 public class ShutdownDemo {
@@ -10,7 +11,7 @@ public class ShutdownDemo {
         // Create an Object with a finalize() method - Bad idea!
         Object f = new Object() {
             public void finalize() throws Throwable {
-                System.out.println( "Running finalize()");
+                System.out.println("Running finalize()");
                 super.finalize();
             }
         };

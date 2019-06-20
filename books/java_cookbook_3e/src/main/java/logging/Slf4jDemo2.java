@@ -16,7 +16,7 @@ public class Slf4jDemo2 {
             Person p = new Person();
             // populate person's fields here...
             theLogger.info("I created an object {}", p);
-            
+
             if (p != null) {    // bogus, just to show logging
                 throw new IllegalArgumentException("Just testing");
             }

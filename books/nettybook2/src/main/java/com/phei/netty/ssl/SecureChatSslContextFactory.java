@@ -17,18 +17,12 @@ package com.phei.netty.ssl;
 
 import io.netty.handler.ssl.SslHandler;
 
+import javax.net.ssl.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Creates a bogus {@link SSLContext}. A client-side context created by this
@@ -101,19 +95,21 @@ public final class SecureChatSslContextFactory {
                 throw new Error(
                         "Failed to initialize the server-side SSLContext", e);
             } finally {
-                if (in != null)
+                if (in != null) {
                     try {
                         in.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
                 in = null;
-                if (tIN != null)
+                if (tIN != null) {
                     try {
                         tIN.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }
                 tIN = null;
             }
         }

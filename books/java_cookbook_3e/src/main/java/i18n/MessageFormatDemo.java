@@ -13,7 +13,7 @@ public class MessageFormatDemo {
 
     public static void main(String[] args) {
         String result = MessageFormat.format(
-            "At {0,time} on {0,date}, {1} {2}.", data);
+                "At {0,time} on {0,date}, {1} {2}.", data);
         System.out.println(result);
     }
 }

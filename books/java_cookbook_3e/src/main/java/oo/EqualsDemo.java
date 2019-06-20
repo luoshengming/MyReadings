@@ -5,7 +5,9 @@ public class EqualsDemo {
     private int int1;
     private SomeClass obj1;
 
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public EqualsDemo(int i, SomeClass o) {
         int1 = i;
         if (o == null) {
@@ -14,12 +16,16 @@ public class EqualsDemo {
         obj1 = o;
     }
 
-    /** Default Constructor */
+    /**
+     * Default Constructor
+     */
     public EqualsDemo() {
         this(0, new SomeClass());
     }
 
-    /** Demonstration "equals" method */
+    /**
+     * Demonstration "equals" method
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this)                    // <1> optimization
@@ -27,12 +33,12 @@ public class EqualsDemo {
 
         if (o == null)                    // <2> No object ever equals null
             return false;
-        
+
         // Of the correct class?
         if (o.getClass() != EqualsDemo.class) // <3>
             return false;
 
-        EqualsDemo other = (EqualsDemo)o; // OK, cast to this class
+        EqualsDemo other = (EqualsDemo) o; // OK, cast to this class
 
         // compare field-by-field         // <4>
         if (int1 != other.int1)           // compare primitives directly

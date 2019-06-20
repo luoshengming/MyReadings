@@ -7,15 +7,15 @@ import java.util.concurrent.RecursiveTask;
 
 /**
  * 计数器任务
- * 
+ *
  * @author tengfei.fangtf
  * @version $Id: CountTask.java, v 0.1 2015-8-1 上午12:00:29 tengfei.fangtf Exp $
  */
 public class CountTask extends RecursiveTask<Integer> {
 
     private static final int THRESHOLD = 2; // 阈值
-    private int              start;
-    private int              end;
+    private int start;
+    private int end;
 
     public CountTask(int start, int end) {
         this.start = start;

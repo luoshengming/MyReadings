@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableZuulProxy
 public class ZuulApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(ZuulApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulApplication.class, args);
+    }
 
-  @Bean
-  public PreRequestLogFilter preRequestLogFilter() {
-    return new PreRequestLogFilter();
-  }
+    @Bean
+    public PreRequestLogFilter preRequestLogFilter() {
+        return new PreRequestLogFilter();
+    }
 }

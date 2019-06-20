@@ -26,8 +26,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             path = !path.contains("file:") ? path : path.substring(5);
             INDEX = new File(path);
         } catch (URISyntaxException e) {
-            throw new IllegalStateException(
-                    "Unable to locate index.html", e);
+            throw new IllegalStateException("Unable to locate index.html", e);
         }
     }
 
@@ -37,19 +36,19 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
-        if (wsUri.equalsIgnoreCase(request.getUri())) {
+        if (wsUri.equalsIgnoreCase(request.uri())) {
             ctx.fireChannelRead(request.retain());
         } else {
-            if (HttpHeaders.is100ContinueExpected(request)) {
+            if (HttpUtil.is100ContinueExpected(request)) {
                 send100Continue(ctx);
             }
             RandomAccessFile file = new RandomAccessFile(INDEX, "r");
-            HttpResponse response = new DefaultHttpResponse(request.getProtocolVersion(), HttpResponseStatus.OK);
-            response.headers().set(HttpHeaders.Names.CONTENT_TYPE, "text/html; charset=UTF-8");
-            boolean keepAlive = HttpHeaders.isKeepAlive(request);
+            HttpResponse response = new DefaultHttpResponse(request.protocolVersion(), HttpResponseStatus.OK);
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
+            boolean keepAlive = HttpUtil.isKeepAlive(request);
             if (keepAlive) {
-                response.headers().set(HttpHeaders.Names.CONTENT_LENGTH, file.length());
-                response.headers().set(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
+                response.headers().set(HttpHeaderNames.CONTENT_LENGTH, file.length());
+                response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
             }
             ctx.write(response);
             if (ctx.pipeline().get(SslHandler.class) == null) {

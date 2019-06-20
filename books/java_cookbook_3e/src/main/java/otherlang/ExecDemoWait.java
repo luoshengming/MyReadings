@@ -16,7 +16,7 @@ public class ExecDemoWait {
         Process p;         // Process tracks one external native process
         BufferedReader is;    // reader for output of process
         String line;
-        
+
         // Our argv[0] contains the program to run; remaining elements
         // of argv contain args for the target program. This is just
         // what is needed for the String[] form of exec.
@@ -31,7 +31,7 @@ public class ExecDemoWait {
 
         while ((line = is.readLine()) != null)
             System.out.println(line);
-        
+
         System.out.println("In Main after EOF");
         System.out.flush();
         try {

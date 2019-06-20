@@ -1,8 +1,9 @@
 package threads;
 
-/** 
+/**
  * Threaded demo application, using inner class as Runnable.
- * @author    Ian Darwin
+ *
+ * @author Ian Darwin
  */
 // BEGIN main
 public class ThreadsDemo3 {
@@ -19,6 +20,7 @@ public class ThreadsDemo3 {
 
     /**
      * Construct a ThreadDemo object
+     *
      * @param m Message to display
      * @param n How many times to display it
      */

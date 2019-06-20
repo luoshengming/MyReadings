@@ -17,9 +17,7 @@ public class MarshallingInitializer extends ChannelInitializer<Channel> {
     private final MarshallerProvider marshallerProvider;
     private final UnmarshallerProvider unmarshallerProvider;
 
-    public MarshallingInitializer(
-            UnmarshallerProvider unmarshallerProvider,
-            MarshallerProvider marshallerProvider) {
+    public MarshallingInitializer(UnmarshallerProvider unmarshallerProvider, MarshallerProvider marshallerProvider) {
         this.marshallerProvider = marshallerProvider;
         this.unmarshallerProvider = unmarshallerProvider;
     }
@@ -32,12 +30,9 @@ public class MarshallingInitializer extends ChannelInitializer<Channel> {
         pipeline.addLast(new ObjectHandler());
     }
 
-    public static final class ObjectHandler
-        extends SimpleChannelInboundHandler<Serializable> {
+    public static final class ObjectHandler extends SimpleChannelInboundHandler<Serializable> {
         @Override
-        public void channelRead0(
-            ChannelHandlerContext channelHandlerContext,
-            Serializable serializable) throws Exception {
+        public void channelRead0(ChannelHandlerContext channelHandlerContext, Serializable serializable) throws Exception {
             // Do something
         }
     }

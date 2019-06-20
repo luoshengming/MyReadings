@@ -17,7 +17,7 @@ import java.net.Socket;
 
 import javax.swing.JFrame;
 
-/** 
+/**
  * <p>
  * Simple Chat Room GUI.
  * Writing a Chat Room seems to be one of many obligatory rites (or wrongs)
@@ -31,46 +31,71 @@ import javax.swing.JFrame;
  * one for reading and one for writing.</p>
  * <p>
  * Server multiplexes messages back to all clients.</p>
+ *
  * @author Ian Darwin
  */
 // BEGIN main
 public class ChatClient extends JFrame {
 
     private static final long serialVersionUID = -3686334002367908392L;
-    private static final String userName = 
-        System.getProperty("user.name", "User With No Name");
-    /** The state of logged-in-ness */
+    private static final String userName =
+            System.getProperty("user.name", "User With No Name");
+    /**
+     * The state of logged-in-ness
+     */
     protected boolean loggedIn;
     /* The main Frame. */
     protected JFrame cp;
-    /** The default port number */
+    /**
+     * The default port number
+     */
     protected static final int PORTNUM = ChatProtocol.PORTNUM;
-    /** The actual port number */
+    /**
+     * The actual port number
+     */
     protected int port;
-    /** The network socket */
+    /**
+     * The network socket
+     */
     protected Socket sock;
-    /** BufferedReader for reading from socket */
+    /**
+     * BufferedReader for reading from socket
+     */
     protected BufferedReader is;
-    /** PrintWriter for sending lines on socket */
+    /**
+     * PrintWriter for sending lines on socket
+     */
     protected PrintWriter pw;
-    /** TextField for input */
+    /**
+     * TextField for input
+     */
     protected TextField tf;
-    /** TextArea to display conversations */
+    /**
+     * TextArea to display conversations
+     */
     protected TextArea ta;
-    /** The Login button */
+    /**
+     * The Login button
+     */
     protected Button loginButton;
-    /** The LogOUT button */
+    /**
+     * The LogOUT button
+     */
     protected Button logoutButton;
-    /** The TitleBar title */
+    /**
+     * The TitleBar title
+     */
     final static String TITLE = "ChatClient: Ian Darwin's Toy Chat Room Client";
 
-    /** set up the GUI */
+    /**
+     * set up the GUI
+     */
     public ChatClient() {
         cp = this;
         cp.setTitle(TITLE);
         cp.setLayout(new BorderLayout());
         port = PORTNUM;
-        
+
         // The GUI
         ta = new TextArea(14, 80);
         ta.setEditable(false);        // readonly
@@ -109,8 +134,8 @@ public class ChatClient extends JFrame {
         tf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (loggedIn) {
-                    pw.println(ChatProtocol.CMD_BCAST+tf.getText());
-                    tf.setText(""); 
+                    pw.println(ChatProtocol.CMD_BCAST + tf.getText());
+                    tf.setText("");
                 }
             }
         });
@@ -124,7 +149,9 @@ public class ChatClient extends JFrame {
 
     protected String serverHost = "localhost";
 
-    /** LOG ME IN TO THE CHAT */
+    /**
+     * LOG ME IN TO THE CHAT
+     */
     public void login() {
         showStatus("In login!");
         if (loggedIn)
@@ -140,9 +167,9 @@ public class ChatClient extends JFrame {
 
             loggedIn = true;
 
-        } catch(IOException e) {
-            showStatus("Can't get socket to " + 
-                serverHost + "/" + port + ": " + e);
+        } catch (IOException e) {
+            showStatus("Can't get socket to " +
+                    serverHost + "/" + port + ": " + e);
             cp.add(new Label("Can't get socket: " + e));
             return;
         }
@@ -155,7 +182,7 @@ public class ChatClient extends JFrame {
                 try {
                     while (loggedIn && ((line = is.readLine()) != null))
                         ta.append(line + "\n");
-                } catch(IOException e) {
+                } catch (IOException e) {
                     showStatus("Lost another client!\n" + e);
                     return;
                 }
@@ -163,7 +190,9 @@ public class ChatClient extends JFrame {
         }).start();
     }
 
-    /** Log me out, Scotty, there's no intelligent life here! */
+    /**
+     * Log me out, Scotty, there's no intelligent life here!
+     */
     public void logout() {
         if (!loggedIn)
             return;
@@ -180,7 +209,9 @@ public class ChatClient extends JFrame {
         System.out.println(message);
     }
 
-    /** A main method to allow the client to be run as an Application */
+    /**
+     * A main method to allow the client to be run as an Application
+     */
     public static void main(String[] args) {
         ChatClient room101 = new ChatClient();
         room101.pack();

@@ -12,7 +12,8 @@ import javax.naming.NamingException;
 
 import domain.User;
 
-/** A UserDB using JDBC and a relational DBMS..
+/**
+ * A UserDB using JDBC and a relational DBMS..
  * We use the inherited getUser ("Find the User object for a given nickname")
  * since we keep everything in memory in this version.
  * <p>
@@ -26,17 +27,21 @@ public class UserDBJDBC extends UserDB {
     protected PreparedStatement setLastLoginStmt;
     protected PreparedStatement deleteUserStmt;
 
-    /** insert the dozen or so fields into the user database */
+    /**
+     * insert the dozen or so fields into the user database
+     */
     final static String SQL_INSERT_USER =
-        "insert into users " +
-        " values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            "insert into users " +
+                    " values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    /** Default constructor */
+    /**
+     * Default constructor
+     */
     protected UserDBJDBC() throws NamingException, SQLException, IOException {
         super();
 
         System.out.println("UserDBJDBC.<init> starting...");
-        
+
         System.out.println("Loading Driver Class");
         try {
             Class.forName("org.hsqldb.jdbcDriver");
@@ -45,8 +50,8 @@ public class UserDBJDBC extends UserDB {
             throw new IllegalStateException(ex.toString());
         }
         Connection conn = DriverManager.getConnection(
-            "jdbc:hsqldb:/home/ian/src/jabadot/WEB-INF/jabadot",
-            "jabadmin", "fredonia");
+                "jdbc:hsqldb:/home/ian/src/jabadot/WEB-INF/jabadot",
+                "jabadmin", "fredonia");
 
         Statement stmt = conn.createStatement();
 
@@ -77,8 +82,8 @@ public class UserDBJDBC extends UserDB {
             // Construct a user object from the fields
             // System.out.println("Constructing User object");
             User u = new User(nick, pass, first, last, email,
-                prov, ctry, credt, lastlog,
-                skin, editPrivs, adminPrivs);
+                    prov, ctry, credt, lastlog,
+                    skin, editPrivs, adminPrivs);
             // System.out.println("Adding User object " + u + " to " + users);
             // Add it to the in-memory copy.
             users.add(u);
@@ -91,18 +96,20 @@ public class UserDBJDBC extends UserDB {
         // re-create them each time needed.
         addUserStmt = conn.prepareStatement(SQL_INSERT_USER);
         setPasswordStatement = conn.prepareStatement(
-            "update users SET password = ? where name = ?");
+                "update users SET password = ? where name = ?");
         setLastLoginStmt = conn.prepareStatement(
-            "update users SET lastLogin = ? where name = ?");
+                "update users SET lastLogin = ? where name = ?");
         deleteUserStmt = conn.prepareStatement(
-            "delete from users where name = ?");
-        
+                "delete from users where name = ?");
+
         conn.close();
     }
 
-    /** Add one user to the list, both in-memory and on disk. */
+    /**
+     * Add one user to the list, both in-memory and on disk.
+     */
     public synchronized void addUser(User nu)
-    throws IOException, SQLException {
+            throws IOException, SQLException {
         // Add it to the in-memory list
         super.addUser(nu);
 
@@ -111,7 +118,7 @@ public class UserDBJDBC extends UserDB {
         int i = 1;
         addUserStmt.setString(i++, nu.getName());
         addUserStmt.setString(i++, nu.getPassword());
-        addUserStmt.setString(i++, nu.getFirstName()); 
+        addUserStmt.setString(i++, nu.getFirstName());
         addUserStmt.setString(i++, nu.getLastName());
         addUserStmt.setString(i++, nu.getEmail());
         addUserStmt.setString(i++, nu.getCity());
@@ -150,8 +157,8 @@ public class UserDBJDBC extends UserDB {
         users.remove(u);
     }
 
-    public synchronized void setPassword(String nick, String newPass) 
-    throws SQLException {
+    public synchronized void setPassword(String nick, String newPass)
+            throws SQLException {
 
         // Find the user object
         User u = getUser(nick);
@@ -166,10 +173,12 @@ public class UserDBJDBC extends UserDB {
         u.setPassword(newPass);
     }
 
-    /** Update the Last Login Date field. */
-    public synchronized void setLoginDate(String nick, java.util.Date date) 
-    throws SQLException {
-    
+    /**
+     * Update the Last Login Date field.
+     */
+    public synchronized void setLoginDate(String nick, java.util.Date date)
+            throws SQLException {
+
         // Find the user object
         User u = getUser(nick);
 

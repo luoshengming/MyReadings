@@ -1,6 +1,8 @@
 package io;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Read and print, using BufferedReader from System.in, onto System.out
@@ -10,8 +12,7 @@ public class CatStdin {
 
     public static void main(String[] av) {
         try {
-            BufferedReader is =
-                new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
             String inputLine;
 
             while ((inputLine = is.readLine()) != null) {

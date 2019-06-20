@@ -10,15 +10,15 @@ import java.io.InputStreamReader;
 
 public class FileReader extends AbstractReader {
 
-  private FileReader(BufferedReader reader) {
-    super(reader);
-  }
-
-  public static Result<Input> fileReader(String path) {
-    try {
-      return Result.success(new FileReader(new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))))));
-    } catch (Exception e) {
-      return Result.failure(e);
+    private FileReader(BufferedReader reader) {
+        super(reader);
     }
-  }
+
+    public static Result<Input> fileReader(String path) {
+        try {
+            return Result.success(new FileReader(new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))))));
+        } catch (Exception e) {
+            return Result.failure(e);
+        }
+    }
 }

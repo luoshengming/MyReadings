@@ -15,12 +15,15 @@
  */
 package com.phei.netty.aio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -29,6 +32,7 @@ import java.util.concurrent.CountDownLatch;
  * @date 2014年2月16日
  */
 public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTimeClientHandler>, Runnable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTimeClientHandler.class);
 
     private AsynchronousSocketChannel client;
     private String host;
@@ -41,7 +45,7 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
         try {
             client = AsynchronousSocketChannel.open();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 
@@ -51,13 +55,14 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
         client.connect(new InetSocketAddress(host, port), this, this);
         try {
             latch.await();
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
+        } catch (InterruptedException e) {
+            LOGGER.warn(e.getMessage(), e);
+            Thread.currentThread().interrupt();
         }
         try {
             client.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 
@@ -67,36 +72,33 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
         ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
         writeBuffer.put(req);
         writeBuffer.flip();
-        client.write(writeBuffer, writeBuffer, new CompletionHandler<Integer, ByteBuffer>() {
+        client.write(writeBuffer, writeBuffer, new CompletionHandler<>() {
             @Override
             public void completed(Integer result, ByteBuffer buffer) {
                 if (buffer.hasRemaining()) {
                     client.write(buffer, buffer, this);
                 } else {
                     ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-                    client.read(readBuffer, readBuffer, new CompletionHandler<Integer, ByteBuffer>() {
+                    client.read(readBuffer, readBuffer, new CompletionHandler<>() {
                         @Override
                         public void completed(Integer result, ByteBuffer buffer) {
                             buffer.flip();
                             byte[] bytes = new byte[buffer.remaining()];
                             buffer.get(bytes);
                             String body;
-                            try {
-                                body = new String(bytes, "UTF-8");
-                                System.out.println("Now is : " + body);
-                                latch.countDown();
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                            }
+                            body = new String(bytes, StandardCharsets.UTF_8);
+                            System.out.println("Now is : " + body);
+                            latch.countDown();
                         }
 
                         @Override
                         public void failed(Throwable exc, ByteBuffer attachment) {
                             try {
                                 client.close();
+                            } catch (IOException ignore) {
+                                // ignore on close
+                            } finally {
                                 latch.countDown();
-                            } catch (IOException e) {
-                                // ingnore on close
                             }
                         }
                     });
@@ -107,9 +109,10 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
             public void failed(Throwable exc, ByteBuffer attachment) {
                 try {
                     client.close();
-                    latch.countDown();
                 } catch (IOException e) {
-                    // ingnore on close
+                    // ignore on close
+                } finally {
+                    latch.countDown();
                 }
             }
         });
@@ -120,9 +123,10 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
         exc.printStackTrace();
         try {
             client.close();
+        } catch (IOException ignore) {
+            // ignore on close
+        } finally {
             latch.countDown();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

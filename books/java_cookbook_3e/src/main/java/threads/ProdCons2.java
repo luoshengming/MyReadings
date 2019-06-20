@@ -43,19 +43,23 @@ package threads;
 import java.io.IOException;
 import java.util.LinkedList;
 
-/** Producer-consumer in Java, Take II.
+/**
+ * Producer-consumer in Java, Take II.
  */
 // BEGIN main
 public class ProdCons2 {
 
-    /** Throughout the code, this is the object we synchronize on so this
+    /**
+     * Throughout the code, this is the object we synchronize on so this
      * is also the object we wait() and notifyAll() on.
      */
     protected LinkedList<Object> list = new LinkedList<>();
     protected int MAX = 10;
     protected boolean done = false; // Also protected by lock on list.
 
-    /** Inner class representing the Producer side */
+    /**
+     * Inner class representing the Producer side
+     */
     class Producer extends Thread {
 
         public void run() {
@@ -64,7 +68,7 @@ public class ProdCons2 {
                 // Get request from the network - outside the synch section.
                 // We're simulating this actually reading from a client, and it
                 // might have to wait for hours if the client is having coffee.
-                synchronized(list) {
+                synchronized (list) {
                     while (list.size() == MAX) { // queue "full"
                         try {
                             System.out.println("Producer WAITING");
@@ -89,16 +93,18 @@ public class ProdCons2 {
             // } catch (InterruptedException ex) {
             //     System.out.println("Producer Read INTERRUPTED");
             // }
-            return(new Object());
+            return (new Object());
         }
     }
 
-    /** Inner class representing the Consumer side */
+    /**
+     * Inner class representing the Consumer side
+     */
     class Consumer extends Thread {
         public void run() {
             while (true) {
                 Object obj = null;
-                synchronized(list) {
+                synchronized (list) {
                     while (list.size() == 0) {
                         try {
                             System.out.println("CONSUMER WAITING");
@@ -126,14 +132,14 @@ public class ProdCons2 {
     }
 
     ProdCons2(int nP, int nC) {
-        for (int i=0; i<nP; i++)
+        for (int i = 0; i < nP; i++)
             new Producer().start();
-        for (int i=0; i<nC; i++)
+        for (int i = 0; i < nC; i++)
             new Consumer().start();
     }
 
     public static void main(String[] args)
-    throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
 
         // Start producers and consumers
         int numProducers = 4;
@@ -141,10 +147,10 @@ public class ProdCons2 {
         ProdCons2 pc = new ProdCons2(numProducers, numConsumers);
 
         // Let it run for, say, 10 seconds
-        Thread.sleep(10*1000);
+        Thread.sleep(10 * 1000);
 
         // End of simulation - shut down gracefully
-        synchronized(pc.list) {
+        synchronized (pc.list) {
             pc.done = true;
             pc.list.notifyAll();
         }

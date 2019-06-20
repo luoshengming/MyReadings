@@ -9,13 +9,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/** A simple demo of a JFileChooser in action. */
+/**
+ * A simple demo of a JFileChooser in action.
+ */
 // BEGIN main
 public class JFileChooserDemo extends JPanel {
 
     private static final long serialVersionUID = 2615629432967419176L;
 
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public JFileChooserDemo(JFrame f) {
         final JFrame frame = f;
         final JFileChooser chooser = new JFileChooser();
@@ -41,15 +45,15 @@ public class JFileChooserDemo extends JPanel {
         add(b);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            int returnVal = chooser.showOpenDialog(frame);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = chooser.getSelectedFile();
-                System.out.println("You chose a " + 
-                    (file.isFile() ? "file" : "directory") +
-                    " named: " + file.getPath());
-            } else {
-                System.out.println("You did not choose a filesystem object.");
-            }
+                int returnVal = chooser.showOpenDialog(frame);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = chooser.getSelectedFile();
+                    System.out.println("You chose a " +
+                            (file.isFile() ? "file" : "directory") +
+                            " named: " + file.getPath());
+                } else {
+                    System.out.println("You did not choose a filesystem object.");
+                }
             }
         });
     }

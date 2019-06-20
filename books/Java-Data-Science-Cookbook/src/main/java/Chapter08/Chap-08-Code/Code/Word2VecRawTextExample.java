@@ -10,7 +10,6 @@ import org.deeplearning4j.text.sentenceiterator.UimaSentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +55,7 @@ public class Word2VecRawTextExample {
         WordVectorSerializer.writeWordVectors(vec, "word2vec.txt");
 
         log.info("Closest Words:");
-        Collection<String> lst = vec.wordsNearest("man", 5); 
+        Collection<String> lst = vec.wordsNearest("man", 5);
         System.out.println(lst);
         double cosSim = vec.similarity("cruise", "voyage");
         System.out.println(cosSim);

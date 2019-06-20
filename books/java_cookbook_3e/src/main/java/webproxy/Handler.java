@@ -16,56 +16,70 @@ import java.util.StringTokenizer;
 
 import com.darwinsys.util.Debug;
 
-/** Called from Httpd in a Thread to handle one connection.
+/**
+ * Called from Httpd in a Thread to handle one connection.
  * We are created with just a Socket, and read the
  * HTTP request, extract a name, read it (saving it
  * in Hashtable h for next time), and write it back.
  * <p>
  * TODO split into general handler stuff and "FileServlet",
- *    then handle w/ either user HttpServlet subclasses or FileServlet.
+ * then handle w/ either user HttpServlet subclasses or FileServlet.
  */
 // BEGIN main
 public class Handler {
 
-    /** inputStream, from Viewer */
+    /**
+     * inputStream, from Viewer
+     */
     protected BufferedReader is;
-    /** outputStream, to Viewer */
+    /**
+     * outputStream, to Viewer
+     */
     protected PrintStream os;
-    /** Main program */
+    /**
+     * Main program
+     */
     protected WebProxy parent;
-    /** The default filename in a directory. */
+    /**
+     * The default filename in a directory.
+     */
     protected final static String DEF_NAME = "/index.html";
 
-    /** The Hashtable used to cache all URLs we've read.
+    /**
+     * The Hashtable used to cache all URLs we've read.
      * Static, shared by all instances of Handler (one Handler per request;
      * this is probably quite inefficient, but simple. Need ThreadPool).
      * Note that Hashtable methods *are* synchronized.
      */
-    private static Map<String,Object> cache  = new HashMap<String,Object>();
+    private static Map<String, Object> cache = new HashMap<String, Object>();
 
     static {
         cache.put("", "<html><body><b>Unknown server error</b>".getBytes());
     }
 
-    /** Construct a Handler */
+    /**
+     * Construct a Handler
+     */
     Handler(WebProxy parent) {
         this.parent = parent;
     }
-    
+
     protected enum RequestType {
         RQ_INVALID, RQ_GET, RQ_HEAD, RQ_POST
-    }; 
+    }
+
+    ;
 
     String requestURL;
-    
+
     public void process(Socket clntSock) {
         String request;        // what Viewer sends us.
         RequestType methodType = RequestType.RQ_INVALID;
         try {
             System.out.println("Connection accepted from " +
-                clntSock.getInetAddress());
+                    clntSock.getInetAddress());
             is = new BufferedReader(new InputStreamReader(
-                clntSock.getInputStream()));
+                    clntSock.getInputStream()));
             // Must do before any chance of errorResponse being called!
             os = new PrintStream(clntSock.getOutputStream());
 
@@ -93,34 +107,34 @@ public class Handler {
 
             // First, check that rqCode is either GET or HEAD or ...
             if ("get".equalsIgnoreCase(requestCommand))
-                  methodType = RequestType.RQ_GET;
+                methodType = RequestType.RQ_GET;
             else if ("head".equalsIgnoreCase(requestCommand))
-                  methodType = RequestType.RQ_HEAD;
+                methodType = RequestType.RQ_HEAD;
             else if ("post".equalsIgnoreCase(requestCommand))
-                  methodType = RequestType.RQ_POST;
+                methodType = RequestType.RQ_POST;
             else {
                 errorResponse(400, "invalid method: " + requestCommand);
                 clntSock.close();
                 return;
             }
-            
+
             // Read headers, up to the null line before the body,
             // so the body can be read directly if it's a POST.
-            Map<String,String> headersMap = new HashMap<String,String>();
+            Map<String, String> headersMap = new HashMap<String, String>();
             String hdrLine;
             while ((hdrLine = is.readLine()) != null &&
                     hdrLine.length() != 0) {
-                    int ix;
-                    if ((ix=hdrLine.indexOf(':')) != -1) {
-                        String hdrName = hdrLine.substring(0, ix);
-                        String hdrValue = hdrLine.substring(ix+1).trim();
-                        Debug.println("hdr", hdrName+","+hdrValue);
-                        headersMap.put(hdrName, hdrValue);
-                    } else {
-                        System.err.println("INVALID HEADER: " + hdrLine);
-                    }
+                int ix;
+                if ((ix = hdrLine.indexOf(':')) != -1) {
+                    String hdrName = hdrLine.substring(0, ix);
+                    String hdrValue = hdrLine.substring(ix + 1).trim();
+                    Debug.println("hdr", hdrName + "," + hdrValue);
+                    headersMap.put(hdrName, hdrValue);
+                } else {
+                    System.err.println("INVALID HEADER: " + hdrLine);
+                }
             }
-            
+
             if (methodType == RequestType.RQ_POST) {
                 errorResponse(501, "Protocol not written yet");
                 clntSock.close();
@@ -134,12 +148,12 @@ public class Handler {
                 errorResponse(401, "protocol not supported: " + requestURL);
                 clntSock.close();
                 return;
-            }                
+            }
 
             returnURL(url, os);
             os.flush();
             clntSock.close();
-            
+
             System.out.println("END OF REQUEST");
         } catch (FileNotFoundException e) {
             errorResponse(404, "Server can't find " + requestURL);
@@ -147,7 +161,7 @@ public class Handler {
             errorResponse(500, "IO Error on proxy");
             System.out.println("IOException " + e);
             e.printStackTrace();
-        }        
+        }
     }
 
     private void returnURL(URL url, PrintStream os) throws IOException {
@@ -158,7 +172,9 @@ public class Handler {
         }
     }
 
-    /** Sends an error response, by number, hopefully localized. */
+    /**
+     * Sends an error response, by number, hopefully localized.
+     */
     protected void errorResponse(final int errNum, final String errMsg) {
 
         // Check for localized messages
@@ -170,7 +186,7 @@ public class Handler {
         }
 
         String response = errMsg;
-        
+
         if (messages != null) {
             try {
                 response = messages.getString(Integer.toString(errNum));
@@ -185,13 +201,13 @@ public class Handler {
         os.println();
         os.println("<html>");
         os.println("<head><title>Error " + errNum + "--" + response +
-            "</title></head>");
+                "</title></head>");
         os.println("<h1>" + errNum + " " + response + "</h1>");
         os.println("<hr>");
         os.println("<address>Java Web Proxy,");
         String myAddr = "http://www.darwinsys.com/freeware/";
         os.println("<a href=\"" + myAddr + "\">" +
-            myAddr + "</a>");
+                myAddr + "</a>");
         os.println("</address>");
         os.println("</html>");
         os.println();

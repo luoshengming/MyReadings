@@ -24,27 +24,37 @@ import javax.swing.JTextArea;
  * The user (will be able to) press a Details... button to see the
  * traceback in a dialog; tracebacks are <b>not</b> displayed unless
  * the user requests them.
+ *
  * @author Ian Darwin
  */
 public class ErrorUtil {
 
     // static { System.out.println("ErrorUtil loaded"); }
 
-    /** The button options for the ultimate (or only) Excepton */
-    final static String[] choicesNoMore = { "OK", "Details..." };
+    /**
+     * The button options for the ultimate (or only) Excepton
+     */
+    final static String[] choicesNoMore = {"OK", "Details..."};
 
-    /** The button options for any non-ultimate Exception */
-    final static String[] choicesMore = { "OK", "Details...", "Next" };
+    /**
+     * The button options for any non-ultimate Exception
+     */
+    final static String[] choicesMore = {"OK", "Details...", "Next"};
 
-    /** Secondary dialog for the "Details..." button */
+    /**
+     * Secondary dialog for the "Details..." button
+     */
     static DetailsDialog detailsDialog;
 
-    /** Public no-arg constructor for those who like simple instantiation. */
+    /**
+     * Public no-arg constructor for those who like simple instantiation.
+     */
     public ErrorUtil() {
         // Nothing to do
     }
 
-    /** Convenience routine for use with AWT's dispatch thread; this is the old,
+    /**
+     * Convenience routine for use with AWT's dispatch thread; this is the old,
      * never-supported and now often-doesn't-work method, but the code is still here.
      * Usage:
      * <pre>
@@ -55,8 +65,9 @@ public class ErrorUtil {
         //System.out.println("handle() called with " + th.getClass().getName());
         showExceptions(null, th);
     }
-        
+
     // BEGIN main
+
     /**
      * Show the given Exception (and any nested Exceptions) in JOptionPane(s).
      */
@@ -69,7 +80,7 @@ public class ErrorUtil {
             String message = className;
 
             if (theExc instanceof SQLException) {
-                SQLException sexc = (SQLException)theExc;
+                SQLException sexc = (SQLException) theExc;
                 message += "; code=" + sexc.getErrorCode();
                 next = sexc.getNextException();
             } else {
@@ -80,22 +91,22 @@ public class ErrorUtil {
 
             /* Show the Dialog! */
             int response = JOptionPane.showOptionDialog(
-                parent,
-                message,
-                className,                             // title
-                JOptionPane.YES_NO_CANCEL_OPTION,      // icontType
-                JOptionPane.ERROR_MESSAGE,             // messageType
-                null,                                  // icon
-                choices,                               // options
-                choices[0]                             // default
-                );
+                    parent,
+                    message,
+                    className,                             // title
+                    JOptionPane.YES_NO_CANCEL_OPTION,      // icontType
+                    JOptionPane.ERROR_MESSAGE,             // messageType
+                    null,                                  // icon
+                    choices,                               // options
+                    choices[0]                             // default
+            );
 
             if (response == 0)          // "OK"
                 return;
             if (response == 1) {        // "Details"
                 // show ANOTHER JDialog with a JTextArea of printStackTrace();
                 if (detailsDialog == null) // first time, lazy creation
-                    detailsDialog = new DetailsDialog((JFrame)parent);
+                    detailsDialog = new DetailsDialog((JFrame) parent);
                 detailsDialog.showStackTrace(theExc);
             }
             // else resp = 2, "Next", let it fall through:
@@ -105,13 +116,18 @@ public class ErrorUtil {
         } while (next != null);
     }
 
-    /** JDialog class to display the details of an Exception */
+    /**
+     * JDialog class to display the details of an Exception
+     */
     protected static class DetailsDialog extends JDialog {
 
         private static final long serialVersionUID = -4779441441693785664L;
         JButton ok;
         JTextArea text;
-        /** Construct a DetailsDialog given a parent (Frame/JFrame) */
+
+        /**
+         * Construct a DetailsDialog given a parent (Frame/JFrame)
+         */
         DetailsDialog(JFrame parent) {
             super(parent);
             Container cp = getContentPane();
@@ -127,7 +143,9 @@ public class ErrorUtil {
             pack();
         }
 
-        /** Display the stackTrace from the given Throwable in this Dialog. */
+        /**
+         * Display the stackTrace from the given Throwable in this Dialog.
+         */
         void showStackTrace(Throwable exc) {
             CharArrayWriter buff = new CharArrayWriter();
             PrintWriter pw = new PrintWriter(buff);

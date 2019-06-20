@@ -40,7 +40,7 @@ public class ChineseProverbServerHandler extends SimpleChannelInboundHandler<Dat
     }
 
     @Override
-    public void messageReceived(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, DatagramPacket packet) throws Exception {
         String req = packet.content().toString(CharsetUtil.UTF_8);
         System.out.println(req);
         if ("谚语字典查询?".equals(req)) {

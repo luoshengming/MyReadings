@@ -12,24 +12,29 @@ public class BuildingManagement {
     Asset things[] = new Asset[24];
     int numItems = 0;
 
-    /** Scenario: goodNight() is called from a timer Thread at 2200, or when
+    /**
+     * Scenario: goodNight() is called from a timer Thread at 2200, or when
      * we get the "shutdown" command from the security guard.
      */
     public void goodNight() {
-        for (int i=0; i<things.length; i++)
+        for (int i = 0; i < things.length; i++)
             if (things[i] instanceof PowerSwitchable)
-                ((PowerSwitchable)things[i]).powerDown();
+                ((PowerSwitchable) things[i]).powerDown();
     }
 
     // goodMorning() would be the same, but call each one's powerUp().
 
-    /** Add a Asset to this building */
+    /**
+     * Add a Asset to this building
+     */
     public void add(Asset thing) {
         System.out.println("Adding " + thing);
         things[numItems++] = thing;
     }
 
-    /** The main program */
+    /**
+     * The main program
+     */
     public static void main(String[] av) {
         BuildingManagement b1 = new BuildingManagement();
         b1.add(new RoomLights(101));    // control lights in room 101

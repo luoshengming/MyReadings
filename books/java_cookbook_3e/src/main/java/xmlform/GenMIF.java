@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
  * Class with code to walk a tree and convert it to Maker Interchange
  * Format (MIF). Must make MIF (not MML) since, alas, MML loses named
  * character codes in input.
- * <P>
+ * <p>
  * Along the way, we do some book-specific things, like running
  * another Java class and grabbing the output back into here.
  *
@@ -30,18 +30,30 @@ import org.w3c.dom.NodeList;
  */
 // BEGIN main
 public class GenMIF implements XmlFormWalker {
-    /** The normal output writer */
+    /**
+     * The normal output writer
+     */
     protected PrintStream msg;
-    /** Specialized PrintStream for use by GetMark. */
+    /**
+     * Specialized PrintStream for use by GetMark.
+     */
     protected StyledPrintStream smsg;
-    /** A GetMark converter for source code. */
+    /**
+     * A GetMark converter for source code.
+     */
     protected GetMark gm = new GetMark();
-    /** Vector used to print indented lines */
+    /**
+     * Vector used to print indented lines
+     */
     protected List<String> indents;
-    /** The Document */
+    /**
+     * The Document
+     */
     Document theDocument;
 
-    /** Construct a converter object */
+    /**
+     * Construct a converter object
+     */
     GenMIF(Document doc, PrintStream pw) {
         theDocument = doc;
         msg = new PrintStream(pw);
@@ -54,31 +66,37 @@ public class GenMIF implements XmlFormWalker {
     }
 
     protected int indent = 0;
+
     protected void indent() {
         if (indent > indents.size()) {
             StringBuffer sb = new StringBuffer();
-            for (int i=0; i<indent; i++) {
+            for (int i = 0; i < indent; i++) {
                 sb.append(' ');
                 sb.append(' ');
             }
             indents.add(sb.toString());
         }
-        msg.print(indents.get(indent>0?indent-1:0));
+        msg.print(indents.get(indent > 0 ? indent - 1 : 0));
     }
 
     protected Stack<String> tagStack = new Stack<>();
+
     protected void startTag(String tag) {
         ++indent;
-        indent(); msg.println('<' + tag);
+        indent();
+        msg.println('<' + tag);
         tagStack.push(tag);
     }
 
     protected void endTag() {
-        indent(); msg.println('>' + " # end of " + tagStack.pop());
+        indent();
+        msg.println('>' + " # end of " + tagStack.pop());
         indent--;
     }
 
-    /** Convert all the nodes in the current document. */
+    /**
+     * Convert all the nodes in the current document.
+     */
     public void convertAll() {
 
         msg.println("<MIFFile 3.00 -- MIF produced by XmlForm>");
@@ -95,20 +113,20 @@ public class GenMIF implements XmlFormWalker {
 
         kids = n.getChildNodes();
         int nkids = kids.getLength();
-        for (int i=0; i<nkids; i++) {
+        for (int i = 0; i < nkids; i++) {
             doRecursive(kids.item(i));
         }
     }
 
     protected void doNode(Node p) {
         if (p.getNodeType() == Node.ELEMENT_NODE)
-            doElement((Element)p);
+            doElement((Element) p);
         else if (p.getNodeType() == Node.TEXT_NODE)
-            doCData((org.w3c.dom.CharacterData)p);
+            doCData((org.w3c.dom.CharacterData) p);
         else
             System.err.println("IGNORING non-Element: " +
-                p.getClass() + ':' + p.toString() + "\n" +
-                p.getNodeValue());
+                    p.getClass() + ':' + p.toString() + "\n" +
+                    p.getNodeValue());
     }
 
     protected void doElement(Element p) {
@@ -122,11 +140,11 @@ public class GenMIF implements XmlFormWalker {
             System.err.println(">>>>Start BODY");
         } else if (tag.equals("chapter")) {
             doChapter(p);
-        //
-        // PARAGRAPH TAGS
-        // This is the application-specific bit of code.
-        // SHOULD BE MAP RULES, NOT HARD-CODED.
-        //
+            //
+            // PARAGRAPH TAGS
+            // This is the application-specific bit of code.
+            // SHOULD BE MAP RULES, NOT HARD-CODED.
+            //
         } else if (tag.equals("title")) {
             doParagraph("ChapterTitle", p);
         } else if (tag.equals("simplesect")) {
@@ -145,16 +163,16 @@ public class GenMIF implements XmlFormWalker {
             doRun(p);
         } else if (tag.equals("figure")) {
             doPre(p);
-        //
-        // STYLE TAGS
-        //
+            //
+            // STYLE TAGS
+            //
         } else if (tag.equals("kb")) {    // keyboard, map to code
             System.err.println("<KB> handler not written yet");
         } else if (tag.equals("bt")) {    // book title, map to Citation
             System.err.println("<BT> handler not written yet");
         } else
             System.err.println("IGNORING UNHANDLED TAG " + tag + '(' +
-                p.getClass() + '@' + p.hashCode() + ')');
+                    p.getClass() + '@' + p.hashCode() + ')');
     }
 
     protected void doChapter(Element p) {
@@ -165,28 +183,35 @@ public class GenMIF implements XmlFormWalker {
     protected void pgfTag(String s) {
         startTag("Para");
         startTag("Pgf");
-        indent(); msg.println("<PgfTag `" + s + "'>");
+        indent();
+        msg.println("<PgfTag `" + s + "'>");
         endTag();    // end of Pgf, not of Para!
     }
 
-    /** Generate a paragraph from the input */
+    /**
+     * Generate a paragraph from the input
+     */
     protected void doParagraph(String tag, Element p) {
-        indent(); pgfTag(tag);
+        indent();
+        pgfTag(tag);
         doChildren(p);
         endTag();
     }
 
-    /** Synthesize a paragraph when we know its content.
+    /**
+     * Synthesize a paragraph when we know its content.
      * content can be null for things like Label paragraphs.
      */
     protected void makeUpParagraph(String tag, String contents) {
-        indent(); pgfTag(tag);
+        indent();
+        pgfTag(tag);
         if (contents != null)
             pgfString(contents);
         endTag();
     }
 
-    /** EXAMPLEs are longer than CODEs, and are not limited by //+ //-
+    /**
+     * EXAMPLEs are longer than CODEs, and are not limited by //+ //-
      * marks, which are therefore not required.
      * XXX TODO wrap a TABLE around the output.
      */
@@ -195,35 +220,37 @@ public class GenMIF implements XmlFormWalker {
         Node href;
         if ((href = attrs.getNamedItem("HREF")) == null)
             throw new IllegalArgumentException(
-                "node " + p + "lacks required HREF Attribute");
+                    "node " + p + "lacks required HREF Attribute");
         String fname = href.getNodeValue();
         System.err.println("Making an EXAMPLE out of " + fname);
-    
+
         makeUpParagraph("ExampleLabel", null);
         makeUpParagraph("ExampleTitle", fname);
 
         try {
-            fname = System.getProperty("codedir", ".") + '/' + fname;    
+            fname = System.getProperty("codedir", ".") + '/' + fname;
             LineNumberReader is = new LineNumberReader(new FileReader(fname));
             String line;
             while ((line = is.readLine()) != null) {
-                indent(); pgfTag("Code");
+                indent();
+                pgfTag("Code");
                 pgfString(line);
                 endTag();    // end of Para
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new IllegalArgumentException(e.toString());
         }
     }
 
-    /** Run a java class' Main Program and capture the output.
+    /**
+     * Run a java class' Main Program and capture the output.
      */
     protected void doRun(Element p) {
         NamedNodeMap attrs = p.getAttributes();
         Node myClass;
         if ((myClass = attrs.getNamedItem("CLASS")) == null)
             throw new IllegalArgumentException(
-                "node " + p + "lacks required CLASS Attribute");
+                    "node " + p + "lacks required CLASS Attribute");
         String className = myClass.getNodeValue();
 
         // makeUpParagraph("Example", "Example XX: " + className);
@@ -237,14 +264,14 @@ public class GenMIF implements XmlFormWalker {
 
             // Create the array of Argument Types
             Class<?>[] argTypes = {
-                argv.getClass(),    // array is Object!
+                    argv.getClass(),    // array is Object!
             };
 
             // Now find the method
             Method m = c.getMethod("main", argTypes);
 
             // Create the actual argument array
-            Object passedArgv[] = { argv };
+            Object passedArgv[] = {argv};
 
             // Now invoke the method.
             System.err.println("Invoking " + m + "...");
@@ -270,23 +297,25 @@ public class GenMIF implements XmlFormWalker {
         endTag();
     }
 
-    /** Code is inserted, but only between / / + and / / - tags */
+    /**
+     * Code is inserted, but only between / / + and / / - tags
+     */
     protected void doCode(Element p) {
         NamedNodeMap attrs = p.getAttributes();
         Node href;
         if ((href = attrs.getNamedItem("HREF")) == null)
             throw new IllegalArgumentException(
-                "node " + p + "lacks required HREF Attribute");
+                    "node " + p + "lacks required HREF Attribute");
         String fname = href.getNodeValue();
         System.err.println("En-CODE-ing " + fname);
 
         makeUpParagraph("Code", "// " + fname);
-    
+
         try {
-            fname = System.getProperty("codedir", ".") + '/' + fname;    
+            fname = System.getProperty("codedir", ".") + '/' + fname;
             LineNumberReader is = new LineNumberReader(new FileReader(fname));
             gm.process(fname, is, smsg);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new IllegalArgumentException(e.toString());
         }
     }
@@ -299,32 +328,34 @@ public class GenMIF implements XmlFormWalker {
         NodeList nodes = p.getChildNodes();
         int numElem = nodes.getLength();
         // System.err.println("Element has " + numElem + " children");
-        for (int i=0; i<numElem; i++) {
+        for (int i = 0; i < numElem; i++) {
             Node n = nodes.item(i);
             if (n == null) {
                 continue;
             }
             // System.err.println("NODE " + n.getNodeType());
-            switch(n.getNodeType()) {
+            switch (n.getNodeType()) {
                 case Node.TEXT_NODE:
                     // System.err.println("\tCDATA: " + n.getNodeValue());
-                    doCData((CharacterData)n);
+                    doCData((CharacterData) n);
                     p.removeChild(n);
                     break;
                 case Node.ELEMENT_NODE:
                     // System.err.println("\tELEMENT<" + n.getNodeName() + ">");
-                    doChildren((Element)n);
+                    doChildren((Element) n);
                     p.removeChild(n);
                     break;
                 default:
-                    System.err.println( "Warning: unhandled child node " +
-                        n.getNodeType() + ": " + n.getClass());
+                    System.err.println("Warning: unhandled child node " +
+                            n.getNodeType() + ": " + n.getClass());
                     break;
             }
         }
     }
 
-    /** Do the minumum needed to make "line" a valid MIF string. */
+    /**
+     * Do the minumum needed to make "line" a valid MIF string.
+     */
     protected void mifString(String line) {
         // Make new, big enough for translations
         StringBuffer b = new StringBuffer(line.length() * 2);
@@ -334,32 +365,49 @@ public class GenMIF implements XmlFormWalker {
         b.append('`');
 
         // Process each character.
-        for (int i=0; i<line.length(); i++) {
+        for (int i = 0; i < line.length(); i++) {
             char c = line.charAt(i);
             switch (c) {
-            case '\\':    b.append("\\"); break;
-            case '\t':    b.append("\\t"); break;
-            case '\'':    b.append("\\xd5 "); break;
-            case '<':    b.append("\\<"); break;
-            case '>':    b.append("\\>"); break;
-            case '\r': case '\n': b.append(' '); break;
-            default:    b.append(c); break;
+                case '\\':
+                    b.append("\\");
+                    break;
+                case '\t':
+                    b.append("\\t");
+                    break;
+                case '\'':
+                    b.append("\\xd5 ");
+                    break;
+                case '<':
+                    b.append("\\<");
+                    break;
+                case '>':
+                    b.append("\\>");
+                    break;
+                case '\r':
+                case '\n':
+                    b.append(' ');
+                    break;
+                default:
+                    b.append(c);
+                    break;
             }
         }
         b.append(' ');
         b.append('\'');
         b.append('>');
-        indent(); msg.println(b.toString());
+        indent();
+        msg.println(b.toString());
     }
 
-    /** Simply subclass PrintStream so we don't have to modify
+    /**
+     * Simply subclass PrintStream so we don't have to modify
      * GetMark to change the format of lines that it writes, or
      * resort to other kluges like passing it a prefix and/or suffix.
-     * <P>
+     * <p>
      * The goal is to make each LINE of output be a separate paragraph,
      * since that's how Frame does Tables, and since O'Reilly uses
      * Frame Tables for multi-line code examples.
-     * <P>
+     * <p>
      * Note that we never actually write anything to the StyledPrintStream's
      * internal buffer: its println() method indirectly writes to msg.
      * This is an example of "subclassing for indirect effect".
@@ -368,8 +416,10 @@ public class GenMIF implements XmlFormWalker {
         public StyledPrintStream(PrintStream p) {
             super(p, true);
         }
+
         public void println(String s) {
-            indent(); pgfTag("Code");
+            indent();
+            pgfTag("Code");
             pgfString(s);
             endTag();    // end of Para
         }

@@ -12,7 +12,9 @@ import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-/** Parse an XML file using DOM, via JAXP. Tries to handle both DTD-based and Schema-based validation.
+/**
+ * Parse an XML file using DOM, via JAXP. Tries to handle both DTD-based and Schema-based validation.
+ *
  * @author Ian Darwin, http://www.darwinsys.com/
  */
 public class XParse {
@@ -22,8 +24,9 @@ public class XParse {
      * <b>Note:</b> It is an unpleasant limitation of javax.xml.validation that parsing DTD-based documents can
      * extract the DTD name/location and use it, whereas Schema(etc)-based validation requires the user to do
      * this manually before invoking the parser.
+     *
      * @param av Command args, may include -v for validation, and -a schema.xsd, before the filename(s);
-     * all documents parsed in this run must use the same Schema.
+     *           all documents parsed in this run must use the same Schema.
      * @throws SAXException
      */
     // BEGIN main
@@ -35,31 +38,29 @@ public class XParse {
         boolean validate = false;
         Schema schema = null;
         try {
-            for (int i=0; i<av.length; i++) {
-                if (av[i].equals("-v"))
+            for (int i = 0; i < av.length; i++) {
+                if ("-v".equals(av[i])) {
                     validate = true;
-                else if (av[i].equals("-a")) {
+                } else if ("-a".equals(av[i])) {
                     // "create a SchemaFactory capable of understanding W3C schemas"
                     //   -- from the Javadoc page
-                    SchemaFactory schemaFactory = 
-                    SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                    SchemaFactory schemaFactory =
+                            SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
                     // load the W3c XML schema, represented by a Schema instance
                     String schemaLocation = av[++i];
                     File schemaFile = new File(schemaLocation);
                     if (!schemaFile.exists()) {
                         throw new IOException(
-                        "Schema location = " + schemaLocation + " does not exist");
+                                "Schema location = " + schemaLocation + " does not exist");
                     }
                     schema = schemaFactory.newSchema(schemaFile);
-                    
+
                 } else {
                     File xmlFile = new File(av[i]);
-                    System.err.println(
-                        "Parsing " + xmlFile.getAbsolutePath() + "...");
-                    
-                    DocumentBuilderFactory dbFactory = 
-                        DocumentBuilderFactory.newInstance();
+                    System.err.println("Parsing " + xmlFile.getAbsolutePath() + "...");
+
+                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                     if (validate) {
                         if (schema != null) {
                             dbFactory.setSchema(schema);
@@ -67,9 +68,9 @@ public class XParse {
                             dbFactory.setValidating(true);
                             dbFactory.setNamespaceAware(true);
                             dbFactory.setAttribute(
-                            "http://java.sun.com/xml/jaxp/properties/schemaLanguage",
+                                    "http://java.sun.com/xml/jaxp/properties/schemaLanguage",
                                     XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                        }            
+                        }
                     }
                     DocumentBuilder parser = dbFactory.newDocumentBuilder();
                     // If not using schema, Get local copies of DTDs...
@@ -80,8 +81,8 @@ public class XParse {
                     System.out.println("Parsed/Validated OK");
                 }
             }
-        // Just +catch+ statements below here...
-        // END main
+            // Just +catch+ statements below here...
+            // END main
         } catch (SAXParseException ex) {
             System.err.println("+================================+");
             System.err.println("|       *SAX Parse Error*        |");
@@ -93,7 +94,6 @@ public class XParse {
             System.err.println("|           *XML Error*          |");
             System.err.println("+================================+");
             ex.printStackTrace();
-            
         }
     }
 }

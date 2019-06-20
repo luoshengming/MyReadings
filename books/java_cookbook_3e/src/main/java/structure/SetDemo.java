@@ -5,6 +5,7 @@ import java.util.Set;
 
 /**
  * Demonstrate the Set interface
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class SetDemo {

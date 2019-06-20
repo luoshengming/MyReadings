@@ -4,7 +4,7 @@ import com.fpinjava.common.Tuple;
 
 public class DonutShop {
 
-  public static Tuple<Donut, Payment> buyDonut(final CreditCard cc) {
-    return new Tuple<>(new Donut(), new Payment(cc, Donut.price));
-  }
+    public static Tuple<Donut, Payment> buyDonut(final CreditCard cc) {
+        return new Tuple<>(new Donut(), new Payment(cc, Donut.price));
+    }
 }

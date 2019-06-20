@@ -3,20 +3,30 @@ package graphics;
 import java.awt.*;
 import javax.swing.*;
 
-/** 
+/**
  * DropShadow -- show overlapped painting.
  */
 // BEGIN main
 public class DropShadow extends JComponent {
-    /** The text to draw */
+    /**
+     * The text to draw
+     */
     protected String theLabel;
-    /** The name of the font */
+    /**
+     * The name of the font
+     */
     protected String fontName;
-    /** The font */
+    /**
+     * The font
+     */
     protected Font theFont;
-    /** The size of the font */
+    /**
+     * The size of the font
+     */
     protected int fontSize = 18;
-    /** The offset for the drop shadow */
+    /**
+     * The offset for the drop shadow
+     */
     protected int theOffset = 3;
 
     /**
@@ -39,11 +49,13 @@ public class DropShadow extends JComponent {
         setBackground(Color.green);
     }
 
-    /** Paint method showing drop shadow effect */
+    /**
+     * Paint method showing drop shadow effect
+     */
     public void paint(Graphics g) {
         g.setFont(theFont);
         g.setColor(Color.black);
-        g.drawString(theLabel, theOffset+30, theOffset+50);
+        g.drawString(theLabel, theOffset + 30, theOffset + 50);
         g.setColor(Color.white);
         g.drawString(theLabel, 30, 50);
     }

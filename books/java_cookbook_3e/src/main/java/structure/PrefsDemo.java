@@ -15,7 +15,7 @@ public class PrefsDemo {
 
         // Retrieve some preferences previously stored, with defaults in case
         // this is the first run.
-        String text    = prefs.get("textFontName", "lucida-bright");
+        String text = prefs.get("textFontName", "lucida-bright");
         String display = prefs.get("displayFontName", "lucida-blackletter");
         System.out.println(text);
         System.out.println(display);

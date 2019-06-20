@@ -1,7 +1,10 @@
 package starting;
 
 // BEGIN main
-/** This program exhibits some bugs, so we can use a debugger */
+
+/**
+ * This program exhibits some bugs, so we can use a debugger
+ */
 public class Buggy {
     static String name;
 

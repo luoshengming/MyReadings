@@ -44,14 +44,16 @@ public final class TextAreaWriter extends Writer {
     }
 
     @Override
-    public void flush(){ }
-    
+    public void flush() {
+    }
+
     @Override
-    public void close(){ }
+    public void close() {
+    }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        textArea.append(new String(cbuf, off, len));        
+        textArea.append(new String(cbuf, off, len));
     }
 }
 // END main

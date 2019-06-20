@@ -5,6 +5,7 @@ import java.util.zip.*;
 
 /**
  * Read some data from a gzip file.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main

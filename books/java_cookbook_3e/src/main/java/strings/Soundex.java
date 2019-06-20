@@ -11,7 +11,7 @@ package strings;
  * to a four character string, the first character being an upper case
  * letter and the remaining three being digits. Double letters are
  * collapsed to a single digit.
- * 
+ *
  * <h2>EXAMPLES</h2>
  * Knuth's examples of various names and the soundex codes they map
  * to are:
@@ -21,7 +21,7 @@ package strings;
  * <b>Knuth, Kant -> K530
  * <b>Lloyd, Ladd -> L300
  * <b>Lukasiewicz, Lissajous -> L222
- * 
+ *
  * <h2>LIMITATIONS</h2>
  * As the soundex algorithm was originally used a <B>long</B> time ago
  * in the United States of America, it uses only the English alphabet
@@ -44,7 +44,7 @@ package strings;
  */
 // BEGIN main
 public class Soundex {
-    
+
     static boolean debug = false;
 
     /* Implements the mapping
@@ -52,13 +52,15 @@ public class Soundex {
      * to:   00000000111122222222334556
      */
     public static final char[] MAP = {
-        //A  B   C   D   E   F   G   H   I   J   K   L   M
-        '0','1','2','3','0','1','2','0','0','2','2','4','5',
-        //N  O   P   W   R   S   T   U   V   W   X   Y   Z
-        '5','0','1','2','6','2','3','0','1','0','2','0','2'
+            //A  B   C   D   E   F   G   H   I   J   K   L   M
+            '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', '2', '4', '5',
+            //N  O   P   W   R   S   T   U   V   W   X   Y   Z
+            '5', '0', '1', '2', '6', '2', '3', '0', '1', '0', '2', '0', '2'
     };
 
-    /** Convert the given String to its Soundex code.
+    /**
+     * Convert the given String to its Soundex code.
+     *
      * @return null If the given string can't be mapped to Soundex.
      */
     public static String soundex(String s) {
@@ -70,21 +72,21 @@ public class Soundex {
         char c, prev = '?', prevOutput = '?';
 
         // Main loop: find up to 4 chars that map.
-        for (int i=0; i<t.length() && res.length() < 4 &&
-            (c = t.charAt(i)) != ','; i++) {
+        for (int i = 0; i < t.length() && res.length() < 4 &&
+                (c = t.charAt(i)) != ','; i++) {
 
             // Check to see if the given character is alphabetic.
             // Text is already converted to uppercase. Algorithm
             // only handles ASCII letters, do NOT use Character.isLetter()!
             // Also, skip double letters.
-            if (c>='A' && c<='Z' && c != prev) {
+            if (c >= 'A' && c <= 'Z' && c != prev) {
                 prev = c;
 
                 // First char is installed unchanged, for sorting.
-                if (i==0) {
+                if (i == 0) {
                     res.append(c);
                 } else {
-                    char m = MAP[c-'A'];
+                    char m = MAP[c - 'A'];
                     if (debug) {
                         System.out.println(c + " --> " + m);
                     }
@@ -97,7 +99,7 @@ public class Soundex {
         }
         if (res.length() == 0)
             return null;
-        for (int i=res.length(); i<4; i++)
+        for (int i = res.length(); i < 4; i++)
             res.append('0');
         return res.toString();
     }

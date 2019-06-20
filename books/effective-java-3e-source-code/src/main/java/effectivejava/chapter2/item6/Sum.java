@@ -1,7 +1,5 @@
 package effectivejava.chapter2.item6;
 
-import java.util.Comparator;
-
 // Hideously slow program! Can you spot the object creation? (Page 24)
 public class Sum {
     private static long sum() {

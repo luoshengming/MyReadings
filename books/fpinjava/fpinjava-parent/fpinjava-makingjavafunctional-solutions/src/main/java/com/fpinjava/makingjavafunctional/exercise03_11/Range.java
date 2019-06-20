@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Range {
 
-  public static List<Integer> range(int start, int end) {
-    List<Integer> result = new ArrayList<>();
-    int temp = start;
-    while (temp < end) {
-      result = CollectionUtilities.append(result, temp);
-      temp = temp + 1;
+    public static List<Integer> range(int start, int end) {
+        List<Integer> result = new ArrayList<>();
+        int temp = start;
+        while (temp < end) {
+            result = CollectionUtilities.append(result, temp);
+            temp = temp + 1;
+        }
+        return result;
     }
-    return result;
-  }
 }

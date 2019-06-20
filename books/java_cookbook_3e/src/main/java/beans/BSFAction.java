@@ -17,7 +17,9 @@ import org.apache.bsf.BSFManager;
 import com.darwinsys.io.FileIO;
 import com.darwinsys.swingui.LabelText;
 
-/** Longer sample of using Bean Scripting Framework with JPython */
+/**
+ * Longer sample of using Bean Scripting Framework with JPython
+ */
 // BEGIN main
 public class BSFAction {
     protected String FILENAME = "buttonhandler.py";
@@ -39,9 +41,9 @@ public class BSFAction {
             manager = new BSFManager();
 
             // register scripting language
-            String[] fntypes = { ".py" };
+            String[] fntypes = {".py"};
             BSFManager.registerScriptingEngine("jpython",
-              "org.apache.bsf.engines.jpython.JPythonEngine", fntypes);
+                    "org.apache.bsf.engines.jpython.JPythonEngine", fntypes);
             jpythonengine = manager.loadScriptingEngine("jpython");
 
             // Tell BSF about the bean.
@@ -50,7 +52,7 @@ public class BSFAction {
             // Read the script file into BSF
             language = BSFManager.getLangFromFilename(FILENAME);
             script = FileIO.readerToString(
-                new FileReader(FILENAME));
+                    new FileReader(FILENAME));
 
         } catch (Exception ex) {
             System.err.println(ex.toString());
@@ -69,6 +71,7 @@ public class BSFAction {
         JButton b = new JButton("Click me!");
         cp.add(b);                // and the button under it.
         b.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
 
@@ -78,8 +81,8 @@ public class BSFAction {
                     System.out.println("<-- End of Script output.");
                 } catch (BSFException bse) {
                     JOptionPane.showMessageDialog(jf,
-                        "ERROR: " + bse, "Script Error",
-                        JOptionPane.ERROR_MESSAGE);
+                            "ERROR: " + bse, "Script Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -88,6 +91,7 @@ public class BSFAction {
         JButton qb = new JButton("Quit");
         cp.add(qb);
         qb.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 System.exit(0);
             }

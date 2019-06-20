@@ -16,8 +16,8 @@
 package com.phei.netty.codec.protobuf;
 
 import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 /**
  * @author lilinfeng
@@ -25,7 +25,7 @@ import io.netty.channel.ChannelHandlerContext;
  * @date 2014年2月14日
  */
 @Sharable
-public class SubReqServerHandler extends ChannelHandlerAdapter {
+public class SubReqServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

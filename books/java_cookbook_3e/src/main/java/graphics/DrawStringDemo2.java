@@ -7,7 +7,8 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-/** Demo showing code that draws text centered in a JComponent.
+/**
+ * Demo showing code that draws text centered in a JComponent.
  * In real life you'd just use a JLabel; this is to show the
  * mechanics of doing such a thing.
  */
@@ -18,7 +19,9 @@ public class DrawStringDemo2 extends JComponent {
     //-
     String message = "Hello Java";
 
-    /** Called by the window system to draw the text. */
+    /**
+     * Called by the window system to draw the text.
+     */
     @Override
     public void paintComponent(Graphics g) {
 
@@ -27,12 +30,12 @@ public class DrawStringDemo2 extends JComponent {
 
         // Use the FontMetrics to get the width of the String.
         // Subtract this from width, divide by 2, that's our starting point.
-        int textX = (getSize().width - fm.stringWidth(message))/2;
-        if (textX<0)        // If string too long, start at 0
+        int textX = (getSize().width - fm.stringWidth(message)) / 2;
+        if (textX < 0)        // If string too long, start at 0
             textX = 0;
 
         // Same as above but for the height
-        int textY = (getSize().height - fm.getAscent())/2 - fm.getDescent();
+        int textY = (getSize().height - fm.getAscent()) / 2 - fm.getDescent();
         if (textY < 0)
             textY = getSize().height - fm.getDescent() - 1;
 

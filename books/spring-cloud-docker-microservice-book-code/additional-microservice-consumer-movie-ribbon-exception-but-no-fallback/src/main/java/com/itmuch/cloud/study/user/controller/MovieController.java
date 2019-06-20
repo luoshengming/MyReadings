@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MovieController {
-  private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
-  @Autowired
-  private UserService userService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
+    @Autowired
+    private UserService userService;
 
-  @HystrixCommand(fallbackMethod = "findByIdFallback")
-  @GetMapping("/user/{id}")
-  public User findById(@PathVariable Long id) {
-    return this.userService.findById(id);
-  }
+    @HystrixCommand(fallbackMethod = "findByIdFallback")
+    @GetMapping("/user/{id}")
+    public User findById(@PathVariable Long id) {
+        return this.userService.findById(id);
+    }
 
-  public User findByIdFallback(Long id, Throwable throwable) {
-    User user = new User();
-    user.setId(-1L);
-    user.setName("the default user");
-    return user;
-  }
+    public User findByIdFallback(Long id, Throwable throwable) {
+        User user = new User();
+        user.setId(-1L);
+        user.setName("the default user");
+        return user;
+    }
 }

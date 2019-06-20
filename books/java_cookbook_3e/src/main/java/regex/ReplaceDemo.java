@@ -3,9 +3,11 @@ package regex;
 import java.util.regex.*;
 
 // BEGIN main
+
 /**
  * Quick demo of RE substitution: correct U.S. 'favor'
  * to Canadian/British 'favour', but not in "favorite"
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class ReplaceDemo {

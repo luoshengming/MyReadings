@@ -14,33 +14,33 @@ import java.util.List;
  */
 public class ReadXmlFile {
 
-  /**
-   * Not testable, throws exceptions.
-   */
-  public static void main(String[] args) {
+    /**
+     * Not testable, throws exceptions.
+     */
+    public static void main(String[] args) {
 
-    SAXBuilder builder = new SAXBuilder();
-    File xmlFile = new File("/path/to/file.xml"); // Fix the path
+        SAXBuilder builder = new SAXBuilder();
+        File xmlFile = new File("/path/to/file.xml"); // Fix the path
 
-    try {
+        try {
 
-      Document document = (Document) builder.build(xmlFile);
-      Element rootNode = document.getRootElement();
-      List list = rootNode.getChildren("staff");
+            Document document = (Document) builder.build(xmlFile);
+            Element rootNode = document.getRootElement();
+            List list = rootNode.getChildren("staff");
 
-      for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
 
-        Element node = (Element) list.get(i);
+                Element node = (Element) list.get(i);
 
-        System.out.println("First Name : " + node.getChildText("firstname"));
-        System.out.println("\tLast Name : " + node.getChildText("lastname"));
-        System.out.println("\tEmail : " + node.getChildText("email"));
-        System.out.println("\tSalary : " + node.getChildText("salary"));
-      }
-    } catch (IOException io) {
-      System.out.println(io.getMessage());
-    } catch (JDOMException jdomex) {
-      System.out.println(jdomex.getMessage());
+                System.out.println("First Name : " + node.getChildText("firstname"));
+                System.out.println("\tLast Name : " + node.getChildText("lastname"));
+                System.out.println("\tEmail : " + node.getChildText("email"));
+                System.out.println("\tSalary : " + node.getChildText("salary"));
+            }
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+        } catch (JDOMException jdomex) {
+            System.out.println(jdomex.getMessage());
+        }
     }
-  }
 }

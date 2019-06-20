@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
 // BEGIN main
+
 /**
  * Interactive test for "macosui" package.
  * Class cannot extend JFrame; must set properties before first
@@ -24,8 +25,8 @@ public class MacOsUiHints {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         // OS X Tester: check that this string appears in the Application Menu.
         System.setProperty("com.apple.mrj.application.apple.menu.about.name",
-            "MacOsUiHints");
-        final MacOsUiHints gui = new MacOsUiHints( );
+                "MacOsUiHints");
+        final MacOsUiHints gui = new MacOsUiHints();
         SwingUtilities.invokeAndWait(new Runnable() {
             @Override
             public void run() {
@@ -40,25 +41,25 @@ public class MacOsUiHints {
         return jf;
     }
 
-    public MacOsUiHints( ) {
+    public MacOsUiHints() {
         jf = new JFrame("MacOsUiHints");
         JButton button = new JButton("Exit");
-        button.addActionListener(new ActionListener( ) {
+        button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 System.exit(0);
             }
         });
-        jf.getContentPane( ).add(button);
-        
+        jf.getContentPane().add(button);
+
         JMenuBar mb = new JMenuBar();
         jf.setJMenuBar(mb);
-        
+
         JMenu fileMenu = new JMenu("File");
         mb.add(fileMenu);
         fileMenu.add(new JMenuItem("Quit"));
-        
+
         mb.add(new JMenu("Edit"));
-        
+
         // Tester: see that Application->About produces our popup
         // Ditto for Preferences and Shutdown.
         // MacOSAppAdapter adapter =

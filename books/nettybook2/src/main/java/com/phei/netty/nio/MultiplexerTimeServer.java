@@ -22,6 +22,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -33,9 +35,7 @@ import java.util.Set;
 public class MultiplexerTimeServer implements Runnable {
 
     private Selector selector;
-
     private ServerSocketChannel servChannel;
-
     private volatile boolean stop;
 
     /**
@@ -117,18 +117,17 @@ public class MultiplexerTimeServer implements Runnable {
                     readBuffer.flip();
                     byte[] bytes = new byte[readBuffer.remaining()];
                     readBuffer.get(bytes);
-                    String body = new String(bytes, "UTF-8");
+                    String body = new String(bytes, StandardCharsets.UTF_8);
                     System.out.println("The time server receive order : " + body);
-                    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
-                            System.currentTimeMillis()).toString()
-                            : "BAD ORDER";
+                    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date().toString() : "BAD ORDER";
                     doWrite(sc, currentTime);
                 } else if (readBytes < 0) {
                     // 对端链路关闭
                     key.cancel();
                     sc.close();
-                } else
+                } else {
                     ; // 读到0字节，忽略
+                }
             }
         }
     }

@@ -3,10 +3,6 @@ package pong;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-
-import static akka.pattern.Patterns.ask;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import scala.concurrent.Future;
 
@@ -15,6 +11,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import static akka.pattern.Patterns.ask;
 import static org.junit.Assert.assertEquals;
 import static scala.compat.java8.FutureConverters.*;
 
@@ -56,7 +53,7 @@ public class PongActorTest {
     /**
      * There is was a bug with the scala-java8-compat library 0.3.0 - thenCompose throws exception
      * https://github.com/scala/scala-java8-compat/issues/26
-     *
+     * <p>
      * I confirmed fixed in 0.6.0-SNAPSHOT (10 months later). Just in time for publishing!
      */
     @Test
@@ -89,8 +86,8 @@ public class PongActorTest {
     public void shouldRecoverOnErrorAsync() throws Exception {
         CompletionStage<String> cf = askPong("cause error")
                 .handle((pong, ex) -> ex == null
-                                ? CompletableFuture.completedFuture(pong)
-                                : askPong("Ping")
+                        ? CompletableFuture.completedFuture(pong)
+                        : askPong("Ping")
                 ).thenCompose(x -> x);
         assertEquals("Pong", get(cf));
     }
@@ -99,8 +96,8 @@ public class PongActorTest {
     public void shouldChainTogetherMultipleOperations() {
         askPong("Ping").thenCompose(x -> askPong("Ping" + x)).handle((x, t) ->
                 t != null
-        ? "default"
-        : x);
+                        ? "default"
+                        : x);
     }
 
     @Test

@@ -1,9 +1,10 @@
 package performance;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 
 /**
  * Time the main method of another class, for performance tuning.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -13,7 +14,7 @@ public class Time {
         Class<?> c = Class.forName(argv[0]);
 
         // Find its static main method (use our own argv as the signature).
-        Class<?>[] classes = { argv.getClass() };
+        Class<?>[] classes = {argv.getClass()};
         Method main = c.getMethod("main", classes);
 
         // Make new argv array, dropping class name from front.
@@ -23,7 +24,7 @@ public class Time {
         String nargv[] = new String[argv.length - 1];
         System.arraycopy(argv, 1, nargv, 0, nargv.length);
 
-        Object[] nargs = { nargv };
+        Object[] nargs = {nargv};
 
         System.err.println("Starting class " + c);
 
@@ -42,8 +43,7 @@ public class Time {
 
         long runTime = t1 - t0;
 
-        System.err.println(
-             "runTime="  + Double.toString(runTime/1000D));
+        System.err.println("runTime=" + runTime / 1000D);
     }
 }
 // END main

@@ -5,7 +5,8 @@ import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Demonstrate use of two buttons, using a single ActionListener 
+/**
+ * Demonstrate use of two buttons, using a single ActionListener
  * made of a named inner class
  */
 // BEGIN main

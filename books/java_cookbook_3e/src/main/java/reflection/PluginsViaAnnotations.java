@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 // BEGIN findAnnotatedClasses
-/** Discover "plugins" or other add-in classes via Reflection using Annotations */
+
+/**
+ * Discover "plugins" or other add-in classes via Reflection using Annotations
+ */
 public class PluginsViaAnnotations {
 
     /**
@@ -14,7 +17,7 @@ public class PluginsViaAnnotations {
      * class-level annotation class.
      */
     public static List<Class<?>> findAnnotatedClasses(String packageName,
-        Class<? extends Annotation> annotationClass) throws Exception {
+                                                      Class<? extends Annotation> annotationClass) throws Exception {
 
         List<Class<?>> ret = new ArrayList<>();
         String[] classes = ClassesInPackage.getPackageContent(packageName);
@@ -26,14 +29,15 @@ public class PluginsViaAnnotations {
         return ret;
     }
     // END findAnnotatedClasses
-    
+
     // BEGIN findClassesWithAnnotatedMethods
+
     /**
      * Find all classes in the given package which have the given
      * method-level annotation class on at least one method.
      */
-    public static List<Class<?>> findClassesWithAnnotatedMethods(String packageName, 
-            Class<? extends Annotation> methodAnnotationClass) throws Exception {
+    public static List<Class<?>> findClassesWithAnnotatedMethods(String packageName,
+                                                                 Class<? extends Annotation> methodAnnotationClass) throws Exception {
         List<Class<?>> ret = new ArrayList<>();
         String[] classes = ClassesInPackage.getPackageContent(packageName);
         for (String clazz : classes) {

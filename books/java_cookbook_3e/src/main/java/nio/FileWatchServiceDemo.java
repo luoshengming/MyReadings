@@ -12,8 +12,9 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
-/** Demonstrate the JavaSE 7+ NIO WatchService.
- * 
+/**
+ * Demonstrate the JavaSE 7+ NIO WatchService.
+ * <p>
  * P L E A S E   R E A D   B E F O R E   C O M P L A I N I N G
  * This class absolutely requires Java SE 7+, so just add an exclusion rule
  * (Build Path -> Exclude) if you are living with a legacy version of Java SE.
@@ -29,18 +30,15 @@ public class FileWatchServiceDemo {
         String tempDirPath = "/tmp";
         System.out.println("Starting watcher for " + tempDirPath);
         Path p = Paths.get(tempDirPath);
-        WatchService watcher = 
-            FileSystems.getDefault().newWatchService();
-        Kind<?>[] watchKinds = { ENTRY_CREATE, ENTRY_MODIFY };
+        WatchService watcher = FileSystems.getDefault().newWatchService();
+        Kind<?>[] watchKinds = {ENTRY_CREATE, ENTRY_MODIFY};
         p.register(watcher, watchKinds);
         mainRunner = Thread.currentThread();
         new Thread(new DemoService()).start();
         while (!done) {
             WatchKey key = watcher.take();
             for (WatchEvent<?> e : key.pollEvents()) {
-                System.out.println(
-                    "Saw event " + e.kind() + " on " + 
-                    e.context());
+                System.out.println("Saw event " + e.kind() + " on " + e.context());
                 if (e.context().toString().equals("MyFileSema.for")) {
                     System.out.println("Semaphore found, shutting down watcher");
                     done = true;
@@ -53,6 +51,7 @@ public class FileWatchServiceDemo {
     }
 
     static class DemoService implements Runnable {
+        @Override
         public void run() {
             try {
                 Thread.sleep(1000);

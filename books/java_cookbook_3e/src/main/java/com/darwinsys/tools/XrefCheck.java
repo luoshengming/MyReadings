@@ -14,9 +14,9 @@ public class XrefCheck {
 
     // BEGIN main
     static final Set<String> decls = new HashSet<>();
-    static final Map<String,String> refs = new HashMap<>();
+    static final Map<String, String> refs = new HashMap<>();
     static final Pattern decl = Pattern.compile("^\\[\\[([^,]+?)\\]\\]$");
-    static final Pattern ref  = Pattern.compile("<<([^,]+?)>>");
+    static final Pattern ref = Pattern.compile("<<([^,]+?)>>");
     private final static boolean VERBOSE_RUN = false;
 
     public static void main(String[] args) throws Exception {

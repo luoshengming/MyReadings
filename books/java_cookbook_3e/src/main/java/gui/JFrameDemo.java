@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-/** Just a Frame
+/**
+ * Just a Frame
  */
 // BEGIN main
 public class JFrameDemo extends JFrame {
@@ -15,7 +16,9 @@ public class JFrameDemo extends JFrame {
     private static final long serialVersionUID = -3089466980388235513L;
     JButton quitButton;
 
-    /** Construct the object including its GUI */
+    /**
+     * Construct the object including its GUI
+     */
     public JFrameDemo() {
         super("JFrameDemo");
         Container cp = getContentPane();
@@ -34,10 +37,11 @@ public class JFrameDemo extends JFrame {
                 System.exit(0);
             }
         });
-            
+
         pack();
         setLocation(500, 400);
     }
+
     public static void main(String[] args) {
         new JFrameDemo().setVisible(true);
     }

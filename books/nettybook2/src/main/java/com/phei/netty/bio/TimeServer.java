@@ -15,6 +15,9 @@
  */
 package com.phei.netty.bio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,12 +28,9 @@ import java.net.Socket;
  * @date 2014年2月14日
  */
 public class TimeServer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TimeServer.class);
 
-    /**
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int port = 8080;
         if (args != null && args.length > 0) {
             try {
@@ -39,21 +39,16 @@ public class TimeServer {
                 // 采用默认值
             }
         }
-        ServerSocket server = null;
-        try {
-            server = new ServerSocket(port);
-            System.out.println("The time server is start in port : " + port);
+        try (ServerSocket server = new ServerSocket(port)) {
+            LOGGER.info("The time server is start in port : {}", port);
             Socket socket;
+
             while (true) {
                 socket = server.accept();
                 new Thread(new TimeServerHandler(socket)).start();
             }
-        } finally {
-            if (server != null) {
-                System.out.println("The time server close");
-                server.close();
-                server = null;
-            }
+        } catch (IOException e) {
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 }

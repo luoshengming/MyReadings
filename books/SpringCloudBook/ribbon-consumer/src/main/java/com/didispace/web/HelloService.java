@@ -62,7 +62,7 @@ public class HelloService {
 
         long end = System.currentTimeMillis();
 
-        logger.info("Spend time : " + (end - start) );
+        logger.info("Spend time : " + (end - start));
         return result.toString();
     }
 

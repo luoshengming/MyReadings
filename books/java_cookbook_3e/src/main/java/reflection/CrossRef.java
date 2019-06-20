@@ -11,20 +11,21 @@ import java.util.Comparator;
  * CrossRef prints a cross-reference about all classes named in argv.
  * For each class, all public fields and methods are listed.
  * "Reflectance" is used to look up the information.
- *
+ * <p>
  * It is expected that the output will be post-processed e.g.,
  * with sort and awk/perl. Try:
-    java CrossRef |
-        uniq | # squeeze out polymorphic forms early
-        sort | awk '$2=="method" { ... }' > crossref-methods.txt
+ * java CrossRef |
+ * uniq | # squeeze out polymorphic forms early
+ * sort | awk '$2=="method" { ... }' > crossref-methods.txt
  * The part in "{ ... }" is left as an exercise for the reader. :-(
  *
- * @author    Ian Darwin, Ian@DarwinSys.com
+ * @author Ian Darwin, Ian@DarwinSys.com
  */
 // BEGIN main
 public class CrossRef extends APIFormatter {
 
-    /** Simple main program, construct self, process each .ZIP file
+    /**
+     * Simple main program, construct self, process each .ZIP file
      * found in CLASSPATH or in argv.
      */
     public static void main(String[] argv) throws IOException {
@@ -45,7 +46,7 @@ public class CrossRef extends APIFormatter {
                 }
             });
             for (int i = 0; i < fields.length; i++) {
-                Field field = (Field)fields[i];
+                Field field = (Field) fields[i];
                 if (!Modifier.isPrivate(field.getModifiers()))
                     putField(field, c);
                 // else System.err.println("private field ignored: " + field);
@@ -68,28 +69,38 @@ public class CrossRef extends APIFormatter {
         endClass();
     }
 
-    /** put a Field's information to the standard output.  */
+    /**
+     * put a Field's information to the standard output.
+     */
     protected void putField(Field fld, Class<?> c) {
         println(fld.getName() + " field " + c.getName() + " ");
     }
 
-    /** put a Method's information to the standard output.  */
+    /**
+     * put a Method's information to the standard output.
+     */
     protected void putMethod(Method method, Class<?> c) {
         String methName = method.getName();
         println(methName + " method " + c.getName() + " ");
     }
 
-    /** Print the start of a class. Unused in this version,
-     * designed to be overridden */
+    /**
+     * Print the start of a class. Unused in this version,
+     * designed to be overridden
+     */
     protected void startClass(Class<?> c) {
     }
 
-    /** Print the end of a class. Unused in this version,
-     * designed to be overridden */
+    /**
+     * Print the end of a class. Unused in this version,
+     * designed to be overridden
+     */
     protected void endClass() {
     }
 
-    /** Convenience routine, short for System.out.println */
+    /**
+     * Convenience routine, short for System.out.println
+     */
     protected final void println(String s) {
         System.out.println(s);
     }

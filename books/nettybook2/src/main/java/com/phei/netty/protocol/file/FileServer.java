@@ -27,6 +27,8 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author lilinfeng
@@ -34,6 +36,7 @@ import io.netty.util.CharsetUtil;
  * @date 2014年2月14日
  */
 public class FileServer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileServer.class);
 
     public void run(int port) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -44,15 +47,8 @@ public class FileServer {
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, 100)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
-                        /*
-                         * (non-Javadoc)
-                         *
-                         * @see
-                         * io.netty.channel.ChannelInitializer#initChannel(io
-                         * .netty.channel.Channel)
-                         */
-                        public void initChannel(SocketChannel ch)
-                                throws Exception {
+                        @Override
+                        public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(
                                     new StringEncoder(CharsetUtil.UTF_8),
                                     new LineBasedFrameDecoder(1024),
@@ -61,7 +57,7 @@ public class FileServer {
                         }
                     });
             ChannelFuture f = b.bind(port).sync();
-            System.out.println("Start file server at port : " + port);
+            LOGGER.info("Start file server at port : {}", port);
             f.channel().closeFuture().sync();
         } finally {
             // 优雅停机
@@ -76,7 +72,7 @@ public class FileServer {
             try {
                 port = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
         }
         new FileServer().run(port);

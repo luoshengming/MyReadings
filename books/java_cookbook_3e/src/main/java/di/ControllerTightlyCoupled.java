@@ -10,7 +10,7 @@ public class ControllerTightlyCoupled {
     public static void main(String[] args) {
         Model m = new SimpleModel();
         View v = new ConsoleViewer();
-        ((ConsoleViewer)v).setModel(m);
+        ((ConsoleViewer) v).setModel(m);
         v.displayMessage();
     }
 }

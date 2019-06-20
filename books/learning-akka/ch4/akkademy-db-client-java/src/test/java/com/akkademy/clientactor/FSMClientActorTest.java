@@ -26,10 +26,10 @@ public class FSMClientActorTest {
         TestActorRef<FSMClientActor> fsmClientRef =
                 TestActorRef.create(system, Props.create(FSMClientActor.class, dbRef.path().toString()));
 
-        assert(fsmClientRef.underlyingActor().stateName() == State.DISCONNECTED);
+        assert (fsmClientRef.underlyingActor().stateName() == State.DISCONNECTED);
         fsmClientRef.tell(new GetRequest("testkey"), probe.ref());
 
-        assert(fsmClientRef.underlyingActor().stateName() == State.CONNECTED_AND_PENDING);
+        assert (fsmClientRef.underlyingActor().stateName() == State.CONNECTED_AND_PENDING);
     }
 
     @Test
@@ -39,12 +39,12 @@ public class FSMClientActorTest {
 
         fsmClientRef.tell(new SetRequest("testkey", "testvalue", probe.ref()), probe.ref());
 
-        assert(fsmClientRef.underlyingActor().stateName() == State.CONNECTED_AND_PENDING);
+        assert (fsmClientRef.underlyingActor().stateName() == State.CONNECTED_AND_PENDING);
 
         fsmClientRef.tell(new FlushMsg(), probe.ref());
 
         probe.expectMsgClass(Status.Success.class);
-        assert(fsmClientRef.underlyingActor().stateName() == State.CONNECTED);
+        assert (fsmClientRef.underlyingActor().stateName() == State.CONNECTED);
     }
 
 }

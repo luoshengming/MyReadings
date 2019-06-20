@@ -43,8 +43,7 @@ public class WebSocketServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
 
                         @Override
-                        protected void initChannel(SocketChannel ch)
-                                throws Exception {
+                        protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast("http-codec", new HttpServerCodec());
                             pipeline.addLast("aggregator", new HttpObjectAggregator(65536));

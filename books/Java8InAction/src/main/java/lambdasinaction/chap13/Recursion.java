@@ -24,8 +24,7 @@ public class Recursion {
     }
 
     public static long factorialStreams(long n) {
-        return LongStream.rangeClosed(1, n)
-                .reduce(1, (long a, long b) -> a * b);
+        return LongStream.rangeClosed(1, n).reduce(1, (long a, long b) -> a * b);
     }
 
     public static long factorialTailRecursive(long n) {

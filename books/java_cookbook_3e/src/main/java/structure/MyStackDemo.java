@@ -18,10 +18,10 @@ public class MyStackDemo {
         ms2.push("billg");               // EXPECT WARNING
         ms2.push("scottm");              // EXPECT WARNING
         ms2.push(new java.util.Date());  // EXPECT WARNING
-        
+
         // Show that it is broken 
         try {
-            String bad = (String)ms2.pop();
+            String bad = (String) ms2.pop();
             System.err.println("Didn't get expected exception, popped " + bad);
         } catch (ClassCastException ex) {
             System.out.println("Did get expected exception.");
@@ -29,7 +29,7 @@ public class MyStackDemo {
 
         // Removed the brokenness, print rest of it.
         while (ms2.hasNext()) {
-            String name = (String)ms2.pop();
+            String name = (String) ms2.pop();
             System.out.println(name);
         }
     }

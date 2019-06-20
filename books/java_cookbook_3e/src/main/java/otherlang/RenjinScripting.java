@@ -6,6 +6,7 @@ import javax.script.ScriptException;
 
 public class RenjinScripting {
     // BEGIN main
+
     /**
      * Demonstrate interacting with the "R" implementation called "Renjin"
      */

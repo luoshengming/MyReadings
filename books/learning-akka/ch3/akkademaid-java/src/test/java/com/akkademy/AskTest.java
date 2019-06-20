@@ -40,7 +40,7 @@ public class AskTest {
         httpClientProbe.reply(new HttpResponse(Articles.article1));
 
         String result = (String) Await.result(f, timeout.duration());
-        assert(result.contains("I’ve been writing a lot in emacs lately"));
-        assert(!result.contains("<body>"));
+        assert (result.contains("I’ve been writing a lot in emacs lately"));
+        assert (!result.contains("<body>"));
     }
 }

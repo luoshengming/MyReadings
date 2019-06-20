@@ -3,7 +3,9 @@ package structure;
 import java.util.Comparator;
 
 // BEGIN main
-/** Comparator for comparing strings ignoring first character.
+
+/**
+ * Comparator for comparing strings ignoring first character.
  */
 public class SubstringComparator implements Comparator<String> {
     @Override

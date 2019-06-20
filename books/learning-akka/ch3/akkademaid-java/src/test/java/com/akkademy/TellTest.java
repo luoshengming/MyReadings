@@ -30,7 +30,7 @@ public class TellTest {
     );
 
     @Test
-    public void itShouldParseArticleTest() throws Exception{
+    public void itShouldParseArticleTest() throws Exception {
         Future f = ask(tellDemoActor, new ParseArticle(("http://www.google.com")), timeout);
         cacheProbe.expectMsgClass(GetRequest.class);
         cacheProbe.reply(new Status.Failure(new Exception("no cache")));
@@ -39,8 +39,8 @@ public class TellTest {
         httpClientProbe.reply(new HttpResponse(Articles.article1));
 
         String result = (String) Await.result(f, timeout.duration());
-        assert(result.contains("I’ve been writing a lot in emacs lately"));
-        assert(!result.contains("<body>"));
+        assert (result.contains("I’ve been writing a lot in emacs lately"));
+        assert (!result.contains("<body>"));
     }
 
 

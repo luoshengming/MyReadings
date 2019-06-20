@@ -16,13 +16,16 @@ public class WindowDemo2 extends JFrame {
         JFrame f = new WindowDemo2();
         f.setVisible(true);
     }
+
     public WindowDemo2() {
         setSize(200, 100);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowDemoAdapter());
     }
 
-    /** Named Inner class that closes a Window. */
+    /**
+     * Named Inner class that closes a Window.
+     */
     class WindowDemoAdapter extends WindowAdapter {
         public void windowClosing(WindowEvent e) {
             // whimsy - close randomly, ~ 1 times in 3
@@ -31,7 +34,7 @@ public class WindowDemo2 extends JFrame {
                 WindowDemo2.this.setVisible(false);    // window will close
                 WindowDemo2.this.dispose();        // and be freed up.
                 System.exit(0);
-            } 
+            }
             System.out.println("You asked me to close, but not to I chose.");
         }
     }

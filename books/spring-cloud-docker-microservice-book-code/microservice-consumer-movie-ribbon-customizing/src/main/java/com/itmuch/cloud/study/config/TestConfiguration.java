@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * 使用@RibbonClient的configuration属性，指定Ribbon的配置类.
  * 可参考的示例：
  * http://spring.io/guides/gs/client-side-load-balancing/
+ *
  * @author 周立
  */
 @Configuration

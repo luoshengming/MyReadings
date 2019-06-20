@@ -4,7 +4,7 @@ import akka.actor.ActorSystem;
 import akka.agent.Agent;
 
 public class JavaAgentExample {
-    public static void apply() throws Exception{
+    public static void apply() throws Exception {
         ActorSystem system = ActorSystem.create();
         Agent<Integer> account = Agent.create(25, system.dispatcher());
 
@@ -12,7 +12,7 @@ public class JavaAgentExample {
 
         account.send(new akka.dispatch.Mapper<Integer, Integer>() {
             public Integer apply(Integer i) {
-                if(ammountToWithdraw <= i)
+                if (ammountToWithdraw <= i)
                     return i - ammountToWithdraw;
                 else
                     return i;
@@ -24,7 +24,7 @@ public class JavaAgentExample {
 
         account.send(new akka.dispatch.Mapper<Integer, Integer>() {
             public Integer apply(Integer i) {
-                if(ammountToWithdraw <= i)
+                if (ammountToWithdraw <= i)
                     return i - ammountToWithdraw;
                 else
                     return i;

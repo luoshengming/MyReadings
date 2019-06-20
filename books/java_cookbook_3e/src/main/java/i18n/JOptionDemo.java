@@ -9,13 +9,14 @@ import com.darwinsys.swingui.I18N;
 
 /**
  * I18N'd JOptionPane
+ *
  * @author Ian Darwin
  */
 // BEGIN main
 public class JOptionDemo extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    
+
     private ResourceBundle rb;
 
     // Constructor
@@ -31,10 +32,10 @@ public class JOptionDemo extends JFrame {
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(
-                    JOptionDemo.this,
-                    rb.getString("dialog1.text"),
-                    rb.getString("dialog1.title"),
-                    JOptionPane.INFORMATION_MESSAGE);
+                        JOptionDemo.this,
+                        rb.getString("dialog1.text"),
+                        rb.getString("dialog1.title"),
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         });
         cp.add(b);

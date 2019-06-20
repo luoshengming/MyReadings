@@ -45,23 +45,25 @@ public final class TextAreaOutputStream extends OutputStream {
     }
 
     @Override
-    public void flush(){ }
-    
+    public void flush() {
+    }
+
     @Override
-    public void close(){ }
+    public void close() {
+    }
 
     @Override
     public void write(int b) throws IOException {
 
         if (b == '\r')
             return;
-        
+
         if (b == '\n') {
             textArea.append(sb.toString());
             sb.setLength(0);
         }
-        
-        sb.append((char)b);
+
+        sb.append((char) b);
     }
 }
 // END main

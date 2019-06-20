@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.util.concurrent.*;
 
 // BEGIN main
+
 /**
  * HttpConcurrent - Httpd Subclass using java.lang.concurrent
  */
@@ -13,7 +14,7 @@ public class HttpdConcurrent extends Httpd {
 
     public HttpdConcurrent() throws Exception {
         super();
-        myThreadPool = Executors.newFixedThreadPool(5);        
+        myThreadPool = Executors.newFixedThreadPool(5);
     }
 
     public static void main(String[] argv) throws Exception {
@@ -26,6 +27,7 @@ public class HttpdConcurrent extends Httpd {
         }
         w.runServer();
     }
+
     public void runServer() throws Exception {
         while (true) {
             final Socket clientSocket = sock.accept();

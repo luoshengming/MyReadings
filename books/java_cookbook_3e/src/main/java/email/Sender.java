@@ -9,31 +9,45 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/** sender -- send an email message.
+/**
+ * sender -- send an email message.
+ *
  * @author Ian F. Darwin
  */
 // BEGIN main
 public class Sender {
 
-    /** The message recipient. */
+    /**
+     * The message recipient.
+     */
     protected String message_recip = "spam-magnet@darwinsys.com";
     /* What's it all about, Alfie? */
     protected String message_subject = "Re: your mail";
-    /** The message CC recipient. */
+    /**
+     * The message CC recipient.
+     */
     protected String message_cc = "nobody@erewhon.com";
-    /** The message body */
+    /**
+     * The message body
+     */
     protected String message_body =
-        "I am unable to attend to your message, as I am busy sunning " +
-        "myself on the beach in Maui, where it is warm and peaceful." +
-        "Perhaps when I return I'll get around to reading your mail. " +
-        "Or not.";
+            "I am unable to attend to your message, as I am busy sunning " +
+                    "myself on the beach in Maui, where it is warm and peaceful." +
+                    "Perhaps when I return I'll get around to reading your mail. " +
+                    "Or not.";
 
-    /** The JavaMail session object */
+    /**
+     * The JavaMail session object
+     */
     protected Session session;
-    /** The JavaMail message object */
+    /**
+     * The JavaMail message object
+     */
     protected Message mesg;
 
-    /** Do the work: send the mail to the SMTP server.  */
+    /**
+     * Do the work: send the mail to the SMTP server.
+     */
     public void doSend() {
 
         // We need to pass info to the mail server as a Properties, since
@@ -47,7 +61,7 @@ public class Sender {
         // Create the Session object
         session = Session.getDefaultInstance(props, null);
         session.setDebug(true);        // Verbose!
-        
+
         try {
             // create a message
             mesg = new MimeMessage(session);
@@ -69,18 +83,20 @@ public class Sender {
             // Now the message body.
             mesg.setText(message_body);
             // XXX I18N: use setText(msgText.getText(), charset)
-            
+
             // Finally, send the message!
             Transport.send(mesg);
 
         } catch (MessagingException ex) {
-            while ((ex = (MessagingException)ex.getNextException()) != null) {
+            while ((ex = (MessagingException) ex.getNextException()) != null) {
                 ex.printStackTrace();
             }
         }
     }
 
-    /** Simple test case driver */
+    /**
+     * Simple test case driver
+     */
     public static void main(String[] av) {
         Sender sm = new Sender();
         sm.doSend();

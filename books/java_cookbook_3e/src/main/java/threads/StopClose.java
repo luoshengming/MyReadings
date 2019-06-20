@@ -5,17 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-/** Stop a thread by closing a socket.
+/**
+ * Stop a thread by closing a socket.
  */
 // BEGIN main
 public class StopClose extends Thread {
     protected Socket io;
 
+    @Override
     public void run() {
         try {
             io = new Socket("java.sun.com", 80);    // HTTP
-            BufferedReader is = new BufferedReader(
-                new InputStreamReader(io.getInputStream()));
+            BufferedReader is = new BufferedReader(new InputStreamReader(io.getInputStream()));
             System.out.println("StopClose reading");
 
             // The following line will deadlock (intentionally), since HTTP 
@@ -37,18 +38,17 @@ public class StopClose extends Thread {
     public void shutDown() throws IOException {
         if (io != null) {
             // This is supposed to interrupt the waiting read.
-            synchronized(io) {
+            synchronized (io) {
                 io.close();
             }
         }
         System.out.println("StopClose.shutDown() completed");
     }
 
-    public static void main(String[] args) 
-    throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         StopClose t = new StopClose();
         t.start();
-        Thread.sleep(1000*5);
+        Thread.sleep(1000 * 5);
         t.shutDown();
     }
 }

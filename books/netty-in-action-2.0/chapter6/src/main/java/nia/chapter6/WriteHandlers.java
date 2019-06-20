@@ -11,11 +11,11 @@ import static io.netty.channel.DummyChannelHandlerContext.DUMMY_INSTANCE;
 
 /**
  * Created by kerr.
- *
+ * <p>
  * Listing 6.6 Accessing the Channel from a ChannelHandlerContext
- *
+ * <p>
  * Listing 6.7 Accessing the ChannelPipeline from a ChannelHandlerContext
- *
+ * <p>
  * Listing 6.8 Calling ChannelHandlerContext write()
  */
 public class WriteHandlers {

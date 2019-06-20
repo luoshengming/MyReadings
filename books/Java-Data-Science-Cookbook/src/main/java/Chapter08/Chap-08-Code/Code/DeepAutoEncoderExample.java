@@ -1,4 +1,5 @@
 package deepbelief.chap8.science.data;
+
 import org.deeplearning4j.datasets.fetchers.MnistDataFetcher;
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
@@ -31,10 +32,10 @@ public class DeepAutoEncoderExample {
         int numSamples = MnistDataFetcher.NUM_EXAMPLES;
         int batchSize = 1000;
         int iterations = 1;
-        int listenerFreq = iterations/5;
+        int listenerFreq = iterations / 5;
 
         log.info("Load data....");
-        DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
+        DataSetIterator iter = new MnistDataSetIterator(batchSize, numSamples, true);
 
         log.info("Build model....");
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
@@ -51,7 +52,7 @@ public class DeepAutoEncoderExample {
                 .layer(6, new RBM.Builder().nIn(100).nOut(250).lossFunction(LossFunctions.LossFunction.RMSE_XENT).build())
                 .layer(7, new RBM.Builder().nIn(250).nOut(500).lossFunction(LossFunctions.LossFunction.RMSE_XENT).build())
                 .layer(8, new RBM.Builder().nIn(500).nOut(1000).lossFunction(LossFunctions.LossFunction.RMSE_XENT).build())
-                .layer(9, new OutputLayer.Builder(LossFunctions.LossFunction.RMSE_XENT).nIn(1000).nOut(numRows*numColumns).build())
+                .layer(9, new OutputLayer.Builder(LossFunctions.LossFunction.RMSE_XENT).nIn(1000).nOut(numRows * numColumns).build())
                 .pretrain(true).backprop(true)
                 .build();
 
@@ -61,9 +62,9 @@ public class DeepAutoEncoderExample {
         model.setListeners(Arrays.asList((IterationListener) new ScoreIterationListener(listenerFreq)));
 
         log.info("Train model....");
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             DataSet next = iter.next();
-            model.fit(new DataSet(next.getFeatureMatrix(),next.getFeatureMatrix()));
+            model.fit(new DataSet(next.getFeatureMatrix(), next.getFeatureMatrix()));
         }
     }
 }

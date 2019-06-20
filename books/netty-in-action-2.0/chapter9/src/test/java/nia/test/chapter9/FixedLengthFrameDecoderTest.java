@@ -22,7 +22,7 @@ public class FixedLengthFrameDecoderTest {
         }
         ByteBuf input = buf.duplicate();
         EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+                new FixedLengthFrameDecoder(3));
         // write bytes
         assertTrue(channel.writeInbound(input.retain()));
         assertTrue(channel.finish());
@@ -53,7 +53,7 @@ public class FixedLengthFrameDecoderTest {
         ByteBuf input = buf.duplicate();
 
         EmbeddedChannel channel = new EmbeddedChannel(
-            new FixedLengthFrameDecoder(3));
+                new FixedLengthFrameDecoder(3));
         assertFalse(channel.writeInbound(input.readBytes(2)));
         assertTrue(channel.writeInbound(input.readBytes(7)));
 

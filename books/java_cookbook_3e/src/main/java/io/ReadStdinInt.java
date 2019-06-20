@@ -1,9 +1,11 @@
 package io;
 
 import java.io.*;
+
 /**
  * Read an int from Standard Input
- * @author    Ian F. Darwin, http://www.darwinsys.com/
+ *
+ * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 public class ReadStdinInt {
@@ -12,7 +14,7 @@ public class ReadStdinInt {
         int val = 0;
         try {
             BufferedReader is = new BufferedReader(
-                new InputStreamReader(System.in));
+                    new InputStreamReader(System.in));
             line = is.readLine();
             val = Integer.parseInt(line);
             System.out.println("I read this number: " + val);

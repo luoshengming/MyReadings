@@ -1,8 +1,9 @@
 // BEGIN main
 package com.darwinsys.lang;
 
-/** A MutableInteger is like an Integer but mutable, to avoid the
- * excess object creation involved in 
+/**
+ * A MutableInteger is like an Integer but mutable, to avoid the
+ * excess object creation involved in
  * c = new Integer(c.getInt()+1)
  * which can get expensive if done a lot.
  * Not subclassed from Integer, since Integer is final (for performance :-))
@@ -13,7 +14,7 @@ public class MutableInteger {
     public MutableInteger(int i) {
         value = i;
     }
-    
+
     public MutableInteger() {
         this(0);
     }

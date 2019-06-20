@@ -9,15 +9,15 @@ public class ScriptEnginesDemo {
 
     public static void main(String[] args) throws ScriptException {
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        
+
         // Print list of supported languages
         scriptEngineManager.getEngineFactories().forEach(factory ->
-            System.out.println(factory.getLanguageName()));
-        
+                System.out.println(factory.getLanguageName()));
+
         // Run a script in the JavaScript language
         String lang = "ECMAScript";
-        ScriptEngine engine = 
-            scriptEngineManager.getEngineByName(lang);
+        ScriptEngine engine =
+                scriptEngineManager.getEngineByName(lang);
         if (engine == null) {
             System.err.println("Could not find engine");
             return;

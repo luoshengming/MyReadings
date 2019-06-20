@@ -7,18 +7,18 @@ import static org.junit.Assert.assertEquals;
 
 public class ListTest {
 
-  @Test
-  public void testConcat() {
-    assertEquals("[4, 5, 6, NIL]", List.concat(list(), list(4, 5, 6)).toString());
-    assertEquals("[1, 2, 3, NIL]", List.concat(list(1, 2, 3), list()).toString());
-    assertEquals("[1, 2, 3, 4, 5, 6, NIL]", List.concat(list(1, 2, 3), list(4, 5, 6)).toString());
-  }
+    @Test
+    public void testConcat() {
+        assertEquals("[4, 5, 6, NIL]", List.concat(list(), list(4, 5, 6)).toString());
+        assertEquals("[1, 2, 3, NIL]", List.concat(list(1, 2, 3), list()).toString());
+        assertEquals("[1, 2, 3, 4, 5, 6, NIL]", List.concat(list(1, 2, 3), list(4, 5, 6)).toString());
+    }
 
-  @Test
-  public void testConcat_() {
-    assertEquals("[4, 5, 6, NIL]", List.concat_(list(), list(4, 5, 6)).toString());
-    assertEquals("[1, 2, 3, NIL]", List.concat_(list(1, 2, 3), list()).toString());
-    assertEquals("[1, 2, 3, 4, 5, 6, NIL]", List.concat_(list(1, 2, 3), list(4, 5, 6)).toString());
-  }
+    @Test
+    public void testConcat_() {
+        assertEquals("[4, 5, 6, NIL]", List.concat_(list(), list(4, 5, 6)).toString());
+        assertEquals("[1, 2, 3, NIL]", List.concat_(list(1, 2, 3), list()).toString());
+        assertEquals("[1, 2, 3, 4, 5, 6, NIL]", List.concat_(list(1, 2, 3), list(4, 5, 6)).toString());
+    }
 
 }

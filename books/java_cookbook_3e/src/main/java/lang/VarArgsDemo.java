@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * VarArgsDemo - show Java 5 variable argument listss
+ *
  * @author ian
  */
 public class VarArgsDemo {
@@ -13,7 +14,7 @@ public class VarArgsDemo {
         mySumCalls();
         // BEGIN processCalls
         process(System.out, "Hello", "Goodbye");
-        process(System.out, (int)42, (int)1066, (int)1776);
+        process(System.out, (int) 42, (int) 1066, (int) 1776);
         process(System.out, "Foo", new Date(), new Object());
         // END processCalls
         // BEGIN passThroughCalls
@@ -41,30 +42,36 @@ public class VarArgsDemo {
         // END mySumCalls
     }
 
-    /** Show passing the entire varargs list on to another method
+    /**
+     * Show passing the entire varargs list on to another method
+     *
      * @param out
      * @param fmt
      * @param args
      */
-    static void passThrough(PrintStream out, String fmt, Object ... args) {
+    static void passThrough(PrintStream out, String fmt, Object... args) {
         line();
         out.printf(fmt, args);
     }
-    
-    /** Show iterating through the varargs list.
+
+    /**
+     * Show iterating through the varargs list.
+     *
      * @param out
      * @param args
      */
-    static void process(PrintStream out, Object ... args) {
+    static void process(PrintStream out, Object... args) {
         line();
         int i = 0;
-        for (Object o : args){
+        for (Object o : args) {
             out.print("Argument " + ++i + " is " + o + "; ");
         }
         System.out.println();
     }
-    
-    /** toy, draw a line... */
+
+    /**
+     * toy, draw a line...
+     */
     private static void line() {
         System.out.println("--------------------------");
     }

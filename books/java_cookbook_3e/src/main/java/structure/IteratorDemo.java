@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/** Iterator used to walk through a List.
+/**
+ * Iterator used to walk through a List.
  */
 // BEGIN main
 public class IteratorDemo {

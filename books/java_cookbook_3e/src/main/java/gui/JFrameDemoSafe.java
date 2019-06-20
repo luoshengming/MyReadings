@@ -4,7 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-/** Create a JFrame class in a thread-safe way.
+/**
+ * Create a JFrame class in a thread-safe way.
  * <br/>
  * See http://java.sun.com/developer/JDCTechTips/2003/tt1208.html.
  */

@@ -1,6 +1,5 @@
 package lambdasinaction.chap8;
 
-
 abstract class OnlineBanking {
     public void processCustomer(int id) {
         Customer c = Database.getCustomerWithId(id);
@@ -11,11 +10,11 @@ abstract class OnlineBanking {
 
 
     // dummy Customer class
-    static private class Customer {
+    private static class Customer {
     }
 
     // dummy Datbase class
-    static private class Database {
+    private static class Database {
         static Customer getCustomerWithId(int id) {
             return new Customer();
         }

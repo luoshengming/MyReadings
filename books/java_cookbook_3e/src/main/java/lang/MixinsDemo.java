@@ -13,7 +13,7 @@ interface Foo {
     }
 }
 
-public class MixinsDemo implements Foo, Bar{
+public class MixinsDemo implements Foo, Bar {
 
     public static void main(String[] args) {
         String input = args.length > 0 ? args[0] : "Hello";

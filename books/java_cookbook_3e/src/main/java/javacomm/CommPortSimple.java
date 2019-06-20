@@ -11,27 +11,41 @@ import javax.comm.CommPortIdentifier;
 import javax.comm.SerialPort;
 
 // BEGIN main
+
 /**
  * Open a serial port using Java Communications.
- * @author    Ian F. Darwin, http://www.darwinsys.com/
+ *
+ * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class CommPortSimple {
     private static final String HELLO = "Hello?";
-    /** How long to wait for the open to finish up. */
+    /**
+     * How long to wait for the open to finish up.
+     */
     public static final int TIMEOUTSECONDS = 30;
-    /** The baud rate to use. */
+    /**
+     * The baud rate to use.
+     */
     public static final int BAUD = 19200;
-    /** The input stream */
+    /**
+     * The input stream
+     */
     protected BufferedReader is;
-    /** The output stream */
+    /**
+     * The output stream
+     */
     protected PrintStream os;
-    /** The chosen Port Identifier */
+    /**
+     * The chosen Port Identifier
+     */
     CommPortIdentifier thePortID;
-    /** The chosen Port itself */
+    /**
+     * The chosen Port itself
+     */
     CommPort thePort;
 
     public static void main(String[] argv) throws Exception {
-        
+
         if (argv.length != 1) {
             System.err.println("Usage: CommPortSimple deviceName");
             System.exit(1);
@@ -46,7 +60,7 @@ public class CommPortSimple {
     public CommPortSimple(String devName) throws Exception {
 
         @SuppressWarnings("unchecked")
-        Enumeration<CommPortIdentifier> pList = 
+        Enumeration<CommPortIdentifier> pList =
                 CommPortIdentifier.getPortIdentifiers();
 
         // Walk the list, looking for the given name
@@ -54,7 +68,7 @@ public class CommPortSimple {
         boolean atLeastOneSerialPresent = false;
         while (pList.hasMoreElements()) {
             CommPortIdentifier c = pList.nextElement();
-            if (c.getPortType() !=CommPortIdentifier.PORT_SERIAL) {
+            if (c.getPortType() != CommPortIdentifier.PORT_SERIAL) {
                 System.err.println("Not a serial port: " + c.getName());
                 continue;
             }
@@ -87,15 +101,17 @@ public class CommPortSimple {
         os = new PrintStream(thePort.getOutputStream(), true);
     }
 
-    /** Hold a conversation - in this case a *very* simple one.  */
+    /**
+     * Hold a conversation - in this case a *very* simple one.
+     */
     protected void holdConversation() throws IOException {
 
         System.out.println("Ready to read and write port.");
 
         os.println(HELLO);
         String response = is.readLine();
-        
-        System.out.printf("I said %s, and the other end replied %s%n", 
+
+        System.out.printf("I said %s, and the other end replied %s%n",
                 HELLO, response);
 
         // Finally, clean up.

@@ -6,17 +6,17 @@ import com.fpinjava.common.Nothing;
 
 public interface IO<A> {
 
-  static IO<Nothing> empty() {
-    return  () -> Nothing.instance;
-  }
+    static IO<Nothing> empty() {
+        return () -> Nothing.instance;
+    }
 
-  A run();
+    A run();
 
-  default <B> IO<B> map(Function<A, B> f) {
-    return () -> f.apply(this.run());
-  }
+    default <B> IO<B> map(Function<A, B> f) {
+        return () -> f.apply(this.run());
+    }
 
-  static <A> IO<A> unit(A a) {
-    return () -> a;
-  }
+    static <A> IO<A> unit(A a) {
+        return () -> a;
+    }
 }

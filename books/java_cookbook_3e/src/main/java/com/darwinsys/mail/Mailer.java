@@ -14,7 +14,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/** Mailer. No relation to Norman. Simply sends an email message.
+/**
+ * Mailer. No relation to Norman. Simply sends an email message.
  * Example usage:
  * <pre>
  * Mailer mb = new Mailer();
@@ -29,163 +30,223 @@ import javax.mail.internet.MimeMessage;
  *       ...
  * }
  * </pre>
+ *
  * @author Ian F. Darwin
  */
 // BEGIN main
 public class Mailer {
-    /** The javamail session object. */
+    /**
+     * The javamail session object.
+     */
     protected Session session;
-    /** The sender's email address */
+    /**
+     * The sender's email address
+     */
     protected String from;
-    /** The subject of the message. */
+    /**
+     * The subject of the message.
+     */
     protected String subject;
-    /** The recipient ("To:"), as Strings. */
+    /**
+     * The recipient ("To:"), as Strings.
+     */
     protected List<String> toList = new ArrayList<>();
-    /** The CC list, as Strings. */
+    /**
+     * The CC list, as Strings.
+     */
     protected List<String> ccList = new ArrayList<String>();
-    /** The BCC list, as Strings. */
+    /**
+     * The BCC list, as Strings.
+     */
     protected List<String> bccList = new ArrayList<String>();
-    /** The text of the message. */
+    /**
+     * The text of the message.
+     */
     protected String body;
-    /** The SMTP relay host */
+    /**
+     * The SMTP relay host
+     */
     protected String mailHost;
-    /** The verbosity setting */
+    /**
+     * The verbosity setting
+     */
     protected boolean verbose;
 
-    /** Get from */
+    /**
+     * Get from
+     */
     public String getFrom() {
         return from;
     }
 
-    /** Set from */
+    /**
+     * Set from
+     */
     public void setFrom(String fm) {
         from = fm;
     }
 
-    /** Get subject */
+    /**
+     * Get subject
+     */
     public String getSubject() {
         return subject;
     }
 
-    /** Set subject */
+    /**
+     * Set subject
+     */
     public void setSubject(String subj) {
         subject = subj;
     }
 
     // SETTERS/GETTERS FOR TO: LIST
 
-    /** Get tolist, as an array of Strings */
+    /**
+     * Get tolist, as an array of Strings
+     */
     public List<String> getToList() {
         return toList;
     }
 
-    /** Set to list to an ArrayList of Strings */
+    /**
+     * Set to list to an ArrayList of Strings
+     */
     public void setToList(ArrayList<String> to) {
         toList = to;
     }
 
-    /** Set to as a string like "tom, mary, robin@host". Loses any
-     * previously set values. */
+    /**
+     * Set to as a string like "tom, mary, robin@host". Loses any
+     * previously set values.
+     */
     public void setToList(String s) {
         toList = Arrays.asList(s.split(",\\s+"));
     }
 
-    /** Add one "to" recipient */
+    /**
+     * Add one "to" recipient
+     */
     public void addTo(String to) {
         toList.add(to);
     }
 
     // SETTERS/GETTERS FOR CC: LIST
 
-    /** Get cclist, as an array of Strings */
+    /**
+     * Get cclist, as an array of Strings
+     */
     public List<String> getCcList() {
         return ccList;
     }
 
-    /** Set cc list to an ArrayList of Strings */
+    /**
+     * Set cc list to an ArrayList of Strings
+     */
     public void setCcList(ArrayList<String> cc) {
         ccList = cc;
     }
 
-    /** Set cc as a string like "tom, mary, robin@host". Loses any
-     * previously set values. */
+    /**
+     * Set cc as a string like "tom, mary, robin@host". Loses any
+     * previously set values.
+     */
     public void setCcList(String s) {
         ccList = Arrays.asList(s.split(",\\s+"));
     }
 
-    /** Add one "cc" recipient */
+    /**
+     * Add one "cc" recipient
+     */
     public void addCc(String cc) {
         ccList.add(cc);
     }
 
     // SETTERS/GETTERS FOR BCC: LIST
 
-    /** Get bcclist, as an array of Strings */
+    /**
+     * Get bcclist, as an array of Strings
+     */
     public List<String> getBccList() {
         return bccList;
     }
 
-    /** Set bcc list to an ArrayList of Strings */
+    /**
+     * Set bcc list to an ArrayList of Strings
+     */
     public void setBccList(List<String> bcc) {
         bccList = bcc;
     }
 
-    /** Set bcc as a string like "tom, mary, robin@host". Loses any
-     * previously set values. */
+    /**
+     * Set bcc as a string like "tom, mary, robin@host". Loses any
+     * previously set values.
+     */
     public void setBccList(String s) {
         bccList = Arrays.asList(s.split(",\\s+"));
     }
 
-    /** Add one "bcc" recipient */
+    /**
+     * Add one "bcc" recipient
+     */
     public void addBcc(String bcc) {
         bccList.add(bcc);
     }
 
     // SETTER/GETTER FOR MESSAGE BODY
 
-    /** Get message */
+    /**
+     * Get message
+     */
     public String getBody() {
         return body;
     }
 
-    /** Set message */
+    /**
+     * Set message
+     */
     public void setBody(String text) {
         body = text;
     }
 
     // SETTER/GETTER FOR VERBOSITY
 
-    /** Get verbose */
+    /**
+     * Get verbose
+     */
     public boolean isVerbose() {
         return verbose;
     }
 
-    /** Set verbose */
+    /**
+     * Set verbose
+     */
     public void setVerbose(boolean v) {
         verbose = v;
     }
 
-    /** Check if all required fields have been set before sending.
+    /**
+     * Check if all required fields have been set before sending.
      * Normally called before doSend; called by doSend for verification.
      */
     public boolean isComplete() {
-        if (from == null    || from.length()==0) {
+        if (from == null || from.length() == 0) {
             System.err.println("doSend: no FROM");
             return false;
         }
-        if (subject == null || subject.length()==0) {
+        if (subject == null || subject.length() == 0) {
             System.err.println("doSend: no SUBJECT");
             return false;
         }
-        if (toList.size()==0) {
+        if (toList.size() == 0) {
             System.err.println("doSend: no recipients");
             return false;
         }
-        if (body == null || body.length()==0) {
+        if (body == null || body.length() == 0) {
             System.err.println("doSend: no body");
             return false;
         }
-        if (mailHost == null || mailHost.length()==0) {
+        if (mailHost == null || mailHost.length() == 0) {
             System.err.println("doSend: no server host");
             return false;
         }
@@ -196,13 +257,14 @@ public class Mailer {
         mailHost = s;
     }
 
-    /** Send the message.
+    /**
+     * Send the message.
      */
     public synchronized void doSend() throws MessagingException {
 
         if (!isComplete())
             throw new IllegalArgumentException(
-                "doSend called before message was complete");
+                    "doSend called before message was complete");
 
         /** Properties object used to pass props into the MAIL API */
         Properties props = new Properties();
@@ -222,8 +284,8 @@ public class Mailer {
 
         // TO Address list
         addresses = new InternetAddress[toList.size()];
-        for (int i=0; i<addresses.length; i++)
-            addresses[i] = new InternetAddress((String)toList.get(i));
+        for (int i = 0; i < addresses.length; i++)
+            addresses[i] = new InternetAddress((String) toList.get(i));
         mesg.setRecipients(Message.RecipientType.TO, addresses);
 
         // From Address
@@ -231,14 +293,14 @@ public class Mailer {
 
         // CC Address list
         addresses = new InternetAddress[ccList.size()];
-        for (int i=0; i<addresses.length; i++)
-            addresses[i] = new InternetAddress((String)ccList.get(i));
+        for (int i = 0; i < addresses.length; i++)
+            addresses[i] = new InternetAddress((String) ccList.get(i));
         mesg.setRecipients(Message.RecipientType.CC, addresses);
 
         // BCC Address list
         addresses = new InternetAddress[bccList.size()];
-        for (int i=0; i<addresses.length; i++)
-            addresses[i] = new InternetAddress((String)bccList.get(i));
+        for (int i = 0; i < addresses.length; i++)
+            addresses[i] = new InternetAddress((String) bccList.get(i));
         mesg.setRecipients(Message.RecipientType.BCC, addresses);
 
         // The Subject
@@ -250,17 +312,19 @@ public class Mailer {
         Transport.send(mesg);
     }
 
-    /** Convenience method that does it all with one call.
-     * @param mailhost - SMTP server host
+    /**
+     * Convenience method that does it all with one call.
+     *
+     * @param mailhost  - SMTP server host
      * @param recipient - domain address of email (user@host.domain)
-     * @param sender - your email address
-     * @param subject - the subject line
-     * @param message - the entire message body as a String with embedded \n's
+     * @param sender    - your email address
+     * @param subject   - the subject line
+     * @param message   - the entire message body as a String with embedded \n's
      */
     public static void send(String mailhost,
-        String recipient, String sender,
-        String subject, String message)
-        throws MessagingException {
+                            String recipient, String sender,
+                            String subject, String message)
+            throws MessagingException {
 
         Mailer m = new Mailer();
         m.setServer(mailhost);

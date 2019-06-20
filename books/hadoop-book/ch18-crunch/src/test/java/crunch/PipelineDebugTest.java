@@ -8,17 +8,17 @@ import org.junit.Rule;
 import org.junit.Test;
 
 public class PipelineDebugTest {
-  @Rule
-  public transient TemporaryPath tmpDir = new TemporaryPath();
+    @Rule
+    public transient TemporaryPath tmpDir = new TemporaryPath();
 
-  @Test
-  public void testDebug() throws Exception {
-    String inputPath = tmpDir.copyResourceFileName("set1.txt");
-    Pipeline pipeline = new MRPipeline(getClass());
-    pipeline.enableDebug();
-    pipeline.getConfiguration().setBoolean("crunch.log.job.progress", true);
-    PCollection<String> lines = pipeline.readTextFile(inputPath);
-    pipeline.writeTextFile(lines, tmpDir.getFileName("out"));
-    pipeline.done();
-  }
+    @Test
+    public void testDebug() throws Exception {
+        String inputPath = tmpDir.copyResourceFileName("set1.txt");
+        Pipeline pipeline = new MRPipeline(getClass());
+        pipeline.enableDebug();
+        pipeline.getConfiguration().setBoolean("crunch.log.job.progress", true);
+        PCollection<String> lines = pipeline.readTextFile(inputPath);
+        pipeline.writeTextFile(lines, tmpDir.getFileName("out"));
+        pipeline.done();
+    }
 }

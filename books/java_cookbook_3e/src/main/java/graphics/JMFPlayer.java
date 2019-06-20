@@ -16,28 +16,45 @@ import javax.swing.JPanel;
 
 /**
  * Demonstrate simple code to play a movie with Java Media Framework.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 @SuppressWarnings("serial")
 // BEGIN main
 public class JMFPlayer extends JPanel implements ControllerListener {
 
-    /** The player object */
+    /**
+     * The player object
+     */
     Player thePlayer = null;
-    /** The parent Frame we are in. */
+    /**
+     * The parent Frame we are in.
+     */
     JFrame parentFrame = null;
-    /** Our contentpane */
+    /**
+     * Our contentpane
+     */
     Container cp;
-    /** The visual component (if any) */
+    /**
+     * The visual component (if any)
+     */
     Component visualComponent = null;
-    /** The default control component (if any) */
+    /**
+     * The default control component (if any)
+     */
     Component controlComponent = null;
-    /** The name of this instance's media file. */
+    /**
+     * The name of this instance's media file.
+     */
     String mediaName;
-    /** The URL representing this media file. */
+    /**
+     * The URL representing this media file.
+     */
     URL theURL;
 
-    /** Construct the player object and the GUI. */
+    /**
+     * Construct the player object and the GUI.
+     */
     public JMFPlayer(JFrame pf, String media) {
         parentFrame = pf;
         mediaName = media;
@@ -60,7 +77,9 @@ public class JMFPlayer extends JPanel implements ControllerListener {
         thePlayer.start();        // start playing
     }
 
-    /** Called to stop the audio, as from a Stop button or menuitem */
+    /**
+     * Called to stop the audio, as from a Stop button or menuitem
+     */
     public void stop() {
         if (thePlayer == null)
             return;
@@ -68,22 +87,26 @@ public class JMFPlayer extends JPanel implements ControllerListener {
         thePlayer.deallocate();    // free system resources
     }
 
-    /** Called when we are really finished (as from an Exit button). */
+    /**
+     * Called when we are really finished (as from an Exit button).
+     */
     public void destroy() {
         if (thePlayer == null)
             return;
         thePlayer.close();
     }
 
-    /** Called by JMF when the Player has something to tell us about. */
+    /**
+     * Called by JMF when the Player has something to tell us about.
+     */
     public synchronized void controllerUpdate(ControllerEvent event) {
         // System.out.println("controllerUpdate(" + event + ")");
         if (event instanceof RealizeCompleteEvent) {
             if ((visualComponent = thePlayer.getVisualComponent()) != null)
-                    cp.add(BorderLayout.CENTER, visualComponent);
+                cp.add(BorderLayout.CENTER, visualComponent);
             if ((controlComponent =
-                thePlayer.getControlPanelComponent()) != null)
-                    cp.add(BorderLayout.SOUTH, controlComponent);
+                    thePlayer.getControlPanelComponent()) != null)
+                cp.add(BorderLayout.SOUTH, controlComponent);
             // resize the main window
             if (parentFrame != null) {
                 parentFrame.pack();

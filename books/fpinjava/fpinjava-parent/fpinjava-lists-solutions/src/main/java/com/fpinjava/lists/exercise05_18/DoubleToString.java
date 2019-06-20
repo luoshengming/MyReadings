@@ -4,10 +4,10 @@ import com.fpinjava.lists.exercise05_16.List;
 
 public class DoubleToString {
 
-  public static List<String> doubleToString(List<Double> list) {
-    return List.foldRight(list,
-        // Starting with an empty list
-        List.<String>list(),
-        h -> t -> t.cons(Double.toString(h)));
-  }
+    public static List<String> doubleToString(List<Double> list) {
+        return List.foldRight(list,
+                // Starting with an empty list
+                List.<String>list(),
+                h -> t -> t.cons(Double.toString(h)));
+    }
 }

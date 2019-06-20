@@ -10,7 +10,7 @@ public class Messages {
         }
     }
 
-    static public class PostToChatroom{
+    static public class PostToChatroom {
         public final String line, username;
 
         public PostToChatroom(String line, String username) {

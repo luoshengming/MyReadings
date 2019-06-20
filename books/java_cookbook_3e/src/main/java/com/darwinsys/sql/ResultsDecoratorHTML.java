@@ -25,12 +25,14 @@
 package com.darwinsys.sql;
 
 // BEGIN main
+
 import java.io.*;
 import java.sql.*;
 
 import com.darwinsys.util.Verbosity;
 
-/** Print ResultSet in HTML
+/**
+ * Print ResultSet in HTML
  */
 public class ResultsDecoratorHTML extends ResultsDecorator {
 
@@ -44,7 +46,7 @@ public class ResultsDecoratorHTML extends ResultsDecorator {
         int colCount = md.getColumnCount();
         println("<table border=1>");
         print("<tr>");
-        for (int i=1; i<=colCount; i++) {
+        for (int i = 1; i <= colCount; i++) {
             print("<th>");
             print(md.getColumnLabel(i));
         }
@@ -53,7 +55,7 @@ public class ResultsDecoratorHTML extends ResultsDecorator {
         while (rs.next()) {
             ++rowCount;
             print("<tr>");
-            for (int i=1; i<=colCount; i++) {
+            for (int i = 1; i <= colCount; i++) {
                 print("<td>");
                 print(rs.getString(i));
             }
@@ -68,7 +70,9 @@ public class ResultsDecoratorHTML extends ResultsDecorator {
         write(rs);
     }
 
-    /** Return a printable name for this decorator
+    /**
+     * Return a printable name for this decorator
+     *
      * @see ResultsDecorator#getName()
      */
     public String getName() {

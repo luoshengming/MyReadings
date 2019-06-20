@@ -8,7 +8,7 @@ public class ReferencesDemo2 {
 
     public static void main(String[] args) throws Exception {
         ReferencesDemo2 rd2 = new ReferencesDemo2();
-        
+
         // Use a method reference to assign the AutoCloseable interface
         // variable "ac" to the matching method signature "c" (obviously
         // short for close, but just to she the method name isn't what matters).

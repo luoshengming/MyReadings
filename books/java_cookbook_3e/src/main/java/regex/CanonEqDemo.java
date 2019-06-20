@@ -6,7 +6,6 @@ import java.util.regex.*;
  * CanonEqDemo - show use of Pattern.CANON_EQ, by comparing varous ways of
  * entering the Spanish word for "equal" and see if they are considered equal
  * by the RE-matching engine.
- * 
  */
 // BEGIN main
 public class CanonEqDemo {
@@ -23,10 +22,10 @@ public class CanonEqDemo {
         for (int i = 0; i < input.length; i++) {
             if (pattern.matcher(input[i]).matches()) {
                 System.out.println(
-                    pattStr + " matches input " + input[i]);
+                        pattStr + " matches input " + input[i]);
             } else {
                 System.out.println(
-                    pattStr + " does not match input " + input[i]);
+                        pattStr + " does not match input " + input[i]);
             }
         }
     }

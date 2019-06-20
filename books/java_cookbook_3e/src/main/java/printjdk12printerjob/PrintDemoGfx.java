@@ -15,14 +15,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/** PrintDemoGfx -- Construct and print a GfxDemoCanvas. 
+/**
+ * PrintDemoGfx -- Construct and print a GfxDemoCanvas.
  * Java 2 VERSION, using a PrinterJob.
  */
 // BEGIN main
 public class PrintDemoGfx {
     final boolean quiet;
 
-    /** Simple demo main program. */
+    /**
+     * Simple demo main program.
+     */
     public static void main(String[] av) throws PrinterException {
         boolean quiet = false;
         if (av.length > 0 && av[0].startsWith("-q"))
@@ -53,7 +56,7 @@ public class PrintDemoGfx {
                     pjob.setPrintable(new Printable() {
                         /** called from the printer system to print each page */
                         public int print(Graphics pg, PageFormat pf, int pageNum) {
-                            if (pageNum>0)        // we only print one page
+                            if (pageNum > 0)        // we only print one page
                                 return Printable.NO_SUCH_PAGE;    // ie., end of job
 
                             // Now ask "thing" to paint itself
@@ -72,8 +75,8 @@ public class PrintDemoGfx {
                     pjob.print();             // Finally, do the printing.
                 } catch (PrinterException pe) {
                     JOptionPane.showMessageDialog(f,
-                        "Printer error" + pe, "Printing error",
-                        JOptionPane.ERROR_MESSAGE);
+                            "Printer error" + pe, "Printing error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

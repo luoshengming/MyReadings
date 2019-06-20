@@ -5,16 +5,18 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 // BEGIN main
+
 /**
  * Demonstrate the Fork-Join Framework to average a large array.
- * Running this on a multi-core machine as e.g., 
+ * Running this on a multi-core machine as e.g.,
  * $ time java threads.RecursiveTaskDemo
  * shows that the CPU time is always greater than the elapsed time,
  * indicating that we are making use of multiple cores.
  * That said, it is a somewhat contrived demo.
- *
+ * <p>
  * Use RecursiveTask<T> where, as in this example, each call returns
  * a value that represents the computation for its subset of the overall task.
+ *
  * @author Ian Darwin
  */
 public class RecursiveTaskDemo extends RecursiveTask<Long> {
@@ -26,7 +28,7 @@ public class RecursiveTaskDemo extends RecursiveTask<Long> {
 
     int[] data;
     int start, length;
-    
+
     public static void main(String[] args) {
         int[] source = new int[N];
         loadData(source);
@@ -47,7 +49,7 @@ public class RecursiveTaskDemo extends RecursiveTask<Long> {
             data[i] = r.nextInt();
         }
     }
-    
+
     public RecursiveTaskDemo(int[] data, int start, int length) {
         this.data = data;
         this.start = start;
@@ -65,10 +67,10 @@ public class RecursiveTaskDemo extends RecursiveTask<Long> {
         } else {                    // Divide and Conquer    
             int split = length / 2;
             RecursiveTaskDemo t1 =
-                new RecursiveTaskDemo(data, start,         split);
+                    new RecursiveTaskDemo(data, start, split);
             t1.fork();
             RecursiveTaskDemo t2 =
-                new RecursiveTaskDemo(data, start + split, length - split);
+                    new RecursiveTaskDemo(data, start + split, length - split);
             return t2.compute() + t1.join();
         }
     }

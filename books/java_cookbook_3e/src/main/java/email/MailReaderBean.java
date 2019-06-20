@@ -1,6 +1,7 @@
 package email;
 
 // BEGIN main
+
 import javax.mail.Address;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -22,7 +23,7 @@ import javax.swing.event.TreeSelectionListener;
 public class MailReaderBean extends JSplitPane {
 
     private static final long serialVersionUID = 1L;
-    
+
     private JTextArea bodyText;
 
     /* Construct a mail reader bean with all defaults.
@@ -33,12 +34,12 @@ public class MailReaderBean extends JSplitPane {
 
     /* Construct a mail reader bean with all values. */
     public MailReaderBean(
-        String protocol,
-        String host,
-        String user,
-        String password,
-        String rootName)
-    throws Exception {
+            String protocol,
+            String host,
+            String user,
+            String password,
+            String rootName)
+            throws Exception {
 
         super(VERTICAL_SPLIT);
 
@@ -46,7 +47,7 @@ public class MailReaderBean extends JSplitPane {
 
         // Start with a Mail Session object
         Session session = Session.getDefaultInstance(
-            System.getProperties(), null);
+                System.getProperties(), null);
         session.setDebug(false);
 
         // Get a Store object for the given protocol
@@ -73,7 +74,7 @@ public class MailReaderBean extends JSplitPane {
             for (Folder f : fs)
                 listFolder(top, new FolderNode(f), recursive);
         } else
-                listFolder(top, top, false);
+            listFolder(top, top, false);
 
         // Now that (all) the foldernodes and treenodes are in,
         // construct a JTree object from the top of the list down,
@@ -101,7 +102,7 @@ public class MailReaderBean extends JSplitPane {
                 if (o instanceof MessageNode) {
                     bodyText.setText("");
                     try {
-                        Message m = ((MessageNode)o).m;
+                        Message m = ((MessageNode) o).m;
 
                         bodyText.append("To: ");
                         Object[] tos = m.getAllRecipients();
@@ -130,16 +131,18 @@ public class MailReaderBean extends JSplitPane {
                     } catch (Exception e) {
                         bodyText.append(e.toString());
                     }
-                } else 
+                } else
                     System.err.println("UNEXPECTED SELECTION: " + o.getClass());
             }
         };
         tree.addTreeSelectionListener(tsl);
     }
 
-    /** Process one folder. */
+    /**
+     * Process one folder.
+     */
     static void listFolder(FolderNode top, FolderNode folder, boolean recurse)
-        throws Exception {
+            throws Exception {
 
         if ((folder.f.getType() & Folder.HOLDS_MESSAGES) != 0) {
             Message[] msgs = folder.f.getMessages();
@@ -148,7 +151,7 @@ public class MailReaderBean extends JSplitPane {
                 Address from = m.m.getFrom()[0];
                 String fromAddress;
                 if (from instanceof InternetAddress)
-                    fromAddress = ((InternetAddress)from).getAddress();
+                    fromAddress = ((InternetAddress) from).getAddress();
                 else
                     fromAddress = from.toString();
                 top.add(new MessageNode(ms));
@@ -172,9 +175,9 @@ public class MailReaderBean extends JSplitPane {
         if (args.length > 0)
             mbox = args[0];
         MailReaderBean mb = new MailReaderBean("imap", "localhost",
-            System.getProperty("user.name"), "*", mbox);
+                System.getProperty("user.name"), "*", mbox);
         jf.getContentPane().add(mb);
-        jf.setSize(640,480);
+        jf.setSize(640, 480);
         jf.setVisible(true);
     }
 }

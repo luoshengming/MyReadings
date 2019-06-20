@@ -6,8 +6,6 @@ import org.springframework.cloud.stream.annotation.rxjava.RxJavaProcessor;
 import org.springframework.context.annotation.Bean;
 
 /**
- *
- *
  * @author 翟永超
  * @create 2016/11/8.
  * @blog http://blog.didispace.com
@@ -33,10 +31,12 @@ public class App1 {
 //        return "From Input Channel Return - " + payload;
 //    }
 
-    /**rxjava实现**/
+    /**
+     * rxjava实现
+     **/
 
     @Bean
-    public RxJavaProcessor<String,String> processor() {
+    public RxJavaProcessor<String, String> processor() {
         return inputStream -> inputStream.map(data -> {
             logger.info("Received: " + data);
             return data;

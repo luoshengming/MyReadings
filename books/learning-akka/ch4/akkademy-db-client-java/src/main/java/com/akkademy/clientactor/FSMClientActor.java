@@ -9,25 +9,28 @@ import java.util.LinkedList;
 
 import static com.akkademy.clientactor.State.*;
 
-enum State{
+enum State {
     DISCONNECTED,
     CONNECTED,
     CONNECTED_AND_PENDING
 }
 
-class EventQueue extends LinkedList<Request> {}
-class FlushMsg{}
+class EventQueue extends LinkedList<Request> {
+}
+
+class FlushMsg {
+}
 
 /**
  * To revert to disconnected, we could send occassional heartbeat pings
  * and revert by restarting the actor (throwing an exception)
  */
 
-public class FSMClientActor extends AbstractFSM<State, EventQueue>{
+public class FSMClientActor extends AbstractFSM<State, EventQueue> {
 
     private ActorSelection remoteDb;
 
-    public FSMClientActor(String dbPath){
+    public FSMClientActor(String dbPath) {
         remoteDb = context().actorSelection(dbPath);
     }
 
@@ -41,9 +44,9 @@ public class FSMClientActor extends AbstractFSM<State, EventQueue>{
                             container.add(msg);
                             return stay();
                         }).event(Connected.class, (msg, container) -> {
-                    if(container.size() == 0){
+                    if (container.size() == 0) {
                         return goTo(CONNECTED);
-                    }else{
+                    } else {
                         return goTo(CONNECTED_AND_PENDING);
                     }
                 }));

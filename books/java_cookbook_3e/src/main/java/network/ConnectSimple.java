@@ -1,6 +1,7 @@
 package network;
 
 // BEGIN main
+
 import java.net.Socket;
 
 /* Client with NO error handling */

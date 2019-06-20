@@ -11,7 +11,6 @@ import com.akkademy.messages.KeyNotFoundException;
 import com.akkademy.messages.SetRequest;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,33 +20,33 @@ public class AkkademyDb extends AbstractActor {
 
     private AkkademyDb() {
         receive(ReceiveBuilder.
-                        match(Connected.class, message -> {
-                            log.info("Received Connected request: {}", message);
-                            sender().tell(new Connected(), self());
-                        }).
-                        match(List.class, message -> {
-                                    message.forEach(x -> {
-                                        if (x instanceof SetRequest) {
-                                            SetRequest setRequest = (SetRequest) x;
-                                            handleSetRequest(setRequest);
-                                        }
-                                        if (x instanceof GetRequest) {
-                                            GetRequest getRequest = (GetRequest) x;
-                                            handleGetRequest(getRequest);
-                                        }
-                                    });
+                match(Connected.class, message -> {
+                    log.info("Received Connected request: {}", message);
+                    sender().tell(new Connected(), self());
+                }).
+                match(List.class, message -> {
+                            message.forEach(x -> {
+                                if (x instanceof SetRequest) {
+                                    SetRequest setRequest = (SetRequest) x;
+                                    handleSetRequest(setRequest);
                                 }
-                        ).
-                        match(SetRequest.class, message -> {
-                            handleSetRequest(message);
-                        }).
-                        match(GetRequest.class, message -> {
-                            handleGetRequest(message);
-                        }).
-                        matchAny(o -> {
-                            log.info("unknown message: " + o);
-                            sender().tell(new Status.Failure(new ClassNotFoundException()), self());
-                        }).build()
+                                if (x instanceof GetRequest) {
+                                    GetRequest getRequest = (GetRequest) x;
+                                    handleGetRequest(getRequest);
+                                }
+                            });
+                        }
+                ).
+                match(SetRequest.class, message -> {
+                    handleSetRequest(message);
+                }).
+                match(GetRequest.class, message -> {
+                    handleGetRequest(message);
+                }).
+                matchAny(o -> {
+                    log.info("unknown message: " + o);
+                    sender().tell(new Status.Failure(new ClassNotFoundException()), self());
+                }).build()
         );
     }
 

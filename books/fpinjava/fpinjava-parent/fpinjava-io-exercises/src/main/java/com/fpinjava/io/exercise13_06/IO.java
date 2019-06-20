@@ -6,15 +6,15 @@ import com.fpinjava.common.Nothing;
 
 public interface IO<A> {
 
-  IO<Nothing> empty = () -> Nothing.instance;
+    IO<Nothing> empty = () -> Nothing.instance;
 
-  A run();
+    A run();
 
-  default <B> IO<B> map(Function<A, B> f) {
-    throw new IllegalStateException("To be implemented");
-  }
+    default <B> IO<B> map(Function<A, B> f) {
+        throw new IllegalStateException("To be implemented");
+    }
 
-  static <A> IO<A> unit(A a) {
-    return () -> a;
-  }
+    static <A> IO<A> unit(A a) {
+        return () -> a;
+    }
 }

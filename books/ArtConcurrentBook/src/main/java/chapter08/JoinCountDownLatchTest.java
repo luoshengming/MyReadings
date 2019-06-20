@@ -1,7 +1,6 @@
 package chapter08;
 
 /**
- * 
  * @author tengfei.fangtf
  * @version $Id: JoinCountDownLatchTest.java, v 0.1 2015-8-1 上午12:08:30 tengfei.fangtf Exp $
  */

@@ -16,24 +16,24 @@ import java.util.Collection;
 
 @RestController
 public class UserController {
-  @Autowired
-  private UserRepository userRepository;
-  private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    @Autowired
+    private UserRepository userRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-  @GetMapping("/{id}")
-  public User findById(@PathVariable Long id) {
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if (principal instanceof UserDetails) {
-      UserDetails user = (UserDetails) principal;
-      Collection<? extends GrantedAuthority> collection = user.getAuthorities();
-      for (GrantedAuthority c : collection) {
-        // 打印当前登录用户的信息
-        UserController.LOGGER.info("当前用户是{}，角色是{}", user.getUsername(), c.getAuthority());
-      }
-    } else {
-      // do other things
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Long id) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserDetails user = (UserDetails) principal;
+            Collection<? extends GrantedAuthority> collection = user.getAuthorities();
+            for (GrantedAuthority c : collection) {
+                // 打印当前登录用户的信息
+                UserController.LOGGER.info("当前用户是{}，角色是{}", user.getUsername(), c.getAuthority());
+            }
+        } else {
+            // do other things
+        }
+        User findOne = this.userRepository.findById(id).orElse(null);
+        return findOne;
     }
-      User findOne = this.userRepository.findById(id).orElse(null);
-    return findOne;
-  }
 }

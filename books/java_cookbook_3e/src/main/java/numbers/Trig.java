@@ -2,6 +2,7 @@ package numbers;
 
 /**
  * Demonstrate a few of the Math functions for Trigonometry.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class Trig {

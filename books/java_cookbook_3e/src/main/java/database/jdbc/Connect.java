@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 
-/** Test of loading a driver and connecting to a database.
+/**
+ * Test of loading a driver and connecting to a database.
  * The URL assumes you have the M$ Example "Companies" database
  * configured as a System DSN (or user DSN for your user) in the
  * ODBC control panel.
@@ -24,8 +25,8 @@ public class Connect {
             DriverManager.setLogWriter(new PrintWriter((System.err)));
 
             System.out.println("Getting Connection");
-            Connection conn = 
-                DriverManager.getConnection(dbURL, "ian", "");    // user, passwd
+            Connection conn =
+                    DriverManager.getConnection(dbURL, "ian", "");    // user, passwd
 
             // If a SQLWarning object is available, print its
             // warning(s).  There may be multiple warnings chained.

@@ -1,10 +1,12 @@
 package email;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-/** A frame for (possibly) multiple MailComposeBean windows.
+/**
+ * A frame for (possibly) multiple MailComposeBean windows.
  */
 // BEGIN main
 public class MailComposeFrame extends JPanel {
@@ -12,8 +14,9 @@ public class MailComposeFrame extends JPanel {
     JButton newButton;
     protected int nx, ny;
 
-    /** To be useful here, a MailComposeBean has to be inside
-     * its own little JInternalFrame. 
+    /**
+     * To be useful here, a MailComposeBean has to be inside
+     * its own little JInternalFrame.
      */
     public MailComposeBean newSend() {
 
@@ -21,11 +24,11 @@ public class MailComposeFrame extends JPanel {
         JInternalFrame jf = new JInternalFrame();
 
         // Bake the actual Bean
-        MailComposeBean newBean = 
-            new MailComposeBean(this, "Compose", 400, 250);
+        MailComposeBean newBean =
+                new MailComposeBean(this, "Compose", 400, 250);
 
         // Arrange them on the diagonal.
-        jf.setLocation(nx+=10, ny+=10);
+        jf.setLocation(nx += 10, ny += 10);
 
         // Make the new Bean be the contents of the JInternalFrame
         jf.setContentPane(newBean);

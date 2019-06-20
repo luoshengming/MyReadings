@@ -2,6 +2,7 @@ package numbers;
 
 /**
  * Format a plural correctly, by hand.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -12,9 +13,11 @@ public class FormatPlurals {
         report(2);
     }
 
-    /** report -- using conditional operator */
+    /**
+     * report -- using conditional operator
+     */
     public static void report(int n) {
-        System.out.println("We used " + n + " item" + (n==1?"":"s"));
+        System.out.println("We used " + n + " item" + (n == 1 ? "" : "s"));
     }
 }
 // END main

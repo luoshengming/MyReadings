@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-/** detab- replace blanks by tabs and blanks.
+/**
+ * detab- replace blanks by tabs and blanks.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 public class DeTab {
     Tabs ts;
-    
+
     public static void main(String[] argv) throws IOException {
         DeTab dt = new DeTab(8);
         dt.detab(new BufferedReader(new InputStreamReader(System.in)),
@@ -21,12 +23,15 @@ public class DeTab {
     public DeTab(int n) {
         ts = new Tabs(n);
     }
+
     public DeTab() {
         ts = new Tabs();
     }
 
-    /** detab one file (replace tabs with spaces)
-     * @param is - the file to be processed
+    /**
+     * detab one file (replace tabs with spaces)
+     *
+     * @param is  - the file to be processed
      * @param out - the updated file
      */
     public void detab(BufferedReader is, PrintWriter out) throws IOException {
@@ -35,8 +40,10 @@ public class DeTab {
             out.println(detabLine(line));
         }
     }
-    
-    /** detab one line (replace tabs with spaces)
+
+    /**
+     * detab one line (replace tabs with spaces)
+     *
      * @param line - the line to be processed
      * @return the updated line
      */

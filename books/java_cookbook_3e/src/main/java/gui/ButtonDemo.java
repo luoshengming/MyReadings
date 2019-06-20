@@ -8,9 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 // BEGIN main
-/** Demonstrate simple use of Button */
+
+/**
+ * Demonstrate simple use of Button
+ */
 public class ButtonDemo extends JFrame implements ActionListener {
-    JButton    b1;
+    JButton b1;
 
     public ButtonDemo() {
         setLayout(new FlowLayout());
@@ -19,10 +22,11 @@ public class ButtonDemo extends JFrame implements ActionListener {
         setSize(300, 200);
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
         System.out.println("Thanks for pushing my button!");
     }
-    
+
     public static void main(String[] unuxed) {
         new ButtonDemo().setVisible(true);
     }

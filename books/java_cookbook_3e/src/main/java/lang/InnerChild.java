@@ -1,8 +1,10 @@
 package lang;
 
 // BEGIN main
+
 /**
  * Demonstrate an Inner Child class
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class InnerChild {
@@ -11,6 +13,7 @@ public class InnerChild {
             // empty
         }
     }
+
     public static void main(String[] argv) {
         // System.out.println(new InnerChild.InnerInnerChild()); // NOT how!
         InnerChild x = new InnerChild();

@@ -1,8 +1,7 @@
 package com.example;
 
-import akka.actor.UntypedActor;
 import akka.actor.Props;
-import akka.japi.Creator;
+import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 

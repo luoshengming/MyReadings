@@ -24,11 +24,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-/** A Swing-based Font Selection JDialog, to be created and
+/**
+ * A Swing-based Font Selection JDialog, to be created and
  * setVisible(true) in the usual way.
  * <p>
  * Uses Listeners to ensure that Preview button isn't actually needed
- * @author    Ian Darwin
+ *
+ * @author Ian Darwin
  */
 // BEGIN main
 // package com.darwinsys.swingui;
@@ -40,39 +42,63 @@ public class FontChooser extends JDialog {
 
     // Results:
 
-    /** The font the user has chosen */
+    /**
+     * The font the user has chosen
+     */
     protected Font resultFont = new Font("Serif", Font.PLAIN, 12);
-    /** The resulting font name */
+    /**
+     * The resulting font name
+     */
     protected String resultName;
-    /** The resulting font size */
+    /**
+     * The resulting font size
+     */
     protected int resultSize;
-    /** The resulting boldness */
+    /**
+     * The resulting boldness
+     */
     protected boolean isBold;
-    /** The resulting italicness */
+    /**
+     * The resulting italicness
+     */
     protected boolean isItalic;
 
     // Working fields
 
-    /** Display text */
+    /**
+     * Display text
+     */
     protected String displayText = DEFAULT_TEXT;
-    /** The font name chooser */
+    /**
+     * The font name chooser
+     */
     protected JList fontNameChoice;
-    /** The font size chooser */
+    /**
+     * The font size chooser
+     */
     protected JList fontSizeChoice;
-    /** The bold and italic choosers */
+    /**
+     * The bold and italic choosers
+     */
     JCheckBox bold, italic;
 
-    /** The list of font sizes */
+    /**
+     * The list of font sizes
+     */
     protected Integer fontSizes[] = {
             8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 30, 36, 40, 48, 60, 72
     };
-    /** The index of the default size (e.g., 14 point == 4) */
+    /**
+     * The index of the default size (e.g., 14 point == 4)
+     */
     protected static final int DEFAULT_SIZE = 4;
-    /** The font display area.
+    /**
+     * The font display area.
      */
     protected JLabel previewArea;
 
-    /** Construct a FontChooser -- Sets title and gets
+    /**
+     * Construct a FontChooser -- Sets title and gets
      * array of fonts on the system. Builds a GUI to let
      * the user choose one font at one size.
      */
@@ -89,7 +115,7 @@ public class FontChooser extends JDialog {
         // with your OS (e.g., Helvetica, Times), plus the Sun/Java ones (Lucida,
         // Lucida Bright, Lucida Sans...)
         String[] fontList = GraphicsEnvironment.getLocalGraphicsEnvironment().
-            getAvailableFontFamilyNames();
+                getAvailableFontFamilyNames();
 
         fontNameChoice = new JList(fontList);
         top.add(new JScrollPane(fontNameChoice));
@@ -106,9 +132,9 @@ public class FontChooser extends JDialog {
 
         JPanel attrs = new JPanel();
         top.add(attrs);
-        attrs.setLayout(new GridLayout(0,1));
-        attrs.add(bold  =new JCheckBox("Bold", false));
-        attrs.add(italic=new JCheckBox("Italic", false));
+        attrs.setLayout(new GridLayout(0, 1));
+        attrs.add(bold = new JCheckBox("Bold", false));
+        attrs.add(italic = new JCheckBox("Italic", false));
 
         // Make sure that any change to the GUI will trigger a font preview.
         ListSelectionListener waker = new ListSelectionListener() {
@@ -166,11 +192,12 @@ public class FontChooser extends JDialog {
         setLocation(100, 100);
     }
 
-    /** Called from the action handlers to get the font info,
+    /**
+     * Called from the action handlers to get the font info,
      * build a font, and set it.
      */
     protected void previewFont() {
-        resultName = (String)fontNameChoice.getSelectedValue();
+        resultName = (String) fontNameChoice.getSelectedValue();
         String resultSizeName = fontSizeChoice.getSelectedValue().toString();
         int resultSize = Integer.parseInt(resultSizeName);
         isBold = bold.isSelected();
@@ -185,16 +212,23 @@ public class FontChooser extends JDialog {
         pack();                // ensure Dialog is big enough.
     }
 
-    /** Retrieve the selected font name. */
+    /**
+     * Retrieve the selected font name.
+     */
     public String getSelectedName() {
         return resultName;
     }
-    /** Retrieve the selected size */
+
+    /**
+     * Retrieve the selected size
+     */
     public int getSelectedSize() {
         return resultSize;
     }
 
-    /** Retrieve the selected font, or null */
+    /**
+     * Retrieve the selected font, or null
+     */
     public Font getSelectedFont() {
         return resultFont;
     }

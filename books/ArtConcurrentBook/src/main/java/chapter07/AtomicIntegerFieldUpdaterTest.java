@@ -3,7 +3,6 @@ package chapter07;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 /**
- * 
  * @author tengfei.fangtf
  * @version $Id: AtomicIntegerFieldUpdaterTest.java, v 0.1 2015-8-1 上午12:04:51 tengfei.fangtf Exp $
  */
@@ -18,7 +17,7 @@ public class AtomicIntegerFieldUpdaterTest {
     }
 
     public static class User {
-        private String      name;
+        private String name;
         public volatile int old;
 
         public User(String name, int old) {

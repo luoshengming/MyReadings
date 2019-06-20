@@ -43,7 +43,7 @@ public class ResultsDecoratorText extends ResultsDecorator {
     }
 
     @Override
-    public int write(ResultSet rs) throws IOException,SQLException {
+    public int write(ResultSet rs) throws IOException, SQLException {
         ResultSetMetaData md = rs.getMetaData();
         int colCount = md.getColumnCount();
         for (int i = 1; i <= colCount; i++) {
@@ -63,7 +63,7 @@ public class ResultsDecoratorText extends ResultsDecorator {
 
     @Override
     public void displayTable(String table, ResultSet rs)
-        throws IOException, SQLException {
+            throws IOException, SQLException {
 
         write(rs);
     }

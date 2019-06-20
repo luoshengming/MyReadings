@@ -7,7 +7,7 @@ import com.darwinsys.lang.ExecAndPrint;
  */
 public class ExecDemoFiles {
     public static void main(String av[]) throws Exception {
-        
+
         // BEGIN main
         // Get and save the Runtime object.
         Runtime rt = Runtime.getRuntime();
@@ -19,7 +19,7 @@ public class ExecDemoFiles {
 
         // Run the "ls" (directory lister) program
         // with its output sent into a file
-        String[] args = { "ls", "-l", "file1", "file2", "file3" };
+        String[] args = {"ls", "-l", "file1", "file2", "file3"};
         ExecAndPrint.run(args);
 
         rt.exec("rm file1 file2 file3");

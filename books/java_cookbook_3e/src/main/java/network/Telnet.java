@@ -12,9 +12,11 @@ import java.io.*;
 public class Telnet {
     String host;
     int portNum;
+
     public static void main(String[] argv) {
         new Telnet().talkTo(argv);
     }
+
     private void talkTo(String av[]) {
         if (av.length >= 1)
             host = av[0];
@@ -33,7 +35,7 @@ public class Telnet {
             // Connect our stdin to the remote
             new Pipe(System.in, s.getOutputStream()).start();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
             return;
         }
@@ -47,13 +49,17 @@ public class Telnet {
         BufferedReader is;
         PrintStream os;
 
-        /** Construct a Pipe to read from is and write to os */
+        /**
+         * Construct a Pipe to read from is and write to os
+         */
         Pipe(InputStream is, OutputStream os) {
             this.is = new BufferedReader(new InputStreamReader(is));
             this.os = new PrintStream(os);
         }
 
-        /** Do the reading and writing. */
+        /**
+         * Do the reading and writing.
+         */
         public void run() {
             String line;
             try {
@@ -62,7 +68,7 @@ public class Telnet {
                     os.print("\r\n");
                     os.flush();
                 }
-            } catch(IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }

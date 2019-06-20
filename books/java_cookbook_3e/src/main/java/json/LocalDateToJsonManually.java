@@ -7,12 +7,12 @@ public class LocalDateToJsonManually {
 
     private static final String OPEN = "{";
     private static final String CLOSE = "}";
-    
+
     public static void main(String[] args) {
         LocalDate dNow = LocalDate.now();
         System.out.println(toJson(dNow));
     }
-    
+
     public static String toJson(LocalDate dNow) {
         StringBuilder sb = new StringBuilder();
         sb.append(OPEN).append("\n");
@@ -22,7 +22,7 @@ public class LocalDateToJsonManually {
         sb.append(CLOSE).append("\n");
         return sb.toString();
     }
-    
+
     public static String jsonize(String key, Object value) {
         return String.format("\"%s\": \"%s\",\n", key, value);
     }

@@ -6,17 +6,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 // BEGIN main
-/** Some JUnit test cases for EqualsDemo.
+
+/**
+ * Some JUnit test cases for EqualsDemo.
  * Writing a full set is left as "an exercise for the reader".
  */
 public class EqualsDemoTest {
 
-    /** an object being tested */
+    /**
+     * an object being tested
+     */
     EqualsDemo d1;
-    /** another object being tested */
+    /**
+     * another object being tested
+     */
     EqualsDemo d2;
 
-    /** Method to be invoked before each test method */
+    /**
+     * Method to be invoked before each test method
+     */
     @Before
     public void setUp() {
         d1 = new EqualsDemo();
@@ -24,7 +32,7 @@ public class EqualsDemoTest {
     }
 
     @Test
-    public void testSymmetry() { 
+    public void testSymmetry() {
         assertTrue(d1.equals(d1));
     }
 

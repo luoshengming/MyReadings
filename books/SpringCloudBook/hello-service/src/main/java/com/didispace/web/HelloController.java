@@ -18,42 +18,42 @@ public class HelloController {
     @Autowired
     private Registration registration; // 服务注册
 
-	@Autowired
-	private DiscoveryClient client;
+    @Autowired
+    private DiscoveryClient client;
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String hello() throws Exception {
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello() throws Exception {
         ServiceInstance instance = serviceInstance();
 
-		// 测试超时触发断路器
+        // 测试超时触发断路器
 //		int sleepTime = new Random().nextInt(3000);
 //		logger.info("sleepTime:" + sleepTime);
 //		Thread.sleep(sleepTime);
 
-		logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-		return "Hello World";
-	}
+        logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
+        return "Hello World";
+    }
 
-	@RequestMapping(value = "/hello1", method = RequestMethod.GET)
-	public String hello(@RequestParam String name) {
+    @RequestMapping(value = "/hello1", method = RequestMethod.GET)
+    public String hello(@RequestParam String name) {
         ServiceInstance instance = serviceInstance();
-		logger.info("/hello1, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-		return "Hello " + name;
-	}
+        logger.info("/hello1, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
+        return "Hello " + name;
+    }
 
-	@RequestMapping(value = "/hello2", method = RequestMethod.GET)
-	public User hello(@RequestHeader String name, @RequestHeader Integer age) {
+    @RequestMapping(value = "/hello2", method = RequestMethod.GET)
+    public User hello(@RequestHeader String name, @RequestHeader Integer age) {
         ServiceInstance instance = serviceInstance();
-		logger.info("/hello2, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-		return new User(name, age);
-	}
+        logger.info("/hello2, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
+        return new User(name, age);
+    }
 
-	@RequestMapping(value = "/hello3", method = RequestMethod.POST)
-	public String hello(@RequestBody User user) {
+    @RequestMapping(value = "/hello3", method = RequestMethod.POST)
+    public String hello(@RequestBody User user) {
         ServiceInstance instance = serviceInstance();
-		logger.info("/hello3, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-		return "Hello "+ user.getName() + ", " + user.getAge();
-	}
+        logger.info("/hello3, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
+        return "Hello " + user.getName() + ", " + user.getAge();
+    }
 
     public ServiceInstance serviceInstance() {
         List<ServiceInstance> list = client.getInstances(registration.getServiceId());

@@ -5,15 +5,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 
  * @author tengfei.fangtf
  * @version $Id: ExchangerTest.java, v 0.1 2015-8-1 上午12:10:37 tengfei.fangtf Exp $
  */
 public class ExchangerTest {
 
-    private static final Exchanger<String> exgr       = new Exchanger<String>();
+    private static final Exchanger<String> exgr = new Exchanger<String>();
 
-    private static ExecutorService         threadPool = Executors.newFixedThreadPool(2);
+    private static ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) {
 

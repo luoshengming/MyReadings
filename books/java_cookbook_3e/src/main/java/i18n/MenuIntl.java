@@ -13,22 +13,27 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-/** This is a partly-internationalized version of MenuDemo.
+/**
+ * This is a partly-internationalized version of MenuDemo.
  * To try it out, use
- *        java MenuIntl
- *        java -Duser.language=es MenuIntl
+ * java MenuIntl
+ * java -Duser.language=es MenuIntl
  */
 @SuppressWarnings("serial")
 // BEGIN main
 public class MenuIntl extends JFrame {
 
-    /** "main program" method - construct and show */
+    /**
+     * "main program" method - construct and show
+     */
     public static void main(String[] av) {
         // create an MenuIntl object, tell it to show up
         new MenuIntl().setVisible(true);
     }
 
-    /** Construct the object including its GUI */
+    /**
+     * Construct the object including its GUI
+     */
     public MenuIntl() {
         super("MenuIntlTest");
         JMenuItem mi;        // used in various spots
@@ -45,14 +50,18 @@ public class MenuIntl extends JFrame {
         ResourceBundle b = ResourceBundle.getBundle("i18n.Widgets");
 
         String titlebar;
-        try { titlebar = b.getString("program"+".title"); }
-        catch (MissingResourceException e) { titlebar="MenuIntl Demo"; }
+        try {
+            titlebar = b.getString("program" + ".title");
+        } catch (MissingResourceException e) {
+            titlebar = "MenuIntl Demo";
+        }
         setTitle(titlebar);
 
         String message;
-        try { message = b.getString("program"+".message"); }
-        catch (MissingResourceException e) {
-            message="Welcome to the world of Java";
+        try {
+            message = b.getString("program" + ".message");
+        } catch (MissingResourceException e) {
+            message = "Welcome to the world of Java";
         }
         lab.setText(message);
 
@@ -73,13 +82,13 @@ public class MenuIntl extends JFrame {
         });
         mb.add(fm);
 
-        JMenu vm = mkMenu(b,  "view");
+        JMenu vm = mkMenu(b, "view");
         vm.add(mi = mkMenuItem(b, "view", "tree"));
         vm.add(mi = mkMenuItem(b, "view", "list"));
         vm.add(mi = mkMenuItem(b, "view", "longlist"));
         mb.add(vm);
 
-        JMenu hm = mkMenu(b,  "help");
+        JMenu hm = mkMenu(b, "help");
         hm.add(mi = mkMenuItem(b, "help", "about"));
         // mb.setHelpMenu(hm);    // needed for portability (Motif, etc.).
 
@@ -93,22 +102,35 @@ public class MenuIntl extends JFrame {
     // Copies of routines that are in darwinsys.jar,
     // just here for compilation convenience
 
-    /** Convenience routine to make a JMenu */
+    /**
+     * Convenience routine to make a JMenu
+     */
     public JMenu mkMenu(ResourceBundle b, String name) {
         String menuLabel;
-        try { menuLabel = b.getString(name+".label"); }
-        catch (MissingResourceException e) { menuLabel=name; }
+        try {
+            menuLabel = b.getString(name + ".label");
+        } catch (MissingResourceException e) {
+            menuLabel = name;
+        }
         return new JMenu(menuLabel);
     }
 
-    /** Convenience routine to make a JMenuItem */
+    /**
+     * Convenience routine to make a JMenuItem
+     */
     public JMenuItem mkMenuItem(ResourceBundle b, String menu, String name) {
         String miLabel;
-        try { miLabel = b.getString(menu + "." + name + ".label"); }
-        catch (MissingResourceException e) { miLabel=name; }
+        try {
+            miLabel = b.getString(menu + "." + name + ".label");
+        } catch (MissingResourceException e) {
+            miLabel = name;
+        }
         String key = null;
-        try { key = b.getString(menu + "." + name + ".key"); }
-        catch (MissingResourceException e) { key=null; }
+        try {
+            key = b.getString(menu + "." + name + ".key");
+        } catch (MissingResourceException e) {
+            key = null;
+        }
 
         if (key == null)
             return new JMenuItem(miLabel);
@@ -116,8 +138,7 @@ public class MenuIntl extends JFrame {
             return new JMenuItem(miLabel, key.charAt(0));
     }
 
-    private String lookupWithDefault(ResourceBundle rb, String key, String dflt)
-    {
+    private String lookupWithDefault(ResourceBundle rb, String key, String dflt) {
         try {
             return rb.getString(key);
         } catch (MissingResourceException e) {

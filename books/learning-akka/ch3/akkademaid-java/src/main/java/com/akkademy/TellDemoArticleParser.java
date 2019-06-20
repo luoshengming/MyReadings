@@ -22,12 +22,14 @@ public class TellDemoArticleParser extends AbstractActor {
         this.artcileParseActor = context().actorSelection(artcileParseActorPath);
         this.timeout = timeout;
     }
+
     /**
      * While this example is a bit harder to understand than the ask demo,
      * for extremely performance critical applications, this has an advantage over ask.
      * The creation of 5 objects are saved - only one extra actor is created.
      * Functionally it's similar.
      * It will make the request to the HTTP actor w/o waiting for the cache response though (can be solved).
+     *
      * @return
      */
 
@@ -49,11 +51,11 @@ public class TellDemoArticleParser extends AbstractActor {
      * Then the actor will shut itself down once the work is complete.
      * A great use case for the use of tell here (aka extra pattern) is aggregating data from several sources.
      */
-    private ActorRef buildExtraActor(ActorRef senderRef, String uri){
+    private ActorRef buildExtraActor(ActorRef senderRef, String uri) {
 
         class MyActor extends AbstractActor {
             public MyActor() {
-            receive(ReceiveBuilder
+                receive(ReceiveBuilder
                         .matchEquals(String.class, x -> x.equals("timeout"), x -> { //if we get timeout, then fail
                             senderRef.tell(new Status.Failure(new TimeoutException("timeout!")), self());
                             context().stop(self());
@@ -80,7 +82,6 @@ public class TellDemoArticleParser extends AbstractActor {
         }
 
         return context().actorOf(Props.create(MyActor.class, () -> new MyActor()));
-
 
 
     }

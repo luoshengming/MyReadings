@@ -23,10 +23,7 @@ import java.io.IOException;
  * @date 2014年2月14日
  */
 public class TimeServer {
-    /**
-     * @param args
-     * @throws IOException
-     */
+
     public static void main(String[] args) throws IOException {
         int port = 8080;
         if (args != null && args.length > 0) {

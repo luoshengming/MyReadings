@@ -1,11 +1,12 @@
 package testing;
 
+import domain.Person;
+import org.junit.Test;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
 
 // BEGIN main
 public class HamcrestDemo {

@@ -13,8 +13,8 @@ public class ProcessIntsUsingFunctional {
 
     public static void main(String[] args) {
         int total = 0;
-        for (int i : integers) 
-            total += process(i, x ->  x * x + 1);
+        for (int i : integers)
+            total += process(i, x -> x * x + 1);
         System.out.println("The total is " + total);
     }
 

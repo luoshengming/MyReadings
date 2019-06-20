@@ -1,7 +1,7 @@
 package graphics;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 // BEGIN main
 public class DrawStringDemo extends JComponent {
@@ -15,6 +15,7 @@ public class DrawStringDemo extends JComponent {
         g.drawString("Hello Java", textX, textY);
     }
 
+    @Override
     public Dimension getPreferredSize() {
         return new Dimension(100, 100);
     }

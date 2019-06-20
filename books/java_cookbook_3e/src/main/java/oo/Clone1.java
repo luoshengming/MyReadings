@@ -1,10 +1,15 @@
 package oo;
 
-/** Demonstration of cloning. */
+/**
+ * Demonstration of cloning.
+ */
 // BEGIN main
 public class Clone1 implements Cloneable {
 
-    /** Clone this object. Call super.clone() to do the work */
+    /**
+     * Clone this object. Call super.clone() to do the work
+     */
+    @Override
     public Object clone() {
         try {
             return super.clone();
@@ -17,7 +22,10 @@ public class Clone1 implements Cloneable {
     int x;
     transient int y;    // will be cloned, but not serialized
 
-    /** Display the current object as a string */
+    /**
+     * Display the current object as a string
+     */
+    @Override
     public String toString() {
         return "Clone1[" + x + "," + y + "]";
     }

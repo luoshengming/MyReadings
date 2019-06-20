@@ -1,7 +1,5 @@
 package com.akkademy;
 
-import java.util.List;
-
 public class TestHelper {
     public static String file = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
             "<!-- saved from url=(0031)http://www.lipsum.com/feed/html -->\n" +

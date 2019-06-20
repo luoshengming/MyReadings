@@ -15,11 +15,13 @@
  */
 package com.phei.netty.pio;
 
+import com.phei.netty.bio.TimeServerHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import com.phei.netty.bio.TimeServerHandler;
 
 /**
  * @author lilinfeng
@@ -27,12 +29,9 @@ import com.phei.netty.bio.TimeServerHandler;
  * @date 2014年2月14日
  */
 public class TimeServer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TimeServer.class);
 
-    /**
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int port = 8080;
         if (args != null && args.length > 0) {
 
@@ -43,22 +42,17 @@ public class TimeServer {
             }
 
         }
-        ServerSocket server = null;
-        try {
-            server = new ServerSocket(port);
-            System.out.println("The time server is start in port : " + port);
+        try (ServerSocket server = new ServerSocket(port)) {
+            LOGGER.info("The time server is start in port : {}", port);
             Socket socket;
-            TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(50, 10000);// 创建IO任务线程池
+            // 创建IO任务线程池
+            TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(50, 10000);
             while (true) {
                 socket = server.accept();
                 singleExecutor.execute(new TimeServerHandler(socket));
             }
-        } finally {
-            if (server != null) {
-                System.out.println("The time server close");
-                server.close();
-                server = null;
-            }
+        } catch (IOException e) {
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 }

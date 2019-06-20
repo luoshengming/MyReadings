@@ -5,10 +5,13 @@ import com.fpinjava.common.Result;
 
 public interface Input {
 
-  Type type();
-  boolean isDeposit();
-  boolean isWithdraw();
-  Result<Integer> getAmount();
+    Type type();
 
-  enum Type {DEPOSIT,WITHDRAW}
+    boolean isDeposit();
+
+    boolean isWithdraw();
+
+    Result<Integer> getAmount();
+
+    enum Type {DEPOSIT, WITHDRAW}
 }

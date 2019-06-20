@@ -10,9 +10,13 @@ import java.io.*;
  */
 // BEGIN main
 public class ExecDemoLs {
-    /** The program to run */
+    /**
+     * The program to run
+     */
     public static final String PROGRAM = "ls"; // "dir" for Windows
-    /** Set to true to end the loop */
+    /**
+     * Set to true to end the loop
+     */
     static volatile boolean done = false;
 
     public static void main(String argv[]) throws IOException {
@@ -20,7 +24,7 @@ public class ExecDemoLs {
         final Process p;         // Process tracks one external native process
         BufferedReader is;    // reader for output of process
         String line;
-        
+
         p = Runtime.getRuntime().exec(PROGRAM);
 
         Debug.println("exec", "In Main after exec");
@@ -49,7 +53,7 @@ public class ExecDemoLs {
 
         while (!done && ((line = is.readLine()) != null))
             System.out.println(line);
-        
+
         Debug.println("exec", "In Main after EOF");
 
         return;

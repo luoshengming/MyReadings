@@ -30,25 +30,22 @@ import java.io.RandomAccessFile;
  */
 public class FileServerHandler extends SimpleChannelInboundHandler<String> {
 
-    private static final String CR = System.getProperty("line.separator");
-
     @Override
-    public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         File file = new File(msg);
         if (file.exists()) {
             if (!file.isFile()) {
-                ctx.writeAndFlush("Not a file : " + file + CR);
+                ctx.writeAndFlush("Not a file : " + file + System.lineSeparator());
                 return;
             }
-            ctx.write(file + " " + file.length() + CR);
-            RandomAccessFile randomAccessFile = new RandomAccessFile(msg, "r");
-            FileRegion region = new DefaultFileRegion(
-                    randomAccessFile.getChannel(), 0, randomAccessFile.length());
-            ctx.write(region);
-            ctx.writeAndFlush(CR);
-            randomAccessFile.close();
+            ctx.write(file + " " + file.length() + System.lineSeparator());
+            try (RandomAccessFile randomAccessFile = new RandomAccessFile(msg, "r")) {
+                FileRegion region = new DefaultFileRegion(randomAccessFile.getChannel(), 0, randomAccessFile.length());
+                ctx.write(region);
+                ctx.writeAndFlush(System.lineSeparator());
+            }
         } else {
-            ctx.writeAndFlush("File not found: " + file + CR);
+            ctx.writeAndFlush("File not found: " + file + System.lineSeparator());
         }
     }
 

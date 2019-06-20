@@ -11,18 +11,27 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
-/** This is the Bounce class; create and start Sprites, using Threads. */
+/**
+ * This is the Bounce class; create and start Sprites, using Threads.
+ */
 // BEGIN main
 public class Bounce extends Applet implements ActionListener {
 
     private static final long serialVersionUID = -5359162621719520213L;
-    /** The main Panel */
+    /**
+     * The main Panel
+     */
     protected Panel p;
-    /** The image, shared by all the Sprite objects */
+    /**
+     * The image, shared by all the Sprite objects
+     */
     protected Image img;
-    /** A Vector of Sprite objects. */
+    /**
+     * A Vector of Sprite objects.
+     */
     protected List<Sprite> v;
 
+    @Override
     public void init() {
         Button b = new Button("Start");
         b.addActionListener(this);
@@ -37,17 +46,18 @@ public class Bounce extends Applet implements ActionListener {
         mt.addImage(img, 0);
         try {
             mt.waitForID(0);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             throw new IllegalArgumentException(
-                "InterruptedException while loading image " + imgName);
+                    "InterruptedException while loading image " + imgName);
         }
         if (mt.isErrorID(0)) {
             throw new IllegalArgumentException(
-                "Couldn't load image " + imgName);
+                    "Couldn't load image " + imgName);
         }
         v = new Vector<Sprite>(); // multithreaded, use Vector
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Creat-ing another one!");
         Sprite s = new Sprite(this, img);
@@ -56,8 +66,9 @@ public class Bounce extends Applet implements ActionListener {
         v.add(s);
     }
 
+    @Override
     public void stop() {
-        for (int i=0; i<v.size(); i++) {
+        for (int i = 0; i < v.size(); i++) {
             v.get(i).stop();
         }
         v.clear();

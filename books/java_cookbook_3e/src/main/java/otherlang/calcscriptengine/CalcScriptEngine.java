@@ -15,7 +15,7 @@ import javax.script.SimpleBindings;
 public class CalcScriptEngine extends AbstractScriptEngine {
 
     private ScriptEngineFactory factory;
-    
+
     CalcScriptEngine(ScriptEngineFactory factory) {
         super();
         this.factory = factory;

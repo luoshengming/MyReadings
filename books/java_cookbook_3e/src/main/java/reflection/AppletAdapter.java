@@ -26,10 +26,14 @@ import java.util.Map;
 public class AppletAdapter extends Panel implements AppletStub, AppletContext {
 
     private static final long serialVersionUID = 1L;
-    /** The status window at the bottom */
+    /**
+     * The status window at the bottom
+     */
     Label status = null;
 
-    /** Construct the GUI for an Applet Status window */
+    /**
+     * Construct the GUI for an Applet Status window
+     */
     AppletAdapter() {
         super();
 
@@ -44,51 +48,68 @@ public class AppletAdapter extends Panel implements AppletStub, AppletContext {
     }
 
     /****************** AppletStub ***********************/
-    /** Called when the applet wants to be resized.  */
+    /**
+     * Called when the applet wants to be resized.
+     */
     public void appletResize(int w, int h) {
         // applet.setSize(w, h);
     }
 
-    /** Gets a reference to the applet's context.  */
+    /**
+     * Gets a reference to the applet's context.
+     */
     public AppletContext getAppletContext() {
         return this;
     }
 
-    /** Gets the base URL.  */
+    /**
+     * Gets the base URL.
+     */
     public URL getCodeBase() {
         return getClass().getResource(".");
     }
 
-    /** Gets the document URL.  */
+    /**
+     * Gets the document URL.
+     */
     public URL getDocumentBase() {
         return getClass().getResource(".");
     }
 
-    /** Returns the value of the named parameter in the HTML tag.  */
+    /**
+     * Returns the value of the named parameter in the HTML tag.
+     */
     public String getParameter(String name) {
         String value = null;
         return value;
     }
-    /** Determines if the applet is active.  */
+
+    /**
+     * Determines if the applet is active.
+     */
     public boolean isActive() {
         return true;
     }
 
     /************************ AppletContext ************************/
 
-    /** Finds and returns the applet with the given name. */
+    /**
+     * Finds and returns the applet with the given name.
+     */
     public Applet getApplet(String an) {
         return null;
     }
 
-    /** Finds all the applets in the document
+    /**
+     * Finds all the applets in the document
      * XXX NOT REALLY IMPLEMENTED
      */
-    public Enumeration<Applet> getApplets()  {
+    public Enumeration<Applet> getApplets() {
         class AppletLister implements Enumeration<Applet> {
             public boolean hasMoreElements() {
                 return false;
             }
+
             public Applet nextElement() {
                 return null;
             }
@@ -96,25 +117,35 @@ public class AppletAdapter extends Panel implements AppletStub, AppletContext {
         return new AppletLister();
     }
 
-    /** Create an audio clip for the given URL of a .au file */
+    /**
+     * Create an audio clip for the given URL of a .au file
+     */
     public AudioClip getAudioClip(URL u) {
         return null;
     }
 
-    /** Look up and create an Image object that can be paint()ed */
-    public Image getImage(URL u)  {
+    /**
+     * Look up and create an Image object that can be paint()ed
+     */
+    public Image getImage(URL u) {
         return null;
     }
 
-    /** Request to overlay the current page with a new one - ignored */
+    /**
+     * Request to overlay the current page with a new one - ignored
+     */
     public void showDocument(URL u) {
     }
 
-    /** as above but with a Frame target */
-    public void showDocument(URL u, String frame)  {
+    /**
+     * as above but with a Frame target
+     */
+    public void showDocument(URL u, String frame) {
     }
 
-    /** Called by the Applet to display a message in the bottom line */
+    /**
+     * Called by the Applet to display a message in the bottom line
+     */
     public void showStatus(String msg) {
         if (msg == null)
             msg = "";
@@ -122,15 +153,17 @@ public class AppletAdapter extends Panel implements AppletStub, AppletContext {
     }
 
     /* StreamKey stuff - new in JDK1.4 */
-    Map<String,InputStream> streamMap = new HashMap<>();
+    Map<String, InputStream> streamMap = new HashMap<>();
 
-    /** Associate the stream with the key. */
+    /**
+     * Associate the stream with the key.
+     */
     public void setStream(String key, InputStream stream) throws IOException {
         streamMap.put(key, stream);
     }
 
     public InputStream getStream(String key) {
-        return (InputStream)streamMap.get(key);
+        return (InputStream) streamMap.get(key);
     }
 
     public Iterator<String> getStreamKeys() {

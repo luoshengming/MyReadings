@@ -1,7 +1,5 @@
 package com.akkademy;
 
-import static org.junit.Assert.assertEquals;
-
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -9,12 +7,13 @@ import akka.actor.Status;
 import akka.testkit.TestActorRef;
 import akka.testkit.TestProbe;
 import com.akkademy.messages.SetRequest;
-import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class AkkademyDbTest {
 

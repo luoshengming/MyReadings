@@ -1,10 +1,16 @@
 package xmlform;
 
-import java.io.*;
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
+import org.w3c.dom.Document;
 
-/** Convert a simple XML file to text.
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.Reader;
+
+/**
+ * Convert a simple XML file to text.
+ *
  * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -14,12 +20,16 @@ public class XmlForm {
 
     protected static PrintStream msg = System.out;
 
-    /** Construct a converter given an input filename */
+    /**
+     * Construct a converter given an input filename
+     */
     public XmlForm(String fn) {
         fileName = fn;
     }
 
-    /** Convert the file */
+    /**
+     * Convert the file
+     */
     public void convert(boolean verbose) {
         try {
             if (verbose)
@@ -28,9 +38,9 @@ public class XmlForm {
             //String uri = "file:" + new File(fileName).getAbsolutePath();
             InputStream uri = getClass().getResourceAsStream(fileName);
             DocumentBuilderFactory factory =
-                DocumentBuilderFactory.newInstance();
+                    DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse( uri );
+            Document doc = builder.parse(uri);
             if (verbose)
                 System.err.println(">>>Walking " + fileName + "...");
             XmlFormWalker c = new GenMIF(doc, msg);
@@ -53,7 +63,7 @@ public class XmlForm {
             System.err.println("Usage: XmlForm file");
             return;
         }
-        for (int i=0; i<av.length; i++) {
+        for (int i = 0; i < av.length; i++) {
             String name = av[i];
             new XmlForm(name).convert(true);
         }

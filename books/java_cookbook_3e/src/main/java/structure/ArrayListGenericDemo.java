@@ -1,6 +1,6 @@
 package structure;
 
-import java.util.*;
+import java.util.ArrayList;
 
 // BEGIN main
 public class ArrayListGenericDemo {

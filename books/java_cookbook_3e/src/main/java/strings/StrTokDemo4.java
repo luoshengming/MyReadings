@@ -2,13 +2,17 @@ package strings;
 
 import java.util.StringTokenizer;
 
-/** Show using a StringTokenizer including getting the delimiters back */
+/**
+ * Show using a StringTokenizer including getting the delimiters back
+ */
 // BEGIN main
 public class StrTokDemo4 {
     public final static int MAXFIELDS = 5;
     public final static String DELIM = "|";
 
-    /** Processes one String, returns it as an array of Strings */
+    /**
+     * Processes one String, returns it as an array of Strings
+     */
     public static String[] process(String line) {
         String[] results = new String[MAXFIELDS];
 
@@ -21,11 +25,13 @@ public class StrTokDemo4 {
         while (st.hasMoreTokens()) {
             String s = st.nextToken();
             if (s.equals(DELIM)) {
-                if (i++>=MAXFIELDS)
-                    // This is messy: See StrTokDemo4b which uses 
-                    // a List to allow any number of fields.
+                if (i++ >= MAXFIELDS)
+                // This is messy: See StrTokDemo4b which uses
+                // a List to allow any number of fields.
+                {
                     throw new IllegalArgumentException("Input line " +
-                        line + " has too many fields");
+                            line + " has too many fields");
+                }
                 continue;
             }
             results[i] = s;
@@ -35,8 +41,9 @@ public class StrTokDemo4 {
 
     public static void printResults(String input, String[] outputs) {
         System.out.println("Input: " + input);
-        for (String s : outputs)
+        for (String s : outputs) {
             System.out.println("Output " + s + " was: " + s);
+        }
     }
 
     // Should be a JUnit test but is referred to in the book text,

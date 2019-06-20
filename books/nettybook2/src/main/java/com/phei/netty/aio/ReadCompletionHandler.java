@@ -26,8 +26,7 @@ import java.nio.channels.CompletionHandler;
  * @version 1.0
  * @date 2014年2月16日
  */
-public class ReadCompletionHandler implements
-        CompletionHandler<Integer, ByteBuffer> {
+public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuffer> {
 
     private AsynchronousSocketChannel channel;
 

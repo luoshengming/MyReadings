@@ -3,9 +3,9 @@ package functional;
 import java.util.List;
 
 public class CameraSearchParallelStream {
-    
+
     static List<Camera> privateListOfCameras = CameraUtils.getList();
-    
+
     // BEGIN search
     public static void main(String[] args) {
         for (Object camera : privateListOfCameras.parallelStream(). // <1>

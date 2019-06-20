@@ -4,7 +4,6 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.routing.RoundRobinGroup;
-import akka.routing.RoundRobinPool;
 import akkademy.ArticleParseActor;
 import akkademy.ParseArticle;
 import org.junit.Test;
@@ -17,12 +16,13 @@ import java.util.stream.IntStream;
 
 public class AssignActorsToDispatcherTest {
     ActorSystem system = ActorSystem.create();
+
     @Test
     public void shouldReadFilesWithActorsInAnotherDispatcher() throws Exception {
 
-        List<ActorRef> routees = Arrays.asList(1,2,3,4,5,6,7,8).stream().map(x ->
+        List<ActorRef> routees = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8).stream().map(x ->
                 system.actorOf(Props.create(ArticleParseActor.class).
-                withDispatcher("article-parsing-dispatcher"))
+                        withDispatcher("article-parsing-dispatcher"))
         ).collect(Collectors.toList());
 
         Iterable<String> routeeAddresses = routees.

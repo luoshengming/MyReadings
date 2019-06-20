@@ -1,8 +1,6 @@
 package com.akkachat;
 
-import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.actor.DeadLetter;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import akka.testkit.TestActorRef;

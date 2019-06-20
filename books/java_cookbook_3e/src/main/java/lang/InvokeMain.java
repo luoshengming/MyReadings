@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 /**
  * Show loading a class and finding and calling its Main method.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class InvokeMain {
@@ -15,7 +16,7 @@ public class InvokeMain {
         if (args.length == 1 && args[0].equals("quit")) {
             return;
         }
-        
+
         try {
             // First, find the class.
             Class<?> c = Class.forName("lang.InvokeMain");
@@ -23,7 +24,7 @@ public class InvokeMain {
 
             // Create the array of Argument Types
             Class<?>[] argTypes = {
-                args.getClass(),    // args is String!
+                    args.getClass(),    // args is String!
             };
 
             // Now find the method
@@ -31,8 +32,8 @@ public class InvokeMain {
             System.out.println("Found method" + m);
 
             // Create the actual argument array
-            String[] newArgs = { "quit" };
-            Object[] passedArgs = { newArgs };
+            String[] newArgs = {"quit"};
+            Object[] passedArgs = {newArgs};
 
             // Now invoke the method. Null for "this ref" because it's static
             m.invoke(null, passedArgs);

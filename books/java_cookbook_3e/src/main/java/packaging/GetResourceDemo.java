@@ -1,9 +1,11 @@
 package packaging;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-/** Show using classLoader.getResource() to load a file.
+/**
+ * Show using classLoader.getResource() to load a file.
  * This is required under Java Web Start.
  */
 public class GetResourceDemo {
@@ -11,7 +13,9 @@ public class GetResourceDemo {
         new GetResourceDemo().demo();
     }
 
-    /** The demo itself */
+    /**
+     * The demo itself
+     */
     public void demo() {
         // BEGIN main
         // Find the ClassLoader that loaded us.

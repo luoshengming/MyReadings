@@ -14,8 +14,8 @@ public class SysPropDemo {
             // END sysprops
         else {
             for (String s : argv) {
-                System.out.println(s + " = " + 
-                    System.getProperty(s));
+                System.out.println(s + " = " +
+                        System.getProperty(s));
             }
         }
     }

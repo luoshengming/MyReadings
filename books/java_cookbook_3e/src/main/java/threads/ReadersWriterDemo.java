@@ -17,13 +17,19 @@ public class ReadersWriterDemo {
         new ReadersWriterDemo().demo();
     }
 
-    /** Set this to true to end the program */
+    /**
+     * Set this to true to end the program
+     */
     private volatile boolean done = false;
 
-    /** The data being protected. */
+    /**
+     * The data being protected.
+     */
     private BallotBox theData;
 
-    /** The read lock / write lock combination */
+    /**
+     * The read lock / write lock combination
+     */
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
     /**
@@ -49,17 +55,17 @@ public class ReadersWriterDemo {
                     while (!done) {
                         lock.readLock().lock();
                         try {
-                            theData.forEach(p -> 
-                                System.out.printf("%s: votes %d%n", 
-                                    p.getName(),
-                                    p.getVotes()));
+                            theData.forEach(p ->
+                                    System.out.printf("%s: votes %d%n",
+                                            p.getName(),
+                                            p.getVotes()));
                         } finally {
                             // Unlock in "finally" to be sure it gets done.
                             lock.readLock().unlock();
                         }
-                        
+
                         try {
-                            Thread.sleep(((long)(Math.random()* 1000)));
+                            Thread.sleep(((long) (Math.random() * 1000)));
                         } catch (InterruptedException ex) {
                             // nothing to do
                         }
@@ -67,7 +73,7 @@ public class ReadersWriterDemo {
                 }
             }.start();
         }
-        
+
         // Start one writer thread to simulate occasional voting
         new Thread() {
             public void run() {
@@ -75,15 +81,15 @@ public class ReadersWriterDemo {
                     lock.writeLock().lock();
                     try {
                         theData.voteFor(
-                            // Vote for random candidate :-)
-                            // Performance: should have one PRNG per thread.
-                            (((int)(Math.random()*
-                            theData.getCandidateCount()))));
+                                // Vote for random candidate :-)
+                                // Performance: should have one PRNG per thread.
+                                (((int) (Math.random() *
+                                        theData.getCandidateCount()))));
                     } finally {
                         lock.writeLock().unlock();
                     }
                     try {
-                        Thread.sleep(((long)(Math.random()*1000)));
+                        Thread.sleep(((long) (Math.random() * 1000)));
                     } catch (InterruptedException ex) {
                         // nothing to do
                     }

@@ -1,18 +1,19 @@
 package functional;
 
 // BEGIN main
+
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class ReferencesDemo4 {
 
-    static final String[] unsortedNames = { 
-        "Gosling", "de Raadt", "Torvalds", "Ritchie", "Hopper"
+    static final String[] unsortedNames = {
+            "Gosling", "de Raadt", "Torvalds", "Ritchie", "Hopper"
     };
-    
+
     public static void main(String[] args) {
         String[] names;
-        
+
         // Sort using 
         // "an Instance Method of an Arbitrary Object of a Particular Type"
         names = unsortedNames.clone();
@@ -23,7 +24,7 @@ public class ReferencesDemo4 {
         names = unsortedNames.clone();
         Arrays.sort(names, (str1, str2) -> str1.compareToIgnoreCase(str2)); // <2>
         dump(names);
-        
+
         // Equivalent old way:
         names = unsortedNames.clone();
         Arrays.sort(names, new Comparator<String>() {                       // <3>
@@ -33,7 +34,7 @@ public class ReferencesDemo4 {
             }
         });
         dump(names);
-        
+
         // Simpest way, using existing comparator
         names = unsortedNames.clone();
         Arrays.sort(names, String.CASE_INSENSITIVE_ORDER);                  // <4>
@@ -41,7 +42,9 @@ public class ReferencesDemo4 {
     }
     // END main
 
-    /** Simple dumper just to show the order of the names in the array */
+    /**
+     * Simple dumper just to show the order of the names in the array
+     */
     private static void dump(String[] names) {
         for (String s : names) {
             System.out.print(s);

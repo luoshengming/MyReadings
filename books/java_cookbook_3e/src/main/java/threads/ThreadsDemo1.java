@@ -30,27 +30,29 @@ package threads;
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * Java, the Duke mascot, and all variants of Sun's Java "steaming coffee
  * cup" logo are trademarks of Sun Microsystems. Sun's, and James Gosling's,
- * pioneering role in inventing and promulgating (and standardizing) the Java 
+ * pioneering role in inventing and promulgating (and standardizing) the Java
  * language and environment is gratefully acknowledged.
- * 
+ *
  * The pioneering role of Dennis Ritchie and Bjarne Stroustrup, of AT&T, for
  * inventing predecessor languages C and C++ is also gratefully acknowledged.
  */
 
-/** 
+/**
  * Threaded demo application, as a Threads subclass.
  *
- * @author    Ian Darwin
+ * @author Ian Darwin
  */
 // BEGIN main
 public class ThreadsDemo1 extends Thread {
     private String mesg;
     private int count;
 
-    /** Run does the work: print a message, "count" number of times */ 
+    /**
+     * Run does the work: print a message, "count" number of times
+     */
     public void run() {
         while (count-- > 0) {
             System.out.println(mesg);
@@ -65,8 +67,9 @@ public class ThreadsDemo1 extends Thread {
 
     /**
      * Construct a ThreadsDemo1 object.
-     * @param m Message to display
-     * @param n How many times to display it
+     *
+     * @param mesg Message to display
+     * @param n    How many times to display it
      */
     public ThreadsDemo1(final String mesg, int n) {
         this.mesg = mesg;

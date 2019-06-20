@@ -14,65 +14,65 @@ import java.nio.file.Paths;
 
 public class ReadXmlFile {
 
-  private final static String format = "First Name : %s\n" +
-      "\tLast Name : %s\n" +
-      "\tEmail : %s\n" +
-      "\tSalary : %s";
+    private final static String format = "First Name : %s\n" +
+            "\tLast Name : %s\n" +
+            "\tEmail : %s\n" +
+            "\tSalary : %s";
 
-  public static void main(String[] args) {
-    final Result<String> path = getXmlFilePath();
-    final Result<String> rDoc = path.flatMap(ReadXmlFile::readFile2String);
-    final Result<String> rRoot = getRootElementName();
-    final Result<List<String>> result = rDoc.flatMap(doc -> rRoot
-        .flatMap(rootElementName -> readDocument(rootElementName, doc))
-        .map(list -> toStringList(list, format)));
-    result.forEachOrException(ReadXmlFile::processList)
-          .forEach(Throwable::printStackTrace);
-  }
-
-  private static Result<String> getXmlFilePath() {
-    return Result.of("file.xml"); // <- adjust path
-  }
-
-  private static Result<String> getRootElementName() {
-    return Result.of("staff"); // Simulating a computation that may fail.
-  }
-
-  public static Result<String> readFile2String(String path) {
-    try {
-      return Result.success(new String(Files.readAllBytes(Paths.get(path)))); // <- throws SecurityException
-    } catch (IOException e) {
-      return Result.failure(String.format("IO error while reading file %s", path), e);
-    } catch (Exception e) {
-      return Result.failure(String.format("Unexpected error while reading file %s", path), e);
+    public static void main(String[] args) {
+        final Result<String> path = getXmlFilePath();
+        final Result<String> rDoc = path.flatMap(ReadXmlFile::readFile2String);
+        final Result<String> rRoot = getRootElementName();
+        final Result<List<String>> result = rDoc.flatMap(doc -> rRoot
+                .flatMap(rootElementName -> readDocument(rootElementName, doc))
+                .map(list -> toStringList(list, format)));
+        result.forEachOrException(ReadXmlFile::processList)
+                .forEach(Throwable::printStackTrace);
     }
-  }
 
-  private static Result<List<Element>> readDocument(String rootElementName, String stringDoc) {
-    final SAXBuilder builder = new SAXBuilder();
-    try {
-      final Document document = builder.build(new StringReader(stringDoc));
-      final Element rootElement = document.getRootElement();
-      return Result.success(List.fromCollection(rootElement.getChildren(rootElementName)));
-    } catch (IOException | JDOMException io) {
-      return Result.failure(String.format("Invalid root element name '%s' or XML data %s", rootElementName, stringDoc), io);
-    } catch (Exception e) {
-      return Result.failure(String.format("Unexpected error while reading XML data %s", stringDoc), e);
+    private static Result<String> getXmlFilePath() {
+        return Result.of("file.xml"); // <- adjust path
     }
-  }
 
-  private static List<String> toStringList(List<Element> list, String format) {
-    return list.map(e -> processElement(e, format));
-  }
+    private static Result<String> getRootElementName() {
+        return Result.of("staff"); // Simulating a computation that may fail.
+    }
 
-  private static String processElement(Element element, String format) {
-    return String.format(format, element.getChildText("firstname"),
-        element.getChildText("lastname"),
-        element.getChildText("email"),
-        element.getChildText("salary"));
-  }
+    public static Result<String> readFile2String(String path) {
+        try {
+            return Result.success(new String(Files.readAllBytes(Paths.get(path)))); // <- throws SecurityException
+        } catch (IOException e) {
+            return Result.failure(String.format("IO error while reading file %s", path), e);
+        } catch (Exception e) {
+            return Result.failure(String.format("Unexpected error while reading file %s", path), e);
+        }
+    }
 
-  private static <T> void processList(List<T> list) {
-    list.forEach(System.out::println);
-  }
+    private static Result<List<Element>> readDocument(String rootElementName, String stringDoc) {
+        final SAXBuilder builder = new SAXBuilder();
+        try {
+            final Document document = builder.build(new StringReader(stringDoc));
+            final Element rootElement = document.getRootElement();
+            return Result.success(List.fromCollection(rootElement.getChildren(rootElementName)));
+        } catch (IOException | JDOMException io) {
+            return Result.failure(String.format("Invalid root element name '%s' or XML data %s", rootElementName, stringDoc), io);
+        } catch (Exception e) {
+            return Result.failure(String.format("Unexpected error while reading XML data %s", stringDoc), e);
+        }
+    }
+
+    private static List<String> toStringList(List<Element> list, String format) {
+        return list.map(e -> processElement(e, format));
+    }
+
+    private static String processElement(Element element, String format) {
+        return String.format(format, element.getChildText("firstname"),
+                element.getChildText("lastname"),
+                element.getChildText("email"),
+                element.getChildText("salary"));
+    }
+
+    private static <T> void processList(List<T> list) {
+        list.forEach(System.out::println);
+    }
 }

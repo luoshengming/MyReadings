@@ -10,13 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableCircuitBreaker
 public class ConsumerMovieApplication {
-  @Bean
-  @LoadBalanced
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
-  }
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-  public static void main(String[] args) {
-    SpringApplication.run(ConsumerMovieApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ConsumerMovieApplication.class, args);
+    }
 }

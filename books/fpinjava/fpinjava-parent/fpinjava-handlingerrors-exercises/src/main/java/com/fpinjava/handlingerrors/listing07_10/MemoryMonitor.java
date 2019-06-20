@@ -15,27 +15,27 @@ public class MemoryMonitor {
 
 
     public static void main(String[] args) {
-      monitorMemory(0.8);
+        monitorMemory(0.8);
     }
 
 
-  public static void monitorMemory(double threshold) {
-    findPSOldGenPool().forEachOrThrow(poolMxBean -> poolMxBean.setCollectionUsageThreshold((int) Math.floor(poolMxBean
-        .getUsage().getMax() * threshold)));
+    public static void monitorMemory(double threshold) {
+        findPSOldGenPool().forEachOrThrow(poolMxBean -> poolMxBean.setCollectionUsageThreshold((int) Math.floor(poolMxBean
+                .getUsage().getMax() * threshold)));
 
-    NotificationEmitter emitter = (NotificationEmitter) ManagementFactory.getMemoryMXBean();
-    emitter.addNotificationListener(notificationListener, null, null);
-  }
-
-  private static NotificationListener notificationListener = (Notification notification, Object handBack) -> {
-    if (notification.getType().equals(MemoryNotificationInfo.MEMORY_COLLECTION_THRESHOLD_EXCEEDED)) {
-      // cleanly shutdown the application;
+        NotificationEmitter emitter = (NotificationEmitter) ManagementFactory.getMemoryMXBean();
+        emitter.addNotificationListener(notificationListener, null, null);
     }
-  };
 
-  private static Result<MemoryPoolMXBean> findPSOldGenPool() {
-    return List.fromCollection(ManagementFactory.getMemoryPoolMXBeans())
-               .first(x -> x.getName().equals("PS Old Gen"))
-        .mapFailure("Could not find PS Old Gen memory pool");
-  }
+    private static NotificationListener notificationListener = (Notification notification, Object handBack) -> {
+        if (notification.getType().equals(MemoryNotificationInfo.MEMORY_COLLECTION_THRESHOLD_EXCEEDED)) {
+            // cleanly shutdown the application;
+        }
+    };
+
+    private static Result<MemoryPoolMXBean> findPSOldGenPool() {
+        return List.fromCollection(ManagementFactory.getMemoryPoolMXBeans())
+                .first(x -> x.getName().equals("PS Old Gen"))
+                .mapFailure("Could not find PS Old Gen memory pool");
+    }
 }

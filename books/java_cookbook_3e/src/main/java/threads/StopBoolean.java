@@ -30,19 +30,20 @@ package threads;
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * Java, the Duke mascot, and all variants of Sun's Java "steaming coffee
  * cup" logo are trademarks of Sun Microsystems. Sun's, and James Gosling's,
- * pioneering role in inventing and promulgating (and standardizing) the Java 
+ * pioneering role in inventing and promulgating (and standardizing) the Java
  * language and environment is gratefully acknowledged.
- * 
+ *
  * The pioneering role of Dennis Ritchie and Bjarne Stroustrup, of AT&T, for
  * inventing predecessor languages C and C++ is also gratefully acknowledged.
  */
 
 // import - none
 
-/** Show stopping a Thread using a flag.
+/**
+ * Show stopping a Thread using a flag.
  */
 // BEGIN main
 public class StopBoolean extends Thread {
@@ -50,6 +51,7 @@ public class StopBoolean extends Thread {
     // MUST be volatile to ensure changes visible to other threads.
     protected volatile boolean done = false;
 
+    @Override
     public void run() {
         while (!done) {
             System.out.println("StopBoolean running");
@@ -61,15 +63,15 @@ public class StopBoolean extends Thread {
         }
         System.out.println("StopBoolean finished.");
     }
+
     public void shutDown() {
         done = true;
     }
 
-    public static void main(String[] args) 
-    throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         StopBoolean t1 = new StopBoolean();
         t1.start();
-        Thread.sleep(1000*5);
+        Thread.sleep(1000 * 5);
         t1.shutDown();
     }
 }

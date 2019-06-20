@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 /**
  * FNFilter - Ls directory lister modified to use FilenameFilter
+ *
  * @author Ian Darwin
  */
 // BEGIN main
@@ -19,14 +20,15 @@ public class FNFilter {
         }
     }
 
-    /** This class implements the FilenameFilter interface.
+    /**
+     * This class implements the FilenameFilter interface.
      * The Accept method returns true for .java, .class and .jar files.
      */
     private static class OnlyJava implements FilenameFilter {
         public boolean accept(File dir, String s) {
             if (s.endsWith(".java") ||
-                s.endsWith(".class") ||
-                s.endsWith(".jar")) {
+                    s.endsWith(".class") ||
+                    s.endsWith(".jar")) {
 
                 return true;
             }

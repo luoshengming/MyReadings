@@ -6,6 +6,8 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 
@@ -15,6 +17,7 @@ import java.net.InetSocketAddress;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class SecureChatServer extends ChatServer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ChatServer.class);
     private final SslContext context;
 
     public SecureChatServer(SslContext context) {
@@ -28,7 +31,7 @@ public class SecureChatServer extends ChatServer {
 
     public static void main(String[] args) throws Exception {
         if (args.length != 1) {
-            System.err.println("Please give port as argument");
+            LOGGER.error("Please give port as argument");
             System.exit(1);
         }
         int port = Integer.parseInt(args[0]);

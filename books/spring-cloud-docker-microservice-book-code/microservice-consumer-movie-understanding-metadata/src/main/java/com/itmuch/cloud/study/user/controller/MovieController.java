@@ -13,23 +13,24 @@ import java.util.List;
 
 @RestController
 public class MovieController {
-  @Autowired
-  private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-  @Autowired
-  private DiscoveryClient discoveryClient;
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
-  @GetMapping("/user/{id}")
-  public User findById(@PathVariable Long id) {
-    return this.restTemplate.getForObject("http://localhost:8000/" + id, User.class);
-  }
+    @GetMapping("/user/{id}")
+    public User findById(@PathVariable Long id) {
+        return this.restTemplate.getForObject("http://localhost:8000/" + id, User.class);
+    }
 
-  /**
-   * 查询microservice-provider-user服务的信息并返回
-   * @return microservice-provider-user服务的信息
-   */
-  @GetMapping("/user-instance")
-  public List<ServiceInstance> showInfo() {
-    return this.discoveryClient.getInstances("microservice-provider-user");
-  }
+    /**
+     * 查询microservice-provider-user服务的信息并返回
+     *
+     * @return microservice-provider-user服务的信息
+     */
+    @GetMapping("/user-instance")
+    public List<ServiceInstance> showInfo() {
+        return this.discoveryClient.getInstances("microservice-provider-user");
+    }
 }

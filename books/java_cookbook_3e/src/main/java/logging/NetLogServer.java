@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 /**
  * Threaded NetLog Server, pre-allocation schema.
+ *
  * @author Ian F. Darwin.
  */
 // BEGIN main
@@ -25,20 +26,22 @@ public class NetLogServer {
     JFrame theFrame;
     JTextArea theTextArea;
 
-    /** Main method, to start the servers. */
-    public static void main(String[] av)
-    {
+    /**
+     * Main method, to start the servers.
+     */
+    public static void main(String[] av) {
         new NetLogServer(PORT, NUM_THREADS);
     }
 
-    /** Constructor */
-    public NetLogServer(int port, int numThreads)
-    {
+    /**
+     * Constructor
+     */
+    public NetLogServer(int port, int numThreads) {
         ServerSocket servSock;
         try {
             servSock = new ServerSocket(PORT);
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             /* Crash the server if IO fails. Something bad has happened */
             System.err.println("Could not create ServerSocket " + e);
             System.exit(1);
@@ -46,14 +49,14 @@ public class NetLogServer {
         }
 
         // Build the GUI - must be before Handler constructors!
-        theFrame  = new JFrame("NetLog Server");
+        theFrame = new JFrame("NetLog Server");
         theTextArea = new JTextArea(24, 80);
         theTextArea.setEditable(false);
         theTextArea.setBorder(BorderFactory.createTitledBorder("NetLogServer"));
         theFrame.getContentPane().add(new JScrollPane(theTextArea));
 
         // Now start the Threads
-        for (int i=0; i<numThreads; i++) {
+        for (int i = 0; i < numThreads; i++) {
             new Handler(servSock, i).start();
         }
 
@@ -69,11 +72,9 @@ public class NetLogServer {
 
         if (s == null) {
             sb.append("(null)");
-        }
-        else if (s.length() == 0) {
+        } else if (s.length() == 0) {
             sb.append("(null string)");
-        }
-        else
+        } else
             sb.append(s);
 
         sb.append('\n');
@@ -82,12 +83,16 @@ public class NetLogServer {
         theFrame.toFront();
     }
 
-    /** A Thread subclass to handle one client conversation. */
+    /**
+     * A Thread subclass to handle one client conversation.
+     */
     class Handler extends Thread {
         ServerSocket servSock;
         int tid;
 
-        /** Construct a Handler. */
+        /**
+         * Construct a Handler.
+         */
         Handler(ServerSocket s, int i) {
             super();
             servSock = s;
@@ -95,23 +100,22 @@ public class NetLogServer {
             setName("Thread " + tid);
         }
 
-        public void run()
-        {
+        public void run() {
             /* Wait for a connection */
-            while (true){
+            while (true) {
                 try {
                     // log(tid, getName() + " waiting");
                     Socket clientSocket = servSock.accept();
-                    log(tid,getName() + " START, IP=" +
-                        clientSocket.getInetAddress());
+                    log(tid, getName() + " START, IP=" +
+                            clientSocket.getInetAddress());
                     BufferedReader is = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream()));
+                            new InputStreamReader(clientSocket.getInputStream()));
                     String line;
                     while ((line = is.readLine()) != null) {
                         // System.out.println(">> " + line);
-                        log(tid,line);
+                        log(tid, line);
                     }
-                    log(tid,getName() + " ENDED ");
+                    log(tid, getName() + " ENDED ");
                     clientSocket.close();
                 } catch (IOException ex) {
                     log(tid, getName() + ": IO Error on socket " + ex);

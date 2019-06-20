@@ -28,7 +28,7 @@ public class SecureChatClientHandler extends SimpleChannelInboundHandler<String>
     private static final Logger logger = Logger.getLogger(SecureChatClientHandler.class.getName());
 
     @Override
-    public void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.err.println(msg);
     }
 

@@ -18,27 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 @Import(FeignClientsConfiguration.class)
 @RestController
 public class MovieController {
-  private UserFeignClient userUserFeignClient;
+    private UserFeignClient userUserFeignClient;
 
-  private UserFeignClient adminUserFeignClient;
+    private UserFeignClient adminUserFeignClient;
 
-  @Autowired
-  public MovieController(Decoder decoder, Encoder encoder, Client client, Contract contract) {
-    // 这边的decoder、encoder、client、contract，可以debug看看是什么实例。
-    this.userUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract)
-        .requestInterceptor(new BasicAuthRequestInterceptor("user", "password1")).target(UserFeignClient.class, "http://microservice-provider-user/");
-    this.adminUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract)
-        .requestInterceptor(new BasicAuthRequestInterceptor("admin", "password2"))
-        .target(UserFeignClient.class, "http://microservice-provider-user/");
-  }
+    @Autowired
+    public MovieController(Decoder decoder, Encoder encoder, Client client, Contract contract) {
+        // 这边的decoder、encoder、client、contract，可以debug看看是什么实例。
+        this.userUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract)
+                .requestInterceptor(new BasicAuthRequestInterceptor("user", "password1")).target(UserFeignClient.class, "http://microservice-provider-user/");
+        this.adminUserFeignClient = Feign.builder().client(client).encoder(encoder).decoder(decoder).contract(contract)
+                .requestInterceptor(new BasicAuthRequestInterceptor("admin", "password2"))
+                .target(UserFeignClient.class, "http://microservice-provider-user/");
+    }
 
-  @GetMapping("/user-user/{id}")
-  public User findByIdUser(@PathVariable Long id) {
-    return this.userUserFeignClient.findById(id);
-  }
+    @GetMapping("/user-user/{id}")
+    public User findByIdUser(@PathVariable Long id) {
+        return this.userUserFeignClient.findById(id);
+    }
 
-  @GetMapping("/user-admin/{id}")
-  public User findByIdAdmin(@PathVariable Long id) {
-    return this.adminUserFeignClient.findById(id);
-  }
+    @GetMapping("/user-admin/{id}")
+    public User findByIdAdmin(@PathVariable Long id) {
+        return this.adminUserFeignClient.findById(id);
+    }
 }

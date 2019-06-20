@@ -1,9 +1,12 @@
 package testing;
 
 import org.junit.*;
+
 import static org.junit.Assert.*;
 
-/** A simple test case for Person */
+/**
+ * A simple test case for Person
+ */
 // BEGIN main
 public class PersonTest {
 

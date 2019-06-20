@@ -12,13 +12,17 @@ import javax.swing.SwingConstants;
 
 import org.junit.Test;
 
-/** Testbed for EntryLayout layout manager.
- * @author    Ian Darwin, http://www.darwinsys.com/
+/**
+ * Testbed for EntryLayout layout manager.
+ *
+ * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 public class EntryLayoutTest {
 
-    /** "main program" method - construct and show */
+    /**
+     * "main program" method - construct and show
+     */
     public static void main(String[] av) {
         testTwoCols();
         testFiveCols();
@@ -27,7 +31,7 @@ public class EntryLayoutTest {
     static void testTwoCols() {
         final JFrame f = new JFrame("EntryLayout Demonstration");
         Container cp = f.getContentPane();
-        double widths[] = { .33, .66 };
+        double widths[] = {.33, .66};
         cp.setLayout(new EntryLayout(widths));
         cp.add(new JLabel("Login:", SwingConstants.RIGHT));
         cp.add(new JTextField(10));
@@ -45,7 +49,7 @@ public class EntryLayoutTest {
     static void testFiveCols() {
         final JFrame f = new JFrame("EntryLayout Five Columns");
         Container cp = f.getContentPane();
-        double widths[] = { .25, .33, .10, .10, .20 };
+        double widths[] = {.25, .33, .10, .10, .20};
         cp.setLayout(new EntryLayout(widths));
         cp.add(new JLabel("Login:", SwingConstants.RIGHT));
         cp.add(new JTextField(10));
@@ -67,7 +71,7 @@ public class EntryLayoutTest {
         f.setLocation(200, 200);
         f.setVisible(true);
     }
-    
+
     @Test
     public void trivialTest() {
         try {

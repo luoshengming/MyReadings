@@ -28,7 +28,7 @@ public class HotswapClientActorTest {
         clientRef.tell(new SetRequest("testkey", "testvalue", probe.ref()), probe.ref());
 
         probe.expectMsg(new Status.Success("testkey"));
-        assert(db.map.get("testkey") == "testvalue");
+        assert (db.map.get("testkey") == "testvalue");
     }
 
     @Test

@@ -1,19 +1,9 @@
 package com.akkademy;
 
-import akka.actor.AbstractActor;
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.actor.Props;
-import akka.japi.pf.ReceiveBuilder;
-import akka.routing.RoundRobinPool;
-import akkademy.ArticleParseActor;
 import akkademy.ArticleParser;
-import akkademy.ParseArticle;
 import com.jasongoodwin.monads.Futures;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -38,9 +28,9 @@ public class ReadFilesWithFuturesTest {
         CompletableFuture<Void> allDoneFuture =
                 CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
         return allDoneFuture.thenApply(v ->
-                        futures.stream().
-                                map(future -> future.join()).
-                                collect(Collectors.<T>toList())
+                futures.stream().
+                        map(future -> future.join()).
+                        collect(Collectors.<T>toList())
         );
     }
 }

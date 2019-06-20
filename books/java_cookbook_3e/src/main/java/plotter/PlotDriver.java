@@ -7,9 +7,11 @@ package plotter;
 // BEGIN main
 public class PlotDriver {
 
-    /** Construct a Plotter driver, and try it out. */
+    /**
+     * Construct a Plotter driver, and try it out.
+     */
     public static void main(String[] argv) {
-        Plotter r ;
+        Plotter r;
         if (argv.length != 1) {
             System.err.println("Usage: PlotDriver driverclass");
             return;
@@ -19,7 +21,7 @@ public class PlotDriver {
             Object o = c.newInstance();
             if (!(o instanceof Plotter))
                 throw new ClassNotFoundException("Not instanceof Plotter");
-            r = (Plotter)o;
+            r = (Plotter) o;
         } catch (ClassNotFoundException e) {
             System.err.println("Sorry, class " + argv[0] +
                     " not a plotter class");

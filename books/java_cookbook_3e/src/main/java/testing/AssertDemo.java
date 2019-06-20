@@ -5,6 +5,7 @@ package testing;
  * <p>
  * Java assertions are not enabled by default;
  * you must run with "java -enableassertions|-ea ...".
+ *
  * @since 1.4
  */
 // BEGIN main

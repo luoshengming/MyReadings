@@ -2,9 +2,11 @@ package environ;
 
 import com.darwinsys.lang.GetOpt;
 import com.darwinsys.lang.GetOptDesc;
+
 import java.util.*;
 
-/** Demonstrate the modern way of using GetOpt. This allows a subset of
+/**
+ * Demonstrate the modern way of using GetOpt. This allows a subset of
  * <pre>UNIX sort options: sort -n -o outfile infile1 infile2</pre>
  * which means: sort numerically (-n), writing to file "outfile" (-o
  * outfile), sort from infile1 and infile2.
@@ -17,11 +19,11 @@ public class GetOptDemoNew {
         String outputFileName = null;
 
         GetOptDesc[] options = {
-            new GetOptDesc('n', "numeric", false),
-            new GetOptDesc('o', "output-file", true),
+                new GetOptDesc('n', "numeric", false),
+                new GetOptDesc('o', "output-file", true),
         };
         GetOpt parser = new GetOpt(options);
-        Map<String,String> optionsFound = parser.parseArguments(argv);
+        Map<String, String> optionsFound = parser.parseArguments(argv);
         for (String key : optionsFound.keySet()) {
             char c = key.charAt(0);
             switch (c) {
@@ -29,14 +31,14 @@ public class GetOptDemoNew {
                     numeric_option = true;
                     break;
                 case 'o':
-                    outputFileName = (String)optionsFound.get(key);
+                    outputFileName = (String) optionsFound.get(key);
                     break;
                 case '?':
                     errs = true;
                     break;
                 default:
                     throw new IllegalStateException(
-                    "Unexpected option character: " + c);
+                            "Unexpected option character: " + c);
             }
         }
         if (errs) {

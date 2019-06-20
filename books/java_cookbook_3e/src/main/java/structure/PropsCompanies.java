@@ -4,6 +4,7 @@ import java.util.Properties;
 
 /**
  * Demonstrate Properties reading/writing.
+ *
  * @see HashTableDemo, for the older Hashtable.
  */
 // BEGIN main

@@ -7,6 +7,7 @@ import javax.swing.JTabbedPane;
 // BEGIN main
 public class TabPaneDemo {
     protected JTabbedPane tabPane;
+
     public TabPaneDemo() {
         tabPane = new JTabbedPane();
         tabPane.add(new JLabel("One", JLabel.CENTER), "First");

@@ -20,12 +20,12 @@ public class WebSocketServerInitializer extends ChannelInitializer<Channel> {
     @Override
     protected void initChannel(Channel ch) throws Exception {
         ch.pipeline().addLast(
-            new HttpServerCodec(),
-            new HttpObjectAggregator(65536),
-            new WebSocketServerProtocolHandler("/websocket"),
-            new TextFrameHandler(),
-            new BinaryFrameHandler(),
-            new ContinuationFrameHandler());
+                new HttpServerCodec(),
+                new HttpObjectAggregator(65536),
+                new WebSocketServerProtocolHandler("/websocket"),
+                new TextFrameHandler(),
+                new BinaryFrameHandler(),
+                new ContinuationFrameHandler());
     }
 
     public static final class TextFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {

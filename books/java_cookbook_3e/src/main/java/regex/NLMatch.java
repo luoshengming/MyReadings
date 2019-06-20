@@ -4,6 +4,7 @@ import java.util.regex.*;
 
 /**
  * Show line ending matching using RE class.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -15,9 +16,9 @@ public class NLMatch {
         System.out.println();
 
         String[] patt = {
-            "engines.more engines",
-            "ines\nmore",
-            "engines$"
+                "engines.more engines",
+                "ines\nmore",
+                "engines$"
         };
 
         for (int i = 0; i < patt.length; i++) {
@@ -28,8 +29,8 @@ public class NLMatch {
             found = p1l.matcher(input).find();
             System.out.println("DEFAULT match " + found);
 
-            Pattern pml = Pattern.compile(patt[i], 
-                Pattern.DOTALL|Pattern.MULTILINE);
+            Pattern pml = Pattern.compile(patt[i],
+                    Pattern.DOTALL | Pattern.MULTILINE);
             found = pml.matcher(input).find();
             System.out.println("MultiLine match " + found);
             System.out.println();

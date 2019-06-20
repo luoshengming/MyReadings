@@ -11,14 +11,14 @@ import com.darwinsys.lang.StringFormat;
 import com.darwinsys.util.FileProperties;
 
 /**
-* List all available folders.
-*/
+ * List all available folders.
+ */
 // BEGIN main
 public class MailLister {
-    static StringFormat fromFmt = 
-        new StringFormat(20, StringFormat.JUST_LEFT);
-    static StringFormat subjFmt = 
-        new StringFormat(40, StringFormat.JUST_LEFT);
+    static StringFormat fromFmt =
+            new StringFormat(20, StringFormat.JUST_LEFT);
+    static StringFormat subjFmt =
+            new StringFormat(40, StringFormat.JUST_LEFT);
 
     public static void main(String[] argv) throws Exception {
         String fileName = MailConstants.PROPS_FILE_NAME;
@@ -50,7 +50,7 @@ public class MailLister {
         // Otherwise give up.
         else {
             System.err.println(
-                "Usage: MailLister protocol host user pw root");
+                    "Usage: MailLister protocol host user pw root");
             System.exit(0);
         }
 
@@ -58,14 +58,14 @@ public class MailLister {
 
         // Start with a JavaMail Session object
         Session session = Session.getDefaultInstance(
-            System.getProperties(), null);
+                System.getProperties(), null);
         session.setDebug(false);
 
         // Get a Store object for the given protocol
         Store store = session.getStore(protocol);
         if (password.equals("*")) {
-            final char[] passBytes = 
-                System.console().readPassword("Password:", (Object[])null);
+            final char[] passBytes =
+                    System.console().readPassword("Password:", (Object[]) null);
             password = new String(passBytes);
         }
         store.connect(host, user, password);
@@ -93,10 +93,10 @@ public class MailLister {
     }
 
     static void listFolder(Folder folder, String tab, boolean recurse)
-    throws Exception {
+            throws Exception {
         folder.open(Folder.READ_WRITE);
         System.out.println(tab + "Name: " + folder.getName() + '(' +
-            folder.getFullName() + ')');
+                folder.getFullName() + ')');
         if (!folder.isSubscribed())
             System.out.println(tab + "Not Subscribed");
         if ((folder.getType() & Folder.HOLDS_MESSAGES) != 0) {
@@ -109,12 +109,12 @@ public class MailLister {
                 Address from = m.getFrom()[0];
                 String fromAddress;
                 if (from instanceof InternetAddress)
-                    fromAddress = ((InternetAddress)from).getAddress();
+                    fromAddress = ((InternetAddress) from).getAddress();
                 else
                     fromAddress = from.toString();
                 StringBuffer sb = new StringBuffer();
                 fromFmt.format(fromAddress, sb, null);
-                sb.    append("  ");
+                sb.append("  ");
                 subjFmt.format(m.getSubject(), sb, null);
                 System.out.println(sb.toString());
             }

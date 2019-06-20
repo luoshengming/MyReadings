@@ -10,7 +10,7 @@ import java.util.Date;
 
 // BEGIN main
 public class DateApplet extends Applet {
-    
+
     private static final long serialVersionUID = 287892791;
     RemoteDate netConn = null;
     Button b;
@@ -18,7 +18,7 @@ public class DateApplet extends Applet {
 
     public void init() {
         try {
-            netConn = (RemoteDate)Naming.lookup(RemoteDate.LOOKUPNAME);
+            netConn = (RemoteDate) Naming.lookup(RemoteDate.LOOKUPNAME);
         } catch (Exception e) {
             System.err.println("RemoteDate exception: " + e.getMessage());
             e.printStackTrace();

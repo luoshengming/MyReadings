@@ -6,8 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/** 
- * Show the XML serialization methods in "java.beans.*" 
+/**
+ * Show the XML serialization methods in "java.beans.*"
  * Note that only properties with public get AND set methods get serialized.
  * Subclass "SerialDemoAbstratBase" to get most of demo infrastructure
  */
@@ -21,7 +21,9 @@ public class SerialDemoXML extends SerialDemoAbstractBase {
         new SerialDemoXML().dump();
     }
 
-    /** Save the data to disk. */
+    /**
+     * Save the data to disk.
+     */
     public void write(Object theGraph) throws IOException {
         XMLEncoder os = new XMLEncoder(
                 new FileOutputStream(FILENAME));
@@ -29,7 +31,9 @@ public class SerialDemoXML extends SerialDemoAbstractBase {
         os.close();
     }
 
-    /** Display the data */
+    /**
+     * Display the data
+     */
     public void dump() throws IOException {
         XMLDecoder inp = new XMLDecoder(
                 new FileInputStream(FILENAME));

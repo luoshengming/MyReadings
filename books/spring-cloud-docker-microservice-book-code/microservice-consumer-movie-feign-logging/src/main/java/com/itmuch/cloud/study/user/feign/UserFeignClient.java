@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient(name = "microservice-provider-user", configuration = FeignLogConfiguration.class)
 public interface UserFeignClient {
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public User findById(@PathVariable("id") Long id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User findById(@PathVariable("id") Long id);
 }

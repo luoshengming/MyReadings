@@ -1,15 +1,20 @@
 package i18n;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-
 import com.darwinsys.swingui.I18N;
 
-/** Display your business-card information in a Java window.
- *
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ResourceBundle;
+
+/**
+ * Display your business-card information in a Java window.
+ * <p>
  * This is a first attempt. The next version should use a GridBagLayout.
+ *
  * @author Ian F. Darwin
  */
 // BEGIN main
@@ -20,13 +25,17 @@ public class BusCard extends JFrame {
     private JComboBox<String> jobChoice;
     private JButton B1, B2, B3, B4;
 
-    /** "main program" method - construct and show */
+    /**
+     * "main program" method - construct and show
+     */
     public static void main(String[] av) {
         // create a BusCard object, tell it to show up
         new BusCard().setVisible(true);
     }
 
-    /** Construct the object including its GUI */
+    /**
+     * Construct the object including its GUI
+     */
     public BusCard() {
 
         Container cp = getContentPane();
@@ -52,6 +61,7 @@ public class BusCard extends JFrame {
         JMenuItem mi = I18N.mkMenuItem(b, "filemenu", "exit");
         aMenu.add(mi);
         mi.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
@@ -66,14 +76,14 @@ public class BusCard extends JFrame {
         mb.add(aMenu);
         //mb.setHelpMenu(aMenu);        // needed for portability (Motif, etc.).
 
-        setTitle(I18N.getString(b, "card"+".company", "TITLE"));
+        setTitle(I18N.getString(b, "card" + ".company", "TITLE"));
 
         JPanel p1 = new JPanel();
         p1.setLayout(new GridLayout(0, 1, 50, 10));
 
         nameTF = new JLabel("My Name", JLabel.CENTER);
         nameTF.setFont(new Font("helvetica", Font.BOLD, 18));
-        nameTF.setText(I18N.getString(b, "card"+".myname", "MYNAME"));
+        nameTF.setText(I18N.getString(b, "card" + ".myname", "MYNAME"));
         p1.add(nameTF);
 
         jobChoice = new JComboBox<>();
@@ -81,7 +91,7 @@ public class BusCard extends JFrame {
 
         // Get Job Titles from the Properties file loaded into "b"!
         String next;
-        int i=1;
+        int i = 1;
         do {
             next = I18N.getString(b, "job_title" + i++, null);
             if (next != null)

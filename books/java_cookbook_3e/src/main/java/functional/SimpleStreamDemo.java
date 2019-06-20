@@ -15,23 +15,24 @@ public class SimpleStreamDemo {
             this.age = age;
         }
     }
+
     // BEGIN main
-    static Hero[] heroes = { 
-        new Hero("Grelber", 21), 
-        new Hero("Roderick", 12),
-        new Hero("Francisco", 35), 
-        new Hero("Superman", 65),
-        new Hero("Jumbletron", 22),
-        new Hero("Mavericks", 1), 
-        new Hero("Palladin", 50),
-        new Hero("Athena", 50) };
+    static Hero[] heroes = {
+            new Hero("Grelber", 21),
+            new Hero("Roderick", 12),
+            new Hero("Francisco", 35),
+            new Hero("Superman", 65),
+            new Hero("Jumbletron", 22),
+            new Hero("Mavericks", 1),
+            new Hero("Palladin", 50),
+            new Hero("Athena", 50)};
 
     public static void main(String[] args) {
 
         long adultYearsExperience = Arrays.stream(heroes)
                 .filter(b -> b.age >= 18)
                 .mapToInt(b -> b.age).sum();
-        System.out.println("We're in good hands! The adult superheros have " + 
+        System.out.println("We're in good hands! The adult superheros have " +
                 adultYearsExperience + " years of experience");
 
         List<Object> sorted = Arrays.stream(heroes)

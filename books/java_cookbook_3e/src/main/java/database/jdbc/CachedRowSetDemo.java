@@ -4,7 +4,8 @@ import javax.sql.RowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
 
-/** Demonstrate simple use of the CachedRowSet.
+/**
+ * Demonstrate simple use of the CachedRowSet.
  */
 // BEGIN main
 public class CachedRowSetDemo {
@@ -38,7 +39,7 @@ public class CachedRowSetDemo {
                 rs.updateRow();
             }
         }
-    
+
         // If we're all done...
         rs.close();
     }

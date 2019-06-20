@@ -1,8 +1,9 @@
 package numbers;
 
-import java.util.*;
+import java.util.Random;
 
-/** Demonstrate the better way of getting random numbers,
+/**
+ * Demonstrate the better way of getting random numbers,
  * using java.util.Random.next*().
  */
 public class Random3 {
@@ -10,8 +11,9 @@ public class Random3 {
         // java.util.Random methods are non-static, do need to construct Math
         // BEGIN main
         Random r = new Random();
-        for (int i=0; i<10; i++)
-        System.out.println("A gaussian random double is " + r.nextGaussian());
+        for (int i = 0; i < 10; i++) {
+            System.out.println("A gaussian random double is " + r.nextGaussian());
+        }
         // END main
     }
 }

@@ -16,51 +16,53 @@ import static org.apache.crunch.types.writable.Writables.tableOf;
 // TODO: sanity check output
 public class MaxTemperatureWithMultipleInputsCrunch {
 
-  public static void main(String[] args) throws Exception {
-    if (args.length != 3) {
-      System.err.println("Usage: MaxTemperatureWithMultipleInputsCrunch <ncdc input> <metoffice input> <output>");
-      System.exit(-1);
+    public static void main(String[] args) throws Exception {
+        if (args.length != 3) {
+            System.err.println("Usage: MaxTemperatureWithMultipleInputsCrunch <ncdc input> <metoffice input> <output>");
+            System.exit(-1);
+        }
+
+        Pipeline pipeline = new MRPipeline(MaxTemperatureWithMultipleInputsCrunch.class);
+
+        PTable<String, Integer> ncdc = pipeline.readTextFile(args[0])
+                .parallelDo(toYearTempPairsFn(), tableOf(strings(), ints()));
+        PTable<String, Integer> metOffice = pipeline.readTextFile(args[1])
+                .parallelDo(metOfficeToYearTempPairsFn(), tableOf(strings(), ints()));
+
+        PTable<String, Integer> maxTemps = ncdc
+                .union(metOffice)
+                .groupByKey()
+                .combineValues(Aggregators.MAX_INTS());
+
+        pipeline.writeTextFile(maxTemps, args[2]);
+        pipeline.run();
     }
 
-    Pipeline pipeline = new MRPipeline(MaxTemperatureWithMultipleInputsCrunch.class);
+    private static DoFn<String, Pair<String, Integer>> toYearTempPairsFn() {
+        return new DoFn<String, Pair<String, Integer>>() {
+            NcdcRecordParser parser = new NcdcRecordParser();
 
-    PTable<String, Integer> ncdc = pipeline.readTextFile(args[0])
-        .parallelDo(toYearTempPairsFn(), tableOf(strings(), ints()));
-    PTable<String, Integer> metOffice = pipeline.readTextFile(args[1])
-        .parallelDo(metOfficeToYearTempPairsFn(), tableOf(strings(), ints()));
+            @Override
+            public void process(String input, Emitter<Pair<String, Integer>> emitter) {
+                parser.parse(input);
+                if (parser.isValidTemperature()) {
+                    emitter.emit(Pair.of(parser.getYear(), parser.getAirTemperature()));
+                }
+            }
+        };
+    }
 
-    PTable<String, Integer> maxTemps = ncdc
-      .union(metOffice)
-      .groupByKey()
-      .combineValues(Aggregators.MAX_INTS());
-    
-    pipeline.writeTextFile(maxTemps, args[2]);
-    pipeline.run();
-  }
+    private static DoFn<String, Pair<String, Integer>> metOfficeToYearTempPairsFn() {
+        return new DoFn<String, Pair<String, Integer>>() {
+            MetOfficeRecordParser parser = new MetOfficeRecordParser();
 
-  private static DoFn<String, Pair<String, Integer>> toYearTempPairsFn() {
-    return new DoFn<String, Pair<String, Integer>>() {
-      NcdcRecordParser parser = new NcdcRecordParser();
-      @Override
-      public void process(String input, Emitter<Pair<String, Integer>> emitter) {
-        parser.parse(input);
-        if (parser.isValidTemperature()) {
-          emitter.emit(Pair.of(parser.getYear(), parser.getAirTemperature()));
-        }
-      }
-    };
-  }
-
-  private static DoFn<String, Pair<String, Integer>> metOfficeToYearTempPairsFn() {
-    return new DoFn<String, Pair<String, Integer>>() {
-      MetOfficeRecordParser parser = new MetOfficeRecordParser();
-      @Override
-      public void process(String input, Emitter<Pair<String, Integer>> emitter) {
-        parser.parse(input);
-        if (parser.isValidTemperature()) {
-          emitter.emit(Pair.of(parser.getYear(), parser.getAirTemperature()));
-        }
-      }
-    };
-  }
+            @Override
+            public void process(String input, Emitter<Pair<String, Integer>> emitter) {
+                parser.parse(input);
+                if (parser.isValidTemperature()) {
+                    emitter.emit(Pair.of(parser.getYear(), parser.getAirTemperature()));
+                }
+            }
+        };
+    }
 }

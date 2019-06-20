@@ -9,25 +9,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/** Look up one use from the relational database using JDBC.
+/**
+ * Look up one use from the relational database using JDBC.
  */
 // BEGIN main
 public class UserQuery {
 
     public static void main(String[] fn)
-    throws ClassNotFoundException, SQLException, IOException {
+            throws ClassNotFoundException, SQLException, IOException {
 
         // Load the database driver
         Class.forName(JDConstants.getProperty("jabadot.jabadb.driver"));
 
         System.out.println("Getting Connection");
         Connection conn = DriverManager.getConnection(
-            JDConstants.getProperty("jabadot.dburl"));
+                JDConstants.getProperty("jabadot.dburl"));
 
         Statement stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery(
-            "SELECT * from jabadb where name='ian'");
+                "SELECT * from jabadb where name='ian'");
 
         // Now retrieve (all) the rows that matched the query
         while (rs.next()) {

@@ -1,7 +1,8 @@
 package numbers;
 
 
-/** Demonstrate the easy way of getting random numbers,
+/**
+ * Demonstrate the easy way of getting random numbers,
  * using java.lang.Math.Random().
  */
 public class Random1 {

@@ -1,9 +1,9 @@
 package threads;
 
-
-/** 
+/**
  * Threaded demo application, version 2, using Runnable.
- * @author    Ian Darwin
+ *
+ * @author Ian Darwin
  */
 // BEGIN main
 public class ThreadsDemo2 implements Runnable {
@@ -21,18 +21,21 @@ public class ThreadsDemo2 implements Runnable {
 
     /**
      * Construct a ThreadsDemo2 object
+     *
      * @param m Message to display
      * @param n How many times to display it
      */
     public ThreadsDemo2(String m, int n) {
         count = n;
-        mesg  = m;
+        mesg = m;
         t = new Thread(this);
         t.setName(m + " runner Thread");
         t.start();
     }
 
-    /** Run does the work. We override the run() method in Runnable. */ 
+    /**
+     * Run does the work. We override the run() method in Runnable.
+     */
     public void run() {
         while (count-- > 0) {
             System.out.println(mesg);

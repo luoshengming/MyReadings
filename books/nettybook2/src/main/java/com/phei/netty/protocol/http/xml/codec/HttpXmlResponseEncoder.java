@@ -15,17 +15,17 @@
  */
 package com.phei.netty.protocol.http.xml.codec;
 
-import static io.netty.handler.codec.http.HttpHeaders.setContentLength;
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
-import static io.netty.handler.codec.http.HttpResponseStatus.OK;
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpUtil;
 
 import java.util.List;
+
+import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
+import static io.netty.handler.codec.http.HttpResponseStatus.OK;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 /**
  * @author Lilinfeng
@@ -41,12 +41,10 @@ public class HttpXmlResponseEncoder extends AbstractHttpXmlEncoder<HttpXmlRespon
         if (response == null) {
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, body);
         } else {
-            response = new DefaultFullHttpResponse(msg.getHttpResponse()
-                    .getProtocolVersion(), msg.getHttpResponse().getStatus(),
-                    body);
+            response = new DefaultFullHttpResponse(msg.getHttpResponse().protocolVersion(), msg.getHttpResponse().status(), body);
         }
         response.headers().set(CONTENT_TYPE, "text/xml");
-        setContentLength(response, body.readableBytes());
+        HttpUtil.setContentLength(response, body.readableBytes());
         out.add(response);
     }
 }

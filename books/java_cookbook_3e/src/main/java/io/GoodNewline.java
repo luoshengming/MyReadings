@@ -4,11 +4,13 @@ import java.io.*;
 
 /**
  * Multiple lines output from one method.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class GoodNewline {
     // BEGIN main
     String myName;
+
     public static void main(String[] argv) {
         GoodNewline jack = new GoodNewline("Jack Adolphus Schmidt, III");
         jack.print(System.out);

@@ -1,8 +1,10 @@
 package crunch;
 
 import com.google.common.collect.Lists;
+
 import java.io.IOException;
 import java.util.List;
+
 import org.apache.crunch.CrunchRuntimeException;
 import org.apache.crunch.DoFn;
 import org.apache.crunch.Emitter;
@@ -18,23 +20,23 @@ import static org.junit.Assert.assertEquals;
 
 public class NonSerializableOuterClass {
 
-  @Rule
-  public transient TemporaryPath tmpDir = new TemporaryPath();
+    @Rule
+    public transient TemporaryPath tmpDir = new TemporaryPath();
 
-  @Test(expected = CrunchRuntimeException.class)
-  public void runPipeline() throws IOException {
-    List<String> expectedContent = Lists.newArrayList("b", "c", "a", "e");
-    String inputPath = tmpDir.copyResourceFileName("set1.txt");
-    Pipeline pipeline = new MRPipeline(getClass());
-    PCollection<String> lines = pipeline.readTextFile(inputPath);
-    PCollection<String> lower = lines.parallelDo(new DoFn<String, String>() {
-      @Override
-      public void process(String input, Emitter<String> emitter) {
-        emitter.emit(input.toLowerCase());
-      }
-    }, strings());
-    assertEquals(expectedContent, Lists.newArrayList(lower.materialize()));
-    pipeline.done();
-  }
+    @Test(expected = CrunchRuntimeException.class)
+    public void runPipeline() throws IOException {
+        List<String> expectedContent = Lists.newArrayList("b", "c", "a", "e");
+        String inputPath = tmpDir.copyResourceFileName("set1.txt");
+        Pipeline pipeline = new MRPipeline(getClass());
+        PCollection<String> lines = pipeline.readTextFile(inputPath);
+        PCollection<String> lower = lines.parallelDo(new DoFn<String, String>() {
+            @Override
+            public void process(String input, Emitter<String> emitter) {
+                emitter.emit(input.toLowerCase());
+            }
+        }, strings());
+        assertEquals(expectedContent, Lists.newArrayList(lower.materialize()));
+        pipeline.done();
+    }
 
 }

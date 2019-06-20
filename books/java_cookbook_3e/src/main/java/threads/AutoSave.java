@@ -30,26 +30,31 @@ package threads;
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * Java, the Duke mascot, and all variants of Sun's Java "steaming coffee
  * cup" logo are trademarks of Sun Microsystems. Sun's, and James Gosling's,
- * pioneering role in inventing and promulgating (and standardizing) the Java 
+ * pioneering role in inventing and promulgating (and standardizing) the Java
  * language and environment is gratefully acknowledged.
- * 
+ *
  * The pioneering role of Dennis Ritchie and Bjarne Stroustrup, of AT&T, for
  * inventing predecessor languages C and C++ is also gratefully acknowledged.
  */
 
 // import - none
 
-/** Demonstration of using a Thread to automatically save
+/**
+ * Demonstration of using a Thread to automatically save
  * the user's work periodically.
  */
 // BEGIN main
 public class AutoSave extends Thread {
-    /** The FileSave interface is implemented by the main class. */
+    /**
+     * The FileSave interface is implemented by the main class.
+     */
     protected FileSaver model;
-    /** How long to sleep between tries */
+    /**
+     * How long to sleep between tries
+     */
     public static final int MINUTES = 5;
     private static final int SECONDS = MINUTES * 60;
 
@@ -62,7 +67,7 @@ public class AutoSave extends Thread {
     public void run() {
         while (true) {        // entire run method runs forever.
             try {
-                sleep(SECONDS*1000);
+                sleep(SECONDS * 1000);
             } catch (InterruptedException e) {
                 // do nothing with it
             }
@@ -76,18 +81,27 @@ public class AutoSave extends Thread {
     // 2) method that shuts down main program be synchronized on *SAME* object
 }
 
-/** Local copy of FileSaver interface, for compiling AutoSave demo. */
+/**
+ * Local copy of FileSaver interface, for compiling AutoSave demo.
+ */
 interface FileSaver {
-    /** Load new model from fn; if null, prompt for new fname */
+    /**
+     * Load new model from fn; if null, prompt for new fname
+     */
     public void loadFile(String fn);
 
-    /** Ask the model if it wants AutoSave done for it */
+    /**
+     * Ask the model if it wants AutoSave done for it
+     */
     public boolean wantAutoSave();
 
-    /** Ask the model if it has any unsaved changes, don't save otherwise */
+    /**
+     * Ask the model if it has any unsaved changes, don't save otherwise
+     */
     public boolean hasUnsavedChanges();
 
-    /** Save the current model's data in fn. 
+    /**
+     * Save the current model's data in fn.
      * If fn == null, use current fname or prompt for a filename if null.
      */
     public void saveFile(String fn);

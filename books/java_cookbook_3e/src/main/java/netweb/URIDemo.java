@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 // BEGIN main
 public class URIDemo {
     public static void main(String[] args)
-    throws URISyntaxException, MalformedURLException {
+            throws URISyntaxException, MalformedURLException {
 
         URI u = new URI("http://www.darwinsys.com/java/../openbsd/../index.jsp");
         System.out.println("Raw: " + u);

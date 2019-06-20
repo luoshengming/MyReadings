@@ -4,7 +4,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 // BEGIN main
-/** Simple Audio Playing with JavaFX */
+
+/**
+ * Simple Audio Playing with JavaFX
+ */
 public class AudioPlay {
     public static void main(String[] args) {
         String clipName = "demo.mp3";

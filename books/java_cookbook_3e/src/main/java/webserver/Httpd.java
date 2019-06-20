@@ -7,23 +7,34 @@ import java.util.Properties;
 import com.darwinsys.util.FileProperties;
 
 // BEGIN main
+
 /**
  * A very very simple Web server.
  * <p>
  * NO SECURITY. ALMOST NO CONFIGURATION. NO CGI. NO SERVLETS.
- *<p>
+ * <p>
  * This version is threaded. I/O is done in Handler.
  */
 public class Httpd {
-    /** The default port number */
+    /**
+     * The default port number
+     */
     public static final int HTTP = 80;
-    /** The server socket used to connect from clients */
+    /**
+     * The server socket used to connect from clients
+     */
     protected ServerSocket sock;
-    /** A Properties, for loading configuration info */
+    /**
+     * A Properties, for loading configuration info
+     */
     private Properties wsp;
-    /** A Properties, for loading mime types into */
+    /**
+     * A Properties, for loading mime types into
+     */
     private Properties mimeTypes;
-    /** The root directory */
+    /**
+     * The root directory
+     */
     private String rootDir;
 
     public static void main(String argv[]) throws Exception {
@@ -38,31 +49,34 @@ public class Httpd {
         // NOTREACHED
     }
 
-    /** Run the main loop of the Server. Each time a client connects,
+    /**
+     * Run the main loop of the Server. Each time a client connects,
      * the ServerSocket accept() returns a new Socket for I/O, and
      * we pass that to the Handler constructor, which creates a Thread,
      * which we start.
      */
-    void runServer() throws Exception  {
+    void runServer() throws Exception {
         while (true) {
-                final Socket clntSock = sock.accept();
-                Thread t = new Thread(){
-                    public void run() {
-                        new Handler(Httpd.this).process(clntSock);
-                    }
-                };
-                t.start();
+            final Socket clntSock = sock.accept();
+            Thread t = new Thread() {
+                public void run() {
+                    new Handler(Httpd.this).process(clntSock);
+                }
+            };
+            t.start();
         }
     }
 
-    /** Construct a server object for a given port number */
+    /**
+     * Construct a server object for a given port number
+     */
     Httpd() throws Exception {
-        wsp=new FileProperties("httpd.properties");
+        wsp = new FileProperties("httpd.properties");
         rootDir = wsp.getProperty("rootDir", ".");
-        mimeTypes = 
-            new FileProperties(
-                wsp.getProperty("mimeProperties",
-                    "mime.properties"));
+        mimeTypes =
+                new FileProperties(
+                        wsp.getProperty("mimeProperties",
+                                "mime.properties"));
     }
 
     public void startServer(int portNum) throws Exception {
@@ -75,15 +89,17 @@ public class Httpd {
         }
         sock = new ServerSocket(portNum);
         System.out.println("Listening on port " + portNum);
-    
+
     }
 
     public String getMimeType(String type) {
         return mimeTypes.getProperty(type);
     }
+
     public String getMimeType(String type, String dflt) {
         return mimeTypes.getProperty(type, dflt);
     }
+
     public String getServerProperty(String name) {
         return wsp.getProperty(name);
     }

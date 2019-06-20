@@ -21,9 +21,7 @@ package com.phei.netty.nio;
  * @date 2014年2月14日
  */
 public class TimeClient {
-    /**
-     * @param args
-     */
+
     public static void main(String[] args) {
         int port = 8080;
         if (args != null && args.length > 0) {

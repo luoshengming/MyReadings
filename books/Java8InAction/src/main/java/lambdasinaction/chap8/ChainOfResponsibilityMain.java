@@ -20,7 +20,7 @@ public class ChainOfResponsibilityMain {
         System.out.println(result2);
     }
 
-    private static abstract class ProcessingObject<T> {
+    private abstract static class ProcessingObject<T> {
         protected ProcessingObject<T> successor;
 
         public void setSuccessor(ProcessingObject<T> successor) {

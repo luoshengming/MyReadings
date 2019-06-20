@@ -11,7 +11,9 @@ import java.util.StringTokenizer;
 import domain.User;
 
 // BEGIN main
-/** Load the database from text file into JDBC relational database.
+
+/**
+ * Load the database from text file into JDBC relational database.
  * Text format is: name:password:fullname:city:prov:country:privs
  */
 public class TextToJDBC {
@@ -29,7 +31,7 @@ public class TextToJDBC {
 
         System.out.println("Getting Connection");
         Connection conn = DriverManager.getConnection(
-            DB_URL, "admin", "");    // user, password
+                DB_URL, "admin", "");    // user, password
 
         System.out.println("Creating Statement");
         Statement stmt = conn.createStatement();
@@ -38,21 +40,21 @@ public class TextToJDBC {
         if (dropAndReCreate)
             stmt.executeUpdate("DROP TABLE IF EXISTS users");
         stmt.executeUpdate("CREATE TABLE users (\n" +
-            "name     char(12) PRIMARY KEY,\n" +
-            "password char(20),\n" +
-            "fullName char(30),\n" +
-            "email    char(60),\n" +
-            "city     char(20),\n" +
-            "prov     char(20),\n" +
-            "country  char(20),\n" +
-            "privs    int\n" +
-            ")");
+                "name     char(12) PRIMARY KEY,\n" +
+                "password char(20),\n" +
+                "fullName char(30),\n" +
+                "email    char(60),\n" +
+                "city     char(20),\n" +
+                "prov     char(20),\n" +
+                "country  char(20),\n" +
+                "privs    int\n" +
+                ")");
         stmt.executeUpdate("CREATE INDEX nickIndex ON users (name)");
         stmt.close();
 
         // put the data in the table
         PreparedStatement ps = conn.prepareStatement(
-            "INSERT INTO users VALUES (?,?,?,?,?,?,?,?)");
+                "INSERT INTO users VALUES (?,?,?,?,?,?,?,?)");
 
         String line;
         while ((line = is.readLine()) != null) {
@@ -61,8 +63,7 @@ public class TextToJDBC {
                 continue;
             }
 
-            StringTokenizer st =
-                new StringTokenizer(line, ":");
+            StringTokenizer st = new StringTokenizer(line, ":");
             String nick = st.nextToken();
             String pass = st.nextToken();
             String full = st.nextToken();

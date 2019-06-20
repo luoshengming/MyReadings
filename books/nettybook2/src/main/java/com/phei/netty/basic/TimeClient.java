@@ -48,7 +48,7 @@ public class TimeClient {
             // 发起异步连接操作
             ChannelFuture f = b.connect(host, port).sync();
 
-            // 当代客户端链路关闭
+            // 等待客户端链路关闭
             f.channel().closeFuture().sync();
         } finally {
             // 优雅退出，释放NIO线程组
@@ -56,10 +56,6 @@ public class TimeClient {
         }
     }
 
-    /**
-     * @param args
-     * @throws Exception
-     */
     public static void main(String[] args) throws Exception {
         int port = 8080;
         if (args != null && args.length > 0) {

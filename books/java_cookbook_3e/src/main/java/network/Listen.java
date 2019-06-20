@@ -5,16 +5,19 @@ import java.net.*;
 
 /**
  * Listen -- make a ServerSocket and wait for connections.
+ *
  * @author Ian F. Darwin
  */
 // BEGIN main
 public class Listen {
-    /** The TCP port for the service. */
+    /**
+     * The TCP port for the service.
+     */
     public static final short PORT = 9999;
 
     public static void main(String[] argv) throws IOException {
         ServerSocket sock;
-        Socket  clientSock;
+        Socket clientSock;
         try {
             sock = new ServerSocket(PORT);
             while ((clientSock = sock.accept()) != null) {
@@ -28,7 +31,9 @@ public class Listen {
         }
     }
 
-    /** This would do something with one client. */
+    /**
+     * This would do something with one client.
+     */
     static void process(Socket s) throws IOException {
         System.out.println("Accept from client " + s.getInetAddress());
         // The conversation would be here.

@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * "Redirect" or reassign some standard descriptors.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class Redirect {

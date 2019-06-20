@@ -8,27 +8,33 @@ import java.util.List;
 import java.util.Random;
 
 // BEGIN main
-/** This is the main class of the server */
+
+/**
+ * This is the main class of the server
+ */
 public class TickerServerImpl
-    extends UnicastRemoteObject
-    implements TickerServer, Runnable
-{
+        extends UnicastRemoteObject
+        implements TickerServer, Runnable {
     private static final long serialVersionUID = -464196277362659008L;
     List<Client> list = new ArrayList<Client>();
 
-    /** Construct the object that implements the remote server.
+    /**
+     * Construct the object that implements the remote server.
      * Called from main, after it has the SecurityManager in place.
      */
     public TickerServerImpl() throws RemoteException {
         super();    // sets up networking
     }
 
-    /** Start background thread to track stocks :-) and alert users. */
+    /**
+     * Start background thread to track stocks :-) and alert users.
+     */
     public void start() {
         new Thread(this).start();
     }
 
-    /** The remote method that "does all the work". This won't get
+    /**
+     * The remote method that "does all the work". This won't get
      * called until the client starts up.
      */
     public void connect(Client da) throws RemoteException {
@@ -49,16 +55,16 @@ public class TickerServerImpl
                 done = true;
             }
             Iterator it = list.iterator();
-            while (it.hasNext()){
+            while (it.hasNext()) {
                 String mesg = ("Your stock price went " +
-                    (rand.nextFloat() > 0.5 ? "up" : "down") + "!");
+                        (rand.nextFloat() > 0.5 ? "up" : "down") + "!");
                 // Send the alert to the given user.
                 // If this fails, remove them from the list
                 try {
-                    ((Client)it.next()).alert(mesg);
+                    ((Client) it.next()).alert(mesg);
                 } catch (RemoteException re) {
                     System.out.println(
-                        "Exception alerting client, removing it.");
+                            "Exception alerting client, removing it.");
                     System.out.println(re);
                     it.remove();
                 }

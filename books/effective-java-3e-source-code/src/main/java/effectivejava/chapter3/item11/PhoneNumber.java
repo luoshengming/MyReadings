@@ -1,6 +1,7 @@
 package effectivejava.chapter3.item11;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 // Shows the need for overriding hashcode when you override equals (Pages 50-53 )
 public final class PhoneNumber {

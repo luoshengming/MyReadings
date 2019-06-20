@@ -9,26 +9,26 @@ import java.io.InputStreamReader;
 
 public class Console {
 
-  private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-  public static IO<String> readLine(Nothing nothing) {
-    return () -> {
-      try {
-        return br.readLine();
-      } catch (IOException e) {
-        throw new IllegalStateException((e));
-      }
-    };
-  }
+    public static IO<String> readLine(Nothing nothing) {
+        return () -> {
+            try {
+                return br.readLine();
+            } catch (IOException e) {
+                throw new IllegalStateException((e));
+            }
+        };
+    }
 
-  public static IO<String> readLine() {
-    return readLine(Nothing.instance);
-  }
+    public static IO<String> readLine() {
+        return readLine(Nothing.instance);
+    }
 
-  public static IO<Nothing> printLine(Object s) {
-    return () -> {
-      System.out.println(s);
-      return Nothing.instance;
-    };
-  }
+    public static IO<Nothing> printLine(Object s) {
+        return () -> {
+            System.out.println(s);
+            return Nothing.instance;
+        };
+    }
 }

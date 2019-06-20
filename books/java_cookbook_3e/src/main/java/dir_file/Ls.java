@@ -2,7 +2,9 @@ package dir_file;
 
 import java.util.Arrays;
 
-/** Simple directory lister.
+/**
+ * Simple directory lister.
+ *
  * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main

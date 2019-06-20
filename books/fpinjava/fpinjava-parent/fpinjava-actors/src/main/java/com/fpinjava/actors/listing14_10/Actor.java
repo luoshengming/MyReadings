@@ -5,25 +5,25 @@ import com.fpinjava.common.Result;
 
 public interface Actor<T> {
 
-  static <T> Result<Actor<T>> noSender() {
-    return Result.empty();
-  }
+    static <T> Result<Actor<T>> noSender() {
+        return Result.empty();
+    }
 
-  Result<Actor<T>> self();
+    Result<Actor<T>> self();
 
-  ActorContext<T> getContext();
+    ActorContext<T> getContext();
 
-  default void tell(T message) {
-    tell(message, self());
-  }
+    default void tell(T message) {
+        tell(message, self());
+    }
 
-  void tell(T message, Result<Actor<T>> sender);
+    void tell(T message, Result<Actor<T>> sender);
 
-  void shutdown();
+    void shutdown();
 
-  default void tell(T message, Actor<T> sender) {
-    tell(message, Result.of(sender));
-  }
+    default void tell(T message, Actor<T> sender) {
+        tell(message, Result.of(sender));
+    }
 
-  enum Type {SERIAL, PARALLEL} // <7>
+    enum Type {SERIAL, PARALLEL} // <7>
 }

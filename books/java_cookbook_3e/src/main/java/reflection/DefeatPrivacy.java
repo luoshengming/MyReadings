@@ -19,7 +19,7 @@ public class DefeatPrivacy {
     public static void main(String[] args) throws Exception {
         new DefeatPrivacy().process();
     }
-    
+
     private void process() throws Exception {
         X x = new X();
         System.out.println(x);

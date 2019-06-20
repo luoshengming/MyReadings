@@ -2,6 +2,7 @@ package strings;
 
 /**
  * Reverse a string by character
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 public class StringRevChar {

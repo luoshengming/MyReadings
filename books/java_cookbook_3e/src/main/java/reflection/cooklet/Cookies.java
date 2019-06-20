@@ -3,6 +3,7 @@ package reflection.cooklet;
 /**
  * This is the part of the Cookies application that loads
  * the user-defined subclass.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
@@ -13,7 +14,7 @@ public class Cookies {
         String cookletClassName = argv[0];
         try {
             Class<Cooklet> cookletClass =
-                (Class<Cooklet>) Class.forName(cookletClassName);
+                    (Class<Cooklet>) Class.forName(cookletClassName);
             cooklet = cookletClass.newInstance();
         } catch (Exception e) {
             System.err.println("Error " + cookletClassName + e);

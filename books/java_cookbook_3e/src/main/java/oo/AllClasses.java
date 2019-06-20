@@ -10,20 +10,22 @@ public class AllClasses {
         int x;
         int y;
     }
+
     public void getResults() {
         JButton b = new JButton("Press me");
         b.addActionListener(new ActionListener() { // <2>
             public void actionPerformed(ActionEvent evt) {
                 Data loc = new Data();
-                loc.x = ((Component)evt.getSource()).getX();
-                loc.x = ((Component)evt.getSource()).getY();
+                loc.x = ((Component) evt.getSource()).getX();
+                loc.x = ((Component) evt.getSource()).getY();
                 System.out.println("Thanks for pressing me");
             }
         });
     }
 }
 
-/** Class contained in same file as AllClasses, but can be used
+/**
+ * Class contained in same file as AllClasses, but can be used
  * (with a warning) in other contexts.
  */
 class AnotherClass {                    // <3>

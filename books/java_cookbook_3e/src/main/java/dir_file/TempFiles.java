@@ -4,6 +4,7 @@ import java.io.*;
 
 /**
  * Work with temporary files in Java.
+ *
  * @author Ian F. Darwin, http://www.darwinsys.com/
  */
 // BEGIN main

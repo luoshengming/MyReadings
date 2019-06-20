@@ -28,7 +28,7 @@ public class VlcjVideo extends JFrame {
         add(player, BorderLayout.CENTER);
         pack();
         setVisible(true);
-        ((MyVideoPanel)player).play(url);
+        ((MyVideoPanel) player).play(url);
     }
 
     class MyVideoPanel extends JPanel {
@@ -38,8 +38,8 @@ public class VlcjVideo extends JFrame {
 
         public MyVideoPanel() {
             NativeLibrary.addSearchPath("libvlc", vlcWhere.getAbsolutePath());
-            EmbeddedMediaPlayerComponent videoCanvas = 
-                new EmbeddedMediaPlayerComponent();
+            EmbeddedMediaPlayerComponent videoCanvas =
+                    new EmbeddedMediaPlayerComponent();
             setLayout(new BorderLayout());
             add(videoCanvas, BorderLayout.CENTER);
             player = videoCanvas.getMediaPlayer();

@@ -40,18 +40,18 @@ public class HibernateSimple {
             tx = session.beginTransaction();
 
             Query query = session.createQuery(
-                "select p from Person p order by p.lastName");
+                    "select p from Person p order by p.lastName");
 
             List<Person> list = query.list();
             System.out.println("There are " + list.size() + " persons:");
             list.forEach(p ->
-                System.out.println(
-                        p.getFirstName() + ' ' + p.getLastName())
+                    System.out.println(
+                            p.getFirstName() + ' ' + p.getLastName())
             );
             System.out.println();
         } finally {
             if (session != null) {
-                session.close();                
+                session.close();
             }
         }
     }

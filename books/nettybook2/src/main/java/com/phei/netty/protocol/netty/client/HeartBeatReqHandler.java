@@ -15,25 +15,24 @@
  */
 package com.phei.netty.protocol.netty.client;
 
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import com.phei.netty.protocol.netty.MessageType;
 import com.phei.netty.protocol.netty.struct.Header;
 import com.phei.netty.protocol.netty.struct.NettyMessage;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lilinfeng
  * @version 1.0
  * @date 2014年3月15日
  */
-public class HeartBeatReqHandler extends ChannelHandlerAdapter {
-    private static final Log LOG = LogFactory.getLog(HeartBeatReqHandler.class);
+public class HeartBeatReqHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HeartBeatReqHandler.class);
     private volatile ScheduledFuture<?> heartBeat;
 
     @Override
@@ -43,7 +42,7 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
         if (message.getHeader() != null && message.getHeader().getType() == MessageType.LOGIN_RESP.value()) {
             heartBeat = ctx.executor().scheduleAtFixedRate(new HeartBeatReqHandler.HeartBeatTask(ctx), 0, 5000, TimeUnit.MILLISECONDS);
         } else if (message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_RESP.value()) {
-            LOG.info("Client receive server heart beat message : ---> " + message);
+            LOGGER.info("Client receive server heart beat message : ---> " + message);
         } else {
             ctx.fireChannelRead(msg);
         }
@@ -59,8 +58,7 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
         @Override
         public void run() {
             NettyMessage heatBeat = buildHeatBeat();
-            LOG.info("Client send heart beat messsage to server : ---> "
-                    + heatBeat);
+            LOGGER.info("Client send heart beat messsage to server : ---> " + heatBeat);
             ctx.writeAndFlush(heatBeat);
         }
 

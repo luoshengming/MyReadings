@@ -32,7 +32,9 @@ import java.sql.SQLException;
 
 import com.darwinsys.util.Verbosity;
 
-/** Base class for a series of ResultSet printers. */
+/**
+ * Base class for a series of ResultSet printers.
+ */
 public abstract class ResultsDecorator {
     PrintWriter out;
     Verbosity verbosity;
@@ -42,25 +44,34 @@ public abstract class ResultsDecorator {
         this.verbosity = v;
     }
 
-    /** Print the name of this Decorator's output format */
+    /**
+     * Print the name of this Decorator's output format
+     */
     public abstract String getName();
 
-    /** Print the contents of a ResultSet */
+    /**
+     * Print the contents of a ResultSet
+     */
     public abstract int write(ResultSet rs) throws IOException, SQLException;
 
-    /** Print the resultset as a table info */
+    /**
+     * Print the resultset as a table info
+     */
     public abstract void displayTable(String table, ResultSet rs)
-        throws IOException, SQLException;
+            throws IOException, SQLException;
 
     public void printRowCount(int n) throws IOException {
         out.println("Row Count = " + n);
     }
+
     public void println(String line) throws IOException {
         out.println(line);
     }
+
     public void println() throws IOException {
         out.println();
     }
+
     public void print(String lineSeg) throws IOException {
         out.print(lineSeg);
     }

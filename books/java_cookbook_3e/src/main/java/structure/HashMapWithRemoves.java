@@ -14,7 +14,7 @@ public class HashMapWithRemoves {
         // Construct and load the hash. This simulates loading a
         // database or reading from a file, or wherever the data is.
 
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String, String> map = new HashMap<String, String>();
 
         // The hash maps from company name to address.
         // In real life this might map to an Address object...
@@ -29,15 +29,15 @@ public class HashMapWithRemoves {
         // BEGIN SafeRemoval
         // Version 2: get ALL the keys and values 
         // with concurrent modification
-        Iterator<String> it = map.keySet( ).iterator( );
-        while (it.hasNext( )) {
-            String key = it.next( );
+        Iterator<String> it = map.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next();
             if (key.equals("Sun")) {
                 it.remove();
                 continue;
             }
             System.out.println("Company " + key + "; " +
-                "Address " + map.get(key));
+                    "Address " + map.get(key));
         }
         // END SafeRemoval
     }

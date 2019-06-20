@@ -7,7 +7,8 @@ import java.net.URL;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
-/** This program, which can be an Applet or an Application,
+/**
+ * This program, which can be an Applet or an Application,
  * shows a form of Toolkit.getImage() which works the same
  * in either Applet or Application.
  * <p>

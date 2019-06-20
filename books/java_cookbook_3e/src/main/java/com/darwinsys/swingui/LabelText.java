@@ -9,46 +9,61 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/** A label and text combination, inspired by
+/**
+ * A label and text combination, inspired by
  * the LabelText control in Guy Eddon's ActiveX Components book
  * (2nd Edition, page 203). But done more simply.
- * @author    Ian Darwin, http://www.darwinsys.com/
+ *
+ * @author Ian Darwin, http://www.darwinsys.com/
  */
 // BEGIN main
 // package com.darwinsys.swingui;
 public class LabelText extends JPanel implements java.io.Serializable {
 
     private static final long serialVersionUID = -8343040707105763298L;
-    /** The label component */
+    /**
+     * The label component
+     */
     protected JLabel theLabel;
-    /** The text field component */
+    /**
+     * The text field component
+     */
     protected JTextField theTextField;
-    /** The font to use */
+    /**
+     * The font to use
+     */
     protected Font myFont;
 
-    /** Construct the object with no initial values.
+    /**
+     * Construct the object with no initial values.
      * To be usable as a JavaBean there must be a no-argument constructor.
      */
     public LabelText() {
-        this("(LabelText)",  12);
+        this("(LabelText)", 12);
     }
 
-    /** Construct the object with the label and a default textfield size */
+    /**
+     * Construct the object with the label and a default textfield size
+     */
     public LabelText(String label) {
         this(label, 12);
     }
 
-    /** Construct the object with given label and textfield size */
+    /**
+     * Construct the object with given label and textfield size
+     */
     public LabelText(String label, int numChars) {
         this(label, numChars, null);
     }
 
-    /** Construct the object with given label, textfield size,
+    /**
+     * Construct the object with given label, textfield size,
      * and "Extra" component
-     * @param label The text to display
+     *
+     * @param label    The text to display
      * @param numChars The size of the text area
-     * @param extra A third component such as a cancel button;
-     * may be null, in which case only the label and textfield exist.
+     * @param extra    A third component such as a cancel button;
+     *                 may be null, in which case only the label and textfield exist.
      */
     public LabelText(String label, int numChars, JComponent extra) {
         super();
@@ -62,37 +77,51 @@ public class LabelText extends JPanel implements java.io.Serializable {
         }
     }
 
-    /** Get the label's horizontal alignment */
+    /**
+     * Get the label's horizontal alignment
+     */
     public int getLabelAlignment() {
         return theLabel.getHorizontalAlignment();
     }
 
-    /** Set the label's horizontal alignment */
+    /**
+     * Set the label's horizontal alignment
+     */
     public void setLabelAlignment(int align) {
         theLabel.setHorizontalAlignment(align);
     }
 
-    /** Get the text displayed in the text field */
+    /**
+     * Get the text displayed in the text field
+     */
     public String getText() {
         return theTextField.getText();
     }
 
-    /** Set the text displayed in the text field */
+    /**
+     * Set the text displayed in the text field
+     */
     public void setText(String text) {
         theTextField.setText(text);
     }
 
-    /** Get the text displayed in the label */
+    /**
+     * Get the text displayed in the label
+     */
     public String getLabel() {
         return theLabel.getText();
     }
 
-    /** Set the text displayed in the label */
+    /**
+     * Set the text displayed in the label
+     */
     public void setLabel(String text) {
         theLabel.setText(text);
     }
 
-    /** Set the font used in both subcomponents. */
+    /**
+     * Set the font used in both subcomponents.
+     */
     public void setFont(Font f) {
         // This class' constructors call to super() can trigger
         // calls to setFont() (from Swing.LookAndFeel.installColorsAndFont),
@@ -103,12 +132,16 @@ public class LabelText extends JPanel implements java.io.Serializable {
             theTextField.setFont(f);
     }
 
-    /** Adds the ActionListener to receive action events from the textfield */
+    /**
+     * Adds the ActionListener to receive action events from the textfield
+     */
     public void addActionListener(ActionListener l) {
         theTextField.addActionListener(l);
     }
 
-    /** Remove an ActionListener from the textfield. */
+    /**
+     * Remove an ActionListener from the textfield.
+     */
     public void removeActionListener(ActionListener l) {
         theTextField.removeActionListener(l);
     }

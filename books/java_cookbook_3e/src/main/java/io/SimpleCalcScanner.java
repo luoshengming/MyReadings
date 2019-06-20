@@ -13,46 +13,62 @@ import java.util.Stack;
  */
 // BEGIN main
 public class SimpleCalcScanner {
-    /** The Scanner */
-    protected  Scanner scan;
+    /**
+     * The Scanner
+     */
+    protected Scanner scan;
 
-    /** The output */
+    /**
+     * The output
+     */
     protected PrintWriter out = new PrintWriter(System.out);
 
-    /** The variable name (not used in this version) */
+    /**
+     * The variable name (not used in this version)
+     */
     protected String variable;
 
-    /** The operand stack; no operators are pushed, so it can be a stack of Double */
+    /**
+     * The operand stack; no operators are pushed, so it can be a stack of Double
+     */
     protected Stack<Double> s = new Stack<>();
 
     /* Driver - main program */
     public static void main(String[] args) throws IOException {
         if (args.length == 0)
             new SimpleCalcScanner(
-                new InputStreamReader(System.in)).doCalc();
-        else 
+                    new InputStreamReader(System.in)).doCalc();
+        else
             for (String arg : args) {
                 new SimpleCalcScanner(arg).doCalc();
             }
     }
 
-    /** Construct a SimpleCalcScanner by name */
+    /**
+     * Construct a SimpleCalcScanner by name
+     */
     public SimpleCalcScanner(String fileName) throws IOException {
         this(new FileReader(fileName));
     }
 
-    /** Construct a SimpleCalcScanner from an open Reader */
+    /**
+     * Construct a SimpleCalcScanner from an open Reader
+     */
     public SimpleCalcScanner(Reader rdr) throws IOException {
         scan = new Scanner(rdr);
     }
 
-    /** Construct a SimpleCalcScanner from a Reader and a PrintWriter */
+    /**
+     * Construct a SimpleCalcScanner from a Reader and a PrintWriter
+     */
     public SimpleCalcScanner(Reader rdr, PrintWriter pw) throws IOException {
         this(rdr);
         setWriter(pw);
     }
 
-    /** Change the output to go to a new PrintWriter */
+    /**
+     * Change the output to go to a new PrintWriter
+     */
     public void setWriter(PrintWriter pw) {
         out = pw;
     }
@@ -93,11 +109,11 @@ public class SimpleCalcScanner {
     }
 
     double pop() {
-        return ((Double)s.pop()).doubleValue();
+        return ((Double) s.pop()).doubleValue();
     }
 
     double peek() {
-        return ((Double)s.peek()).doubleValue();
+        return ((Double) s.peek()).doubleValue();
     }
 
     void clearStack() {
