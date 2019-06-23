@@ -17,7 +17,8 @@ public class FixedCollectionClassifier {
                 new HashMap<String, String>().values()
         };
 
-        for (Collection<?> c : collections)
+        for (Collection<?> c : collections) {
             System.out.println(classify(c));
+        }
     }
 }

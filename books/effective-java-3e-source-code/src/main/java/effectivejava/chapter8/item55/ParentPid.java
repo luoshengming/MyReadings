@@ -13,7 +13,6 @@ public class ParentPid {
                 String.valueOf(parentProcess.get().pid()) : "N/A"));
 
         // Equivalent (and superior) code using orElse
-        System.out.println("Parent PID: " +
-                ph.parent().map(h -> String.valueOf(h.pid())).orElse("N/A"));
+        System.out.println("Parent PID: " + ph.parent().map(h -> String.valueOf(h.pid())).orElse("N/A"));
     }
 }

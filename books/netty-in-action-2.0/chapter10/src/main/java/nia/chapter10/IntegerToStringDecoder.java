@@ -14,6 +14,7 @@ public class IntegerToStringDecoder extends MessageToMessageDecoder<Integer> {
 
     @Override
     public void decode(ChannelHandlerContext ctx, Integer msg, List<Object> out) throws Exception {
+        // 将Integer消息转换为它的String表示，并将其添加到输出的List中
         out.add(String.valueOf(msg));
     }
 }

@@ -15,6 +15,7 @@ public class ToIntegerDecoder2 extends ReplayingDecoder<Void> {
 
     @Override
     public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+        // 从入站ByteBuf中读取一个int，并将其添加到解码消息的List中
         out.add(in.readInt());
     }
 }

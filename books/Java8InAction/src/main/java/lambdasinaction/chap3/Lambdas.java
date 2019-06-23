@@ -62,11 +62,9 @@ public class Lambdas {
             this.color = color;
         }
 
+        @Override
         public String toString() {
-            return "Apple{" +
-                    "color='" + color + '\'' +
-                    ", weight=" + weight +
-                    '}';
+            return "Apple{" + "color='" + color + '\'' + ", weight=" + weight + '}';
         }
     }
 

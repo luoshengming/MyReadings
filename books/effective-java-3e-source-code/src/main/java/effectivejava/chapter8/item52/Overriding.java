@@ -8,7 +8,8 @@ public class Overriding {
         List<Wine> wineList = List.of(
                 new Wine(), new SparklingWine(), new Champagne());
 
-        for (Wine wine : wineList)
+        for (Wine wine : wineList) {
             System.out.println(wine.name());
+        }
     }
 }
